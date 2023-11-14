@@ -68,9 +68,9 @@ function strSplit(string $separator, string $value)
         }
     }
     if (count($array) == 0)
-    throw new Exception("provided separator does not exist on the provided string value.");
+        throw new Exception("provided separator does not exist on the provided string value.");
 
-return $array;
+    return $array;
 }
 // print_r(strSplit('/', '/this/is/a/test/for/split/function'));
 
@@ -80,12 +80,12 @@ return $array;
 function strIndexOfChar(string $char, string $value)
 {
     if ($char == "" || $char == null)
-    throw new Exception("\$char parameter is not set.");
-for ($i = 0; $i < strlen($value); $i++) {
-    if ($char == $value[$i])
-    return $i;
-}
-return -1;
+        throw new Exception("\$char parameter is not set.");
+    for ($i = 0; $i < strlen($value); $i++) {
+        if ($char == $value[$i])
+            return $i;
+    }
+    return -1;
 }
 // echo strIndexOfChar(' ', 'bba');
 
@@ -115,3 +115,41 @@ function strFindCharAppearance(string $toSearch, string $value)
     return $appearanceCount;
 }
 // echo strFindCharAppearance('a', 'aabbbbaa');
+
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+//* 8 strToLower 
+function _strToLower(string $value)
+{
+    $lowerLetters = 'abcdefghijklmnopqrstuvwxyz';
+    $upperLetters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    for ($i = 0; $i < strlen($value); $i++) {
+        $upperLetterIndex = strIndexOfChar($value[$i], $upperLetters);
+        if ($upperLetterIndex != -1)
+            $value[$i] = $lowerLetters[$upperLetterIndex];
+    }
+    return $value;
+}
+echo _strToLower('TEST');
+
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+//* 9 strToUpper
+// function strToUpper(string $value){}
+
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+//* 10 _count 
+// function _count($value){}
+
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+//* 11 _strlen 
+// function _strlen(string $value){}
+
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+echo '<br>';
+echo ' <hr > ';
+echo '<br>';
