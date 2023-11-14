@@ -130,12 +130,24 @@ function _strToLower(string $value)
     }
     return $value;
 }
-echo _strToLower('TEST');
+// echo _strToLower('TEST');
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 //* 9 strToUpper
-// function strToUpper(string $value){}
+function _strToUpper(string $value){
+    $lowerLetters = 'abcdefghijklmnopqrstuvwxyz';
+    $upperLetters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    for ($i = 0; $i < strlen($value); $i++) {
+        $lowerLetterIndex = strIndexOfChar($value[$i], $lowerLetters);
+        if ($lowerLetterIndex != -1)
+            $value[$i] = $upperLetters[$lowerLetterIndex];
+    }
+    return $value;
+}
+echo strToUpper('test');
+
+
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
