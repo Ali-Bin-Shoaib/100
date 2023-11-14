@@ -173,22 +173,24 @@ function _count($value)
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 //* 11 _strlen 
-
+function _strlen(string $value)
+{
+    // if()
+}
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //* 12 _isSet
-function _isSet($value)
-{
-    if ($value == false || $value == [] || $value == '') {
-        if($value!=null)
-        return true;
-    }
-    return false;
-}
-$test =null;
-echo _isSet($test);
-echo '<br>';
-echo isset($test);
-echo '<br>';
-echo ' <hr > ';
-echo '<br>';
+// function _isSet($value)
+// {
+//     if ($value == '' && $value == [])
+//         if ($value != null)
+//             return true;
+//     return false;
+// }
+// $test = [];
+// echo _isSet($test);
+// echo '<br>';
+// echo isset($test);
+// echo '<br>';
+// echo ' <hr > ';
+// echo '<br>';
