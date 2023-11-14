@@ -175,9 +175,14 @@ function _count($value)
 //* 11 _strlen 
 function _strlen(string $value)
 {
-    // if()
+    if (is_string($value)) {
+        return _count($value);
+    } else {
+        throw new Exception('value must be a string.');
+    }
 }
-
+$test = 'test';
+echo _strlen($test);
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //* 12 _isSet
 // function _isSet($value)
