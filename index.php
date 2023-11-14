@@ -199,3 +199,5 @@ echo _strlen($test);
 // echo '<br>';
 // echo ' <hr > ';
 // echo '<br>';
+//* 13 strReplace 
+// strReplace(){}
