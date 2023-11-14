@@ -75,3 +75,16 @@ return $array;
 // print_r(strSplit('/', '/this/is/a/test/for/split/function'));
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+//* 5 strIndexOfChar
+function strIndexOfChar(string $char, string $value)
+{
+    if ($char == "" || $char == null)
+        throw new Exception("\$char parameter is not set.");
+    for ($i = 0; $i < strlen($value); $i++) {
+        if ($char == $value[$i])
+            return $i;
+    }
+    return -1;
+}
+// echo strIndexOfChar(' ', 'bba');
