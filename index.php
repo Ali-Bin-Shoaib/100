@@ -165,19 +165,30 @@ function _count($value)
     }
     return $counter;
 }
-$testArray = [1, 2, 3];
-echo '<br>';
-echo (_count($testArray));
-echo '<br>';
+// $testArray = [1, 2, 3];
+// echo '<br>';
+// echo (_count($testArray));
+// echo '<br>';
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 //* 11 _strlen 
-// function _strlen(string $value){}
+
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-
+//* 12 _isSet
+function _isSet($value)
+{
+    if ($value == false || $value == [] || $value == '') {
+        if($value!=null)
+        return true;
+    }
+    return false;
+}
+$test =null;
+echo _isSet($test);
+echo '<br>';
+echo isset($test);
 echo '<br>';
 echo ' <hr > ';
 echo '<br>';
