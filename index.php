@@ -80,11 +80,22 @@ return $array;
 function strIndexOfChar(string $char, string $value)
 {
     if ($char == "" || $char == null)
-        throw new Exception("\$char parameter is not set.");
-    for ($i = 0; $i < strlen($value); $i++) {
-        if ($char == $value[$i])
-            return $i;
-    }
-    return -1;
+    throw new Exception("\$char parameter is not set.");
+for ($i = 0; $i < strlen($value); $i++) {
+    if ($char == $value[$i])
+    return $i;
+}
+return -1;
 }
 // echo strIndexOfChar(' ', 'bba');
+
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+//* 6 arrayPush
+function arrayPush($array, $value)
+{
+    $array[count($array)] = $value;
+    return $array;
+}
+// $testArray = array(0, 1);
+// print_r(arrayPush(arrayPush($testArray, ['test', 'is', 'ok']), '😁'));
