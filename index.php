@@ -33,3 +33,16 @@ function strRevers(string $value)
 // echo strRevers('ok');
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+//* 3 strToArray
+function strToArray(string $value)
+{
+    $array = [];
+    for ($i = 0; $i < strlen($value); $i++) {
+        $array[$i] = $value[$i];
+    }
+    return $array;
+};
+// print_r(strToArray('do ok'));
+
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
