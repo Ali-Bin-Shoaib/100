@@ -99,3 +99,19 @@ function arrayPush($array, $value)
 }
 // $testArray = array(0, 1);
 // print_r(arrayPush(arrayPush($testArray, ['test', 'is', 'ok']), '😁'));
+
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+//* 7 strFindCharAppearance
+function strFindCharAppearance(string $toSearch, string $value)
+{
+    if (strlen($toSearch) != 1) throw new Exception("char value to search is grater than one provided \$toSearch:$toSearch");
+    $appearanceCount = 0;
+    for ($i = 0; $i < strlen($value); $i++) {
+
+        if ($value[$i] == $toSearch)
+            $appearanceCount++;
+    }
+    return $appearanceCount;
+}
+// echo strFindCharAppearance('a', 'aabbbbaa');
