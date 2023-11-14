@@ -46,3 +46,32 @@ function strToArray(string $value)
 // print_r(strToArray('do ok'));
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+//* 4 strSplit
+function strSplit(string $separator, string $value)
+{
+    if (strlen($separator) != 1) {
+        throw new Exception("Separator must be one character. provided separator: {$separator} with length = " . strlen($separator));
+    }
+    $arrayIndex = 0;
+    $array = [];
+    $temp = '';
+    for ($i = 0; $i < strlen($value); $i++) {
+        if ($value[$i] == $separator) {
+            if ($temp != '') {
+                // array_push($array, $temp);
+                $array[$arrayIndex++] = $temp;
+                $temp = '';
+            }
+        } else {
+            $temp .= $value[$i];
+        }
+    }
+    if (count($array) == 0)
+    throw new Exception("provided separator does not exist on the provided string value.");
+
+return $array;
+}
+// print_r(strSplit('/', '/this/is/a/test/for/split/function'));
+
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
