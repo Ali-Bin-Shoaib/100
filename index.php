@@ -135,7 +135,8 @@ function _strToLower(string $value)
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 //* 9 strToUpper
-function _strToUpper(string $value){
+function _strToUpper(string $value)
+{
     $lowerLetters = 'abcdefghijklmnopqrstuvwxyz';
     $upperLetters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     for ($i = 0; $i < strlen($value); $i++) {
@@ -145,14 +146,29 @@ function _strToUpper(string $value){
     }
     return $value;
 }
-echo strToUpper('test');
+// echo strToUpper('test');
 
 
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 //* 10 _count 
-// function _count($value){}
+function _count($value)
+{
+    $counter = 0;
+    $isValue = $value[$counter] ?? null;
+    if ($isValue == null && $value ?? null == null)
+        throw new Exception("provided value is null. value must be an array.");
+    while ($isValue != null) {
+        $counter++;
+        $isValue = $value[$counter] ?? null;
+    }
+    return $counter;
+}
+$testArray = [1, 2, 3];
+echo '<br>';
+echo (_count($testArray));
+echo '<br>';
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
