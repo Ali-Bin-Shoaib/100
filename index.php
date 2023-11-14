@@ -18,3 +18,18 @@ function strCountWords(string $value)
     return $isLastCharIsSpace ? $wordCount : $wordCount + 1;
 }
 // echo strCountWords('   ok   is   fine   ');
+
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+//* 2 strRevers
+function strRevers(string $value)
+{
+    $revers = '';
+    for ($i = strlen($value) - 1; $i >= 0; $i--) {
+        $revers = $revers . $value[$i];
+    }
+    return $revers;
+}
+// echo strRevers('ok');
+
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
