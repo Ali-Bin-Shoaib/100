@@ -25,7 +25,7 @@ function strCountWords(string $value)
 function strRevers(string $value)
 {
     $revers = '';
-    for ($i = strlen($value) - 1; $i >= 0; $i--) {
+    for ($i = _strlen($value) - 1; $i >= 0; $i--) {
         $revers = $revers . $value[$i];
     }
     return $revers;
@@ -38,7 +38,7 @@ function strRevers(string $value)
 function strToArray(string $value)
 {
     $array = [];
-    for ($i = 0; $i < strlen($value); $i++) {
+    for ($i = 0; $i < _strlen($value); $i++) {
         $array[$i] = $value[$i];
     }
     return $array;
@@ -50,15 +50,17 @@ function strToArray(string $value)
 //* 4 strSplit
 function strSplit(string $separator, string $value)
 {
-    if (strlen($separator) != 1) {
+    if (_strlen($separator) != 1) {
         throw new Exception("Separator must be one character. provided separator: {$separator} with length = " . strlen($separator));
     }
     $arrayIndex = 0;
     $array = [];
     $temp = '';
     for ($i = 0; $i < strlen($value); $i++) {
-        if ($value[$i] == $separator) {
+        if ($value[$i] == $separator || $i == _strlen($value) - 1) {
             if ($temp != '') {
+                if ($i == _strlen($value) - 1)
+                    $temp .= $value[$i];
                 // array_push($array, $temp);
                 $array[$arrayIndex++] = $temp;
                 $temp = '';
@@ -72,7 +74,7 @@ function strSplit(string $separator, string $value)
 
     return $array;
 }
-// print_r(strSplit('/', '/this/is/a/test/for/split/function'));
+print_r(strSplit('/', '/this/is/a/test/for/split/function'));
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -81,7 +83,7 @@ function strIndexOfChar(string $char, string $value)
 {
     if ($char == "" || $char == null)
         throw new Exception("\$char parameter is not set.");
-    for ($i = 0; $i < strlen($value); $i++) {
+    for ($i = 0; $i < _strlen($value); $i++) {
         if ($char == $value[$i])
             return $i;
     }
@@ -94,7 +96,7 @@ function strIndexOfChar(string $char, string $value)
 //* 6 arrayPush
 function arrayPush($array, $value)
 {
-    $array[count($array)] = $value;
+    $array[_count($array)] = $value;
     return $array;
 }
 // $testArray = array(0, 1);
@@ -105,9 +107,9 @@ function arrayPush($array, $value)
 //* 7 strFindCharAppearance
 function strFindCharAppearance(string $toSearch, string $value)
 {
-    if (strlen($toSearch) != 1) throw new Exception("char value to search is grater than one provided \$toSearch:$toSearch");
+    if (_strlen($toSearch) != 1) throw new Exception("char value to search is grater than one provided \$toSearch:$toSearch");
     $appearanceCount = 0;
-    for ($i = 0; $i < strlen($value); $i++) {
+    for ($i = 0; $i < _strlen($value); $i++) {
 
         if ($value[$i] == $toSearch)
             $appearanceCount++;
@@ -123,7 +125,7 @@ function _strToLower(string $value)
 {
     $lowerLetters = 'abcdefghijklmnopqrstuvwxyz';
     $upperLetters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    for ($i = 0; $i < strlen($value); $i++) {
+    for ($i = 0; $i < _strlen($value); $i++) {
         $upperLetterIndex = strIndexOfChar($value[$i], $upperLetters);
         if ($upperLetterIndex != -1)
             $value[$i] = $lowerLetters[$upperLetterIndex];
@@ -139,7 +141,7 @@ function _strToUpper(string $value)
 {
     $lowerLetters = 'abcdefghijklmnopqrstuvwxyz';
     $upperLetters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    for ($i = 0; $i < strlen($value); $i++) {
+    for ($i = 0; $i < _strlen($value); $i++) {
         $lowerLetterIndex = strIndexOfChar($value[$i], $lowerLetters);
         if ($lowerLetterIndex != -1)
             $value[$i] = $upperLetters[$lowerLetterIndex];
@@ -182,7 +184,7 @@ function _strlen(string $value)
     }
 }
 $test = 'test';
-echo _strlen($test);
+// echo _strlen($test);
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //* 12 _isSet
 // function _isSet($value)
