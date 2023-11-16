@@ -195,7 +195,7 @@ function _count(array $value)
 //* 11 _strlen 
 function _strlen(string $value)
 {
-$counter = 0;
+    $counter = 0;
     if (_isset($value)) {
         $isValue = @$value[$counter];
         if (_isset($isValue)) {
@@ -228,8 +228,34 @@ function _isset($value)
 // echo '<br>';
 // echo ' <hr > ';
 // echo '<br>';
+//* 13 _is_array
+function _is_array(array &$array)
+{
+    if (_isset($array))
+        if (_count($array))
+            return true;
+    return false;
+}
+$test = '';
+echo is_array($test);
+//* 14 _str_replace
+function _str_replace(
+    array|string $search,
+    array|string $replace,
+    array|string $subject,
+) {
+    return'';
+}
+echo $test = 'before this before';
+echo '<br>';
+$test = str_replace('before', 'after', $test);
+echo '<br>';
+echo $test;
+echo '<br>';
+$test = _str_replace('this', 'with this', 'from this');
+echo '<br>';
+echo $test;
 
-// strReplace(){}
 
 // _isANumber(){}
 
@@ -284,13 +310,3 @@ function _isset($value)
 // function _wordWrap( string $string, int $width = 75, string $break = "\n",bool $cut_long_words = false):string{}
 
 // _arrayFill($array,$value,int $times){}
-
-//* _is_array
-function _is_array(array &$array)
-{
-    if (_isset($array))
-        if (_count($array))
-            return true;
-}
-
-// echo is_array();
