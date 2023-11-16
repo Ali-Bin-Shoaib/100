@@ -98,7 +98,7 @@ function _strIndexOfChar(string $char, string $value)
     }
     return -1;
 }
-// echo _strIndexOfChar(' ', 'bba');
+// echo _strIndexOfChar('a', 'bba');
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -122,7 +122,6 @@ function _array_push(array &$array, mixed ...$values)
 
 function strFindCharAppearance(string $toSearch, string $value)
 {
-    echo _strlen($toSearch);
     if (_strlen($toSearch) != 1) throw new Exception("char value to search is grater than one provided \$toSearch:$toSearch");
     $appearanceCount = 0;
     for ($i = 0; $i < _strlen($value); $i++) {
@@ -171,36 +170,49 @@ function _strToUpper(string $value)
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 //* 10 _count 
-function _count($value)
+function _count(array $value)
 {
-    if (_isset($value))
+    if (!_isset($value))
         throw new Exception("provided value is null. value must be an array.");
     $counter = 0;
-    $isValue = _isset($value[$counter]);
-    while ($isValue != null) {
-        $counter++;
-        $isValue = $value[$counter] ?? null;
+    $isValue = @$value[$counter];
+    if ($isValue) {
+        while (_isset($isValue)) {
+            $counter++;
+            $isValue = $value[$counter] ?? null;
+        }
     }
     return $counter;
 }
-$testArray = [1];
+// $testArray = [1];
 // echo '<br>';
 // echo (_count($testArray));
 // echo '<br>';
+// echo (count($testArray));
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 //* 11 _strlen 
 function _strlen(string $value)
 {
-    if (is_string($value)) {
-        return _count($value);
+$counter = 0;
+    if (_isset($value)) {
+        $isValue = @$value[$counter];
+        if (_isset($isValue)) {
+            while (_isset($isValue)) {
+                $counter++;
+                $isValue = $value[$counter] ?? null;
+            }
+        }
+        return $counter;
     } else {
-        throw new Exception('value must be a string.');
+        throw new Exception('provide null value.');
     }
 }
-// $test = 'test';
+// $test = 'it is working';
 // echo _strlen($test);
+// echo '<br>';
+// echo strlen($test);
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //* 12 _isSet
 //check casting (int)$value to convert zero to int and differentiate it from null
@@ -209,7 +221,7 @@ function _isset($value)
 {
     return $value === null ? null : true;
 }
-// $test = '';
+// $test = '000';
 // echo _isSet($test);
 // echo '<br>';
 // echo isset($test);
