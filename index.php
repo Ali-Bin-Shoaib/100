@@ -375,18 +375,29 @@ function _str_contains($value, $toSearch)
 function _max(array $array)
 {
     _throw_null_exception($array);
-    if (_empty($array))
+    if (!_empty($array))
         throw new Exception("Array can not be empty");
-    $maxValue = NULL;
+    $maxValue = 0;
     foreach ($array as  $value) {
-        if (!is_numeric($value)) continue;
-        $maxValue = $maxValue < $value ? $value : $maxValue;
+        if (!_is_numeric($value)) continue;
+        $maxValue = ($value > $maxValue || $value === 0)  ? $value : $maxValue;
     }
     return $maxValue;
 }
-echo_r(_max([]), max([1, 2, 3]));
+// echo_r(_max([1, 2, 3, 4, 5]), max([1, 2, 3, 4, 5]));
 //* 29 _min
-// _min(){}
+function _min(array $array)
+{
+    _throw_null_exception($array);
+    if (!_empty($array))  throw new Exception("Array can not be empty");
+    $minValue = 0;
+    foreach ($array as $value) {
+        $minValue = $minValue > $value ? $value : $minValue;
+        // echo_r($minValue);
+    }
+    return $minValue;
+}
+// echo_r(_min([ 0, 5]), min([ 0, 5]));
 
 //* 30 _empty
 function _empty($value)
