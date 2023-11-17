@@ -443,7 +443,7 @@ function _trim(string $value)
     return _ltrim(_rtrim($value));
 }
 // echo_r(_strlen(_trim($test)));
-//*35 _str_repeat
+//*34 _str_repeat
 function _str_repeat(string $value, int $times)
 {
     _throw_null_exception($value, $times);
@@ -456,8 +456,20 @@ function _str_repeat(string $value, int $times)
     return $temp;
 }
 // echo_r(str_repeat('ok ', 4), _str_repeat('ok ', 4));
-// strRepeat(){}
-
+//* 35 _join
+function _join(string $separator, array $values)
+{
+    $temp = '';
+    _throw_null_exception($separator, $values);
+    if ( !_empty($values)) {
+        foreach ($values as $value) {
+            $temp .= $value . $separator;
+        }
+        return $temp;
+    }
+    throw new Exception('array is empty');
+}
+// echo_r(join(' ', ['test', 'this', 'function']), _join(' ', ['test', 'this', 'function']));
 // _join(){$value1,$value2}
 
 // _str_ireplace($toReplace,$value){}
