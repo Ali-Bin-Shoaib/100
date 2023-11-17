@@ -308,14 +308,16 @@ function _pow($number, $exponent)
     return $number ** $exponent;
 }
 
-echo_r([pow(2, 3), _pow(2, 3)]);
+// echo_r(pow(2, 3), _pow(2, 3));
 //* 20 _mod
 function _mod($num1, $num2)
 {
 }
+echo_r();
 //* 21 echo_r
-function echo_r($array)
+function echo_r(...$values)
 {
+    $array = [...$values];
     foreach ($array as $value) {
         echo '<h1>' . $value . '</h1>';
     }
