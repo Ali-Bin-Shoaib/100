@@ -229,16 +229,13 @@ function _isset($value)
 //* 13 _is_array
 function _is_array(array &$array)
 {
-    if (_isset($array))
-        // if (_count($array))
-        return true;
-    return false;
+    return _isset($array) ? true : false;
 }
-// $test = [1,2,3];
-// echo is_array($test);
-// echo '<br>';
-// echo is_array($test);
-// echo '<br>';
+$test = [1, 2, 5];
+echo is_array($test);
+echo '<br>';
+echo _is_array($test);
+echo '<br>';
 //* 14 _str_replace
 function _str_replace(string $search, string $replace, string $subject)
 {
@@ -268,7 +265,7 @@ function _str_replace(string $search, string $replace, string $subject)
 //* 15 _is_numeric
 function _is_numeric(mixed $value)
 {
-    if (!_isset(@$value)) throw new Exception('value is null');
+    _throw_null_exception($value);
     if ((int)$value == $value || (float)$value == $value || $value === 0)
         return true;
     return false;
@@ -282,12 +279,18 @@ function _is_numeric(mixed $value)
 //*16 _is_string
 function _is_string(mixed $value)
 {
+    _throw_null_exception($value);
     return (string)$value === $value ? true : false;
 }
-$test = 'test';
-echo is_string($test);
+$test = 55;
+echo _is_string($test);
 echo '<br>';
 echo is_string($test);
+//* 17 _throw_null_exception
+function _throw_null_exception($value)
+{
+    return _isset($value) ? true : throw new Exception("null value");
+}
 // _range(){}
 
 // _arrMaxValue(){}
