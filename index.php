@@ -292,9 +292,11 @@ function _is_string(mixed $value)
 // echo '<br>';
 // echo is_string($test);
 //* 17 _throw_null_exception
-function _throw_null_exception($value)
+function _throw_null_exception(...$value)
 {
-    return _isset($value) ? true : throw new Exception("null value");
+    foreach ($value as $v) {
+        return _isset($value) ? true : throw new Exception("null value");
+    }
 }
 //* 18 _is_null
 function _is_null(mixed $value): bool
@@ -360,8 +362,34 @@ function _is_float($value)
 //* 25
 function _str_ends_with(string $value, string $end)
 {
+    $flag = false;
+    _throw_null_exception($value, $end);
+    if (_str_contains($value, $end)) {
+        if (_strlen($end) > 1) {
+            for ($i = _strlen($value) - 1; $i >= 0; $i--) {
+                for ($j = _strlen($end) - 1; $j >= 0; $j--) {
+                    if ($end[$j] === $value[$i]) {
+                        $flag = true;
+                        $i--;
+                    } else {
+                        $flag = false;
+                        break;
+                    }
+                }
+                return $flag;
+            }
+        } elseif (_strlen($end) === 1) {
+            $index = _strIndexOfChar($end, _strrev($value));
+            if ($index === 0) return true;
+            else return false;
+            // echo_r($index);
+        }
+    } else {
+        throw new Exception('invalid end with value.');
+    }
+    return false;
 }
-// echo_r(str_ends_with('this is it', 'it'),_str_ends_with('this is it', 'it'));
+// echo_r(str_ends_with('a string ends with ok', 'ok'), _str_ends_with('a string ends with ok', 'ok'));
 //* 26
 // strStartWith(){}
 //* 27
