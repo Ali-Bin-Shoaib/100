@@ -55,21 +55,19 @@ function _str_split(string $value)
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //none issues : don't split last char if separator is before the last char.
 //* 4 strSplit
-function _explode(string $separator, string $value)
+function _explode_by_char(string $separator, string $value)
 {
     if (_strlen($separator) != 1) {
-        throw new Exception("Separator must be one character. provided separator: {$separator} with length = " . strlen($separator));
+        throw new Exception("Separator must be one character. provided separator: \${$separator} with length = " . _strlen($separator));
     }
-    $arrayIndex = 0;
     $array = [];
     $temp = '';
-    for ($i = 0; $i < strlen($value); $i++) {
+    for ($i = 0; $i < _strlen($value); $i++) {
         if ($value[$i] == $separator || $i == _strlen($value) - 1) {
             if ($temp != '') {
                 if ($i == _strlen($value) - 1)
                     $temp .= $value[$i];
-                // array_push($array, $temp);
-                $array[$arrayIndex++] = $temp;
+                _array_push($array, $temp);
                 $temp = '';
             }
         } else {
@@ -81,7 +79,7 @@ function _explode(string $separator, string $value)
 
     return $array;
 }
-// print_r(_explode('/', '/this/is/a/test/for/split/function'));
+// print_r(_explode_by_char('/', '/this/is/a/test/for/split/function'));
 // echo '<br>';
 // print_r(explode('/', '/this/is/a/test/for/split/function'));
 
@@ -232,32 +230,56 @@ function _isset($value)
 function _is_array(array &$array)
 {
     if (_isset($array))
-        if (_count($array))
-            return true;
+        // if (_count($array))
+        return true;
     return false;
 }
-$test = '';
-echo is_array($test);
+// $test = [1,2,3];
+// echo is_array($test);
+// echo '<br>';
+// echo is_array($test);
+// echo '<br>';
 //* 14 _str_replace
-function _str_replace(
-    array|string $search,
-    array|string $replace,
-    array|string $subject,
-) {
-    return'';
+function _str_replace(string $search, string $replace, string $subject)
+{
+    echo '<h1>' . _strlen($subject) . '</h1>';
+
+    return '';
+    // for ($i = 0; $i < _strlen($subject); $i++) {
+    //     for ($j = $i; $j < _strlen($subject); $j++) {
+    //         if($subject[$j]==$search[$j]){
+    //             $temp .= $
+    //         }
+    //     }
+    // }
 }
-echo $test = 'before this before';
-echo '<br>';
-$test = str_replace('before', 'after', $test);
-echo '<br>';
-echo $test;
-echo '<br>';
-$test = _str_replace('this', 'with this', 'from this');
-echo '<br>';
-echo $test;
+// echo $test = 'test';
+// echo '<br>';
+// $test = str_replace('test', 'ok', $test);
+// echo '<br>';
+// echo $test;
+// echo '<br>';
+// echo $test = 'test';
+// echo '<br>';
+// $test = _str_replace('test', 'ok', $test);
+// echo '<br>';
+// echo $test;
+
+//* 15 _is_numeric
+function _is_numeric(mixed $value)
+{
+    if (!_isset(@$value)) throw new Exception('value is null');
+    if ((int)$value == $value || (float)$value == $value || $value === 0)
+        return true;
+    return false;
+}
 
 
-// _isANumber(){}
+// $test = '55';
+// echo _is_numeric($test);
+// echo '<br>';
+// echo is_numeric($test);
+// echo '<br>';
 
 // _range(){}
 
