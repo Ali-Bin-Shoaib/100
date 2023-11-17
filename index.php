@@ -428,7 +428,7 @@ function _ltrim(string $value)
         return $temp;
     } else throw new Exception('value is empty or not start with space');
 }
-$test = '     |test this|     ';
+// $test = '     |test this|     ';
 // echo_r(_strlen(ltrim($test)), _strlen(_ltrim($test)));
 //* 32 _rtrim
 function _rtrim(string $value)
@@ -443,6 +443,19 @@ function _trim(string $value)
     return _ltrim(_rtrim($value));
 }
 // echo_r(_strlen(_trim($test)));
+//*35 _str_repeat
+function _str_repeat(string $value, int $times)
+{
+    _throw_null_exception($value, $times);
+    if (!is_numeric($times)) throw new Exception('times must be an int value');
+    if ($times < 0) throw new Exception('times must be an int value');
+    $temp = '';
+    for ($i = 0; $i < $times; $i++) {
+        $temp .= $value;
+    }
+    return $temp;
+}
+// echo_r(str_repeat('ok ', 4), _str_repeat('ok ', 4));
 // strRepeat(){}
 
 // _join(){$value1,$value2}
