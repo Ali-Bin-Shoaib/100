@@ -24,11 +24,15 @@ function _str_word_count(string $value)
 //* 2 _strrev
 function _strrev(string $value)
 {
-    $revers = '';
-    for ($i = _strlen($value) - 1; $i >= 0; $i--) {
-        $revers .=  @$value[$i];
-    }
-    return $revers;
+    _throw_null_exception($value);
+    if (!_empty($value)) {
+
+        $revers = '';
+        for ($i = _strlen($value) - 1; $i >= 0; $i--) {
+            $revers .=  @$value[$i];
+        }
+        return $revers;
+    } else throw new Exception('string is empty.');
 }
 // echo_r(_strrev('hi my name is ali'), strrev('hi my name is ali'));
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -189,15 +193,17 @@ function _count(array $value)
 //* 11 _strlen 
 function _strlen(string $value)
 {
+    // echo_r(__FUNCTION__, $value);
     $counter = 0;
     if (_isset($value)) {
         $isValue = @$value[$counter];
-        if (_isset($isValue)) {
-            while (_isset($isValue)) {
+        if (_isset($isValue) && !_empty($isValue)) {
+            while (_isset($isValue) && !_empty($isValue)) {
                 $counter++;
                 $isValue = $value[$counter] ?? null;
             }
         }
+        // echo_r(__FUNCTION__,$counter);
         return $counter;
     } else {
         throw new Exception('provide null value.');
@@ -412,7 +418,9 @@ function _empty($value)
 
 function _ltrim(string $value)
 {
-    $firstCharacter = null;
+    $firstCharacter = 0;
+    // echo_r(__FUNCTION__, $value);
+
     $temp = '';
     _throw_null_exception($value);
     if (!_empty($value) && _str_starts_with($value, ' ')) {
@@ -426,9 +434,13 @@ function _ltrim(string $value)
             $temp .= $value[$i];
         }
         return $temp;
-    } else throw new Exception('value is empty or not start with space');
+    } else {
+        // echo_r(__FUNCTION__, 'false');
+        //! error when returning the value!!?
+        return $value;
+    }
 }
-// $test = '     |test this|     ';
+$test = '|test this|     ';
 // echo_r(_strlen(ltrim($test)), _strlen(_ltrim($test)));
 //* 32 _rtrim
 function _rtrim(string $value)
@@ -440,9 +452,9 @@ function _rtrim(string $value)
 //* 33 _trim
 function _trim(string $value)
 {
-    return _ltrim(_rtrim($value));
+    return _rtrim(_ltrim($value));
 }
-// echo_r(_strlen(_trim($test)));
+// echo_r(_strlen(_trim($test)), _strlen(_trim($test)));
 //*34 _str_repeat
 function _str_repeat(string $value, int $times)
 {
@@ -461,7 +473,7 @@ function _join(string $separator, array $values)
 {
     $temp = '';
     _throw_null_exception($separator, $values);
-    if ( !_empty($values)) {
+    if (!_empty($values)) {
         foreach ($values as $value) {
             $temp .= $value . $separator;
         }
@@ -470,32 +482,31 @@ function _join(string $separator, array $values)
     throw new Exception('array is empty');
 }
 // echo_r(join(' ', ['test', 'this', 'function']), _join(' ', ['test', 'this', 'function']));
-// _join(){$value1,$value2}
 
-// _str_ireplace($toReplace,$value){}
+//* 
+function _str_capitalize(string $value)
+{
+    _throw_null_exception($value);
+    $temp = _trim($value);
+    $temp[0] = _str_to_upper($temp[0]);
+    for ($i = 1; $i < _strlen($temp); $i++) {
+        if ($temp[$i] === ' ' && $i < _strlen($temp) - 1)
+            $temp[$i = 1] = _str_to_upper($temp[$i + 1]);
+    }
+    return $temp;
+}
 
-// _strCapitalize($value){}
+// echo_r(_str_capitalize('capitalization is working'));
 
-// _strComparison($value1,$value2){}
-
-// _implode($array,$separator){}
 
 // _substr_count($value,$substring){}
 
 // _substr_replace($value,$toSearch,$toReplace){}
 
-// function _wordWrap( string $string, int $width = 75, string $break = "\n",bool $cut_long_words = false):string{}
 // strSubString(){}
 
 // arrShuffle(){}
 
 // strShuffle(){}
-
-
-
-
-
-
-
 
 // _arrayFill($array,$value,int $times){}
