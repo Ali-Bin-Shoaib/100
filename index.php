@@ -103,9 +103,12 @@ function _strIndexOfChar(string $char, string $value)
 //* 6 arrayPush
 function _array_push(array &$array, mixed ...$values)
 {
+    echo_r('before', _count($array));
     foreach ($values as $item) {
+
         $array[_count($array)] = $item;
     }
+    echo_r('after', _count($array));
 }
 // $testArray = [0, 1];
 // $testArray1 = [0, 1];
@@ -312,8 +315,11 @@ function _pow($number, $exponent)
 //* 20 _mod
 function _mod($num1, $num2)
 {
+    _throw_null_exception($num1);
+    _throw_null_exception($num2);
+    return $num1 % $num2;
 }
-echo_r();
+// echo_r(_mod(10, 2));
 //* 21 echo_r
 function echo_r(...$values)
 {
@@ -321,8 +327,33 @@ function echo_r(...$values)
     foreach ($array as $value) {
         echo '<h1>' . $value . '</h1>';
     }
+    echo "<hr>";
 }
-// _range(){}
+// echo_r(1, 2, ...['ok', 'it', 'is', 'working']);
+//* 22 range
+function _range(float |int $start, float |int $end, float |int|null $step = 1)
+{
+    $array = [];
+    for ($i = $start; $i <= $end; $i += $step)
+        _array_push($array, $i);
+    return $array;
+}
+// echo_r(...range(0, 20, 10), ..._range(0, 20, 10));
+
+//* 23 _is_int
+function _is_int( $value)
+{
+    _throw_null_exception($value);
+    return (int)$value === $value ? true : false;
+}
+// echo_r(_is_int(5), is_int(5));
+//* 24 float
+function _is_float( $value)
+{
+    _throw_null_exception($value);
+    return (float)$value === $value;
+}
+// echo_r(_is_float(5.5), is_float(5.1));
 
 // _arrMaxValue(){}
 
