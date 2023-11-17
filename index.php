@@ -300,6 +300,19 @@ function _is_null(mixed $value): bool
 // echo _is_null($test);
 // echo '<br>';
 // echo is_null($test);
+//* 19 _pow
+function _pow($number, $exponent)
+{
+    _throw_null_exception($number);
+    _throw_null_exception($exponent);
+    return $number ** $exponent;
+}
+
+echo _pow(2, 3);
+echo '<br>';
+echo pow(2, 3);
+
+// mod(){}
 // _range(){}
 
 // _arrMaxValue(){}
@@ -321,9 +334,6 @@ function _is_null(mixed $value): bool
 // strIncludes(){}
 
 
-// power(){}
-
-// mod(){}
 
 // _trim(){}
 
