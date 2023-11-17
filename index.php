@@ -117,7 +117,7 @@ function _array_push(array &$array, mixed ...$values)
 
 //* 7 strFindCharAppearance
 
-function strFindCharAppearance(string $toSearch, string $value)
+function _str_count_char_appearance(string $toSearch, string $value)
 {
     if (_strlen($toSearch) != 1) throw new Exception("char value to search is grater than one provided \$toSearch:$toSearch");
     $appearanceCount = 0;
@@ -133,7 +133,7 @@ function strFindCharAppearance(string $toSearch, string $value)
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 //* 8 strToLower 
-function _strToLower(string $value)
+function _str_to_lower(string $value)
 {
     $lowerLetters = 'abcdefghijklmnopqrstuvwxyz';
     $upperLetters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -144,12 +144,12 @@ function _strToLower(string $value)
     }
     return $value;
 }
-// echo_r(_strToLower('TEST'));
+// echo_r(_str_to_lower('TEST'));
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 //* 9 strToUpper
-function _strToUpper(string $value)
+function _str_to_upper(string $value)
 {
     $lowerLetters = 'abcdefghijklmnopqrstuvwxyz';
     $upperLetters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -160,7 +160,7 @@ function _strToUpper(string $value)
     }
     return $value;
 }
-// echo_r(strToUpper('test'));
+// echo_r(_str_to_upper('test'));
 
 
 
@@ -223,6 +223,7 @@ function _is_array(array $array)
 }
 // echo_r(_is_array([1,2,3]), is_array([1, 2, 3]));
 //* 14 _str_replace
+//! to implement
 function _str_replace(string $search, string $replace, string $subject)
 {
     _throw_null_exception($search, $replace, $subject);
@@ -282,7 +283,7 @@ function echo_r(...$values)
 {
     $array = [...$values];
     foreach ($array as $value) {
-        echo '<h1 style="color:red;font-size:40px">' . $value . '</h1>';
+        echo '<h1 style="color:red;font-size:40px;">' . $value . '</h1>';
     }
     echo "<hr>";
 }
@@ -375,7 +376,7 @@ function _str_contains($value, $toSearch)
 function _max(array $array)
 {
     _throw_null_exception($array);
-    if (!_empty($array))
+    if (_empty($array))
         throw new Exception("Array can not be empty");
     $maxValue = 0;
     foreach ($array as  $value) {
@@ -389,7 +390,7 @@ function _max(array $array)
 function _min(array $array)
 {
     _throw_null_exception($array);
-    if (!_empty($array))  throw new Exception("Array can not be empty");
+    if (_empty($array))  throw new Exception("Array can not be empty");
     $minValue = 0;
     foreach ($array as $value) {
         $minValue = $minValue > $value ? $value : $minValue;
@@ -403,26 +404,46 @@ function _min(array $array)
 function _empty($value)
 {
     _throw_null_exception($value);
-    if ($value !== '' || $value !== [])
+    if ($value === '' || $value === [])
         return true;
     return false;
 }
+//* 31 _ltrim
+
+function _ltrim(string $value)
+{
+    $firstCharacter = null;
+    $temp = '';
+    _throw_null_exception($value);
+    if (!_empty($value) && _str_starts_with($value, ' ')) {
+        for ($i = 0; $i < _strlen($value); $i++) {
+            if ($value[$i] !== ' ') {
+                $firstCharacter = $i;
+                break;
+            }
+        }
+        for ($i = $firstCharacter; $i < _strlen($value); $i++) {
+            $temp .= $value[$i];
+        }
+        return $temp;
+    } else throw new Exception('value is empty or not start with space');
+}
+$test = '     |test this|     ';
+// echo_r(_strlen(ltrim($test)), _strlen(_ltrim($test)));
+//* 32 _rtrim
+function _rtrim(string $value)
+{
+    return _strrev(_ltrim(_strrev($value)));
+}
+// echo_r(_strlen(rtrim($test)), _strlen(_rtrim($test)));
+
+//* 33 _trim
+function _trim(string $value)
+{
+    return _ltrim(_rtrim($value));
+}
+// echo_r(_strlen(_trim($test)));
 // strRepeat(){}
-
-// strSubString(){}
-
-// arrShuffle(){}
-
-// strShuffle(){}
-
-
-
-
-// _trim(){}
-
-// _lTrim(){}
-
-// _rTrim($value){}
 
 // _join(){$value1,$value2}
 
@@ -439,5 +460,17 @@ function _empty($value)
 // _substr_replace($value,$toSearch,$toReplace){}
 
 // function _wordWrap( string $string, int $width = 75, string $break = "\n",bool $cut_long_words = false):string{}
+// strSubString(){}
+
+// arrShuffle(){}
+
+// strShuffle(){}
+
+
+
+
+
+
+
 
 // _arrayFill($array,$value,int $times){}
