@@ -231,11 +231,11 @@ function _is_array(array &$array)
 {
     return _isset($array) ? true : false;
 }
-$test = [1, 2, 5];
-echo is_array($test);
-echo '<br>';
-echo _is_array($test);
-echo '<br>';
+// $test = [1, 2, 5];
+// echo is_array($test);
+// echo '<br>';
+// echo _is_array($test);
+// echo '<br>';
 //* 14 _str_replace
 function _str_replace(string $search, string $replace, string $subject)
 {
@@ -291,6 +291,15 @@ function _throw_null_exception($value)
 {
     return _isset($value) ? true : throw new Exception("null value");
 }
+//* 18 _is_null
+function _is_null(mixed $value): bool
+{
+    return !_isset($value);
+}
+// $test = null;
+// echo _is_null($test);
+// echo '<br>';
+// echo is_null($test);
 // _range(){}
 
 // _arrMaxValue(){}
@@ -311,7 +320,6 @@ function _throw_null_exception($value)
 
 // strIncludes(){}
 
-// isNull(){}
 
 // power(){}
 
