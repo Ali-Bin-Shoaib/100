@@ -17,10 +17,8 @@ function _str_word_count(string $value)
     }
     return $isLastCharIsSpace ? $wordCount : $wordCount + 1;
 }
-// echo _str_word_count('   count these words   ');
-// echo '<br>';
-// echo str_word_count('   count these words   ');
-
+// $test= '   count these words   ';
+// echo_r(_str_word_count($test),str_word_count($test));
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 //* 2 _strrev
@@ -28,14 +26,11 @@ function _strrev(string $value)
 {
     $revers = '';
     for ($i = _strlen($value) - 1; $i >= 0; $i--) {
-        $revers .=  $value[$i];
+        $revers .=  @$value[$i];
     }
     return $revers;
 }
-// echo strRevers('hi my name is ali');
-// echo '<br>';
-// echo strrev('hi my name is ali');
-
+// echo_r(_strrev('hi my name is ali'), strrev('hi my name is ali'));
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 //* 3 _str_split
@@ -79,9 +74,9 @@ function _explode_by_char(string $separator, string $value)
 
     return $array;
 }
-// print_r(_explode_by_char('/', '/this/is/a/test/for/split/function'));
+// print_r(_explode_by_char('/', 'the/name/is/ali'));
 // echo '<br>';
-// print_r(explode('/', '/this/is/a/test/for/split/function'));
+// print_r(explode('/', 'the/name/is/ali'));
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -96,29 +91,28 @@ function _strIndexOfChar(string $char, string $value)
     }
     return -1;
 }
-// echo _strIndexOfChar('a', 'bba');
+// echo_r(_strIndexOfChar('a', 'bba'));
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 //* 6 arrayPush
 function _array_push(array &$array, mixed ...$values)
 {
-    // echo_r('before', _count($array));
     foreach ($values as $item) {
-        // if (_is_int($item))  $array[_count($array)] = (int)$item;
-        // elseif (_is_float($item))  $array[_count($array)] = (float)$item;
-        // else
         $array[_count($array)] = $item;
     }
-    // echo_r('after', _count($array));
 }
 // $testArray = [0, 1];
 // $testArray1 = [0, 1];
-// _array_push($testArray, [2, 3, 4]);
+// $toPush = [2, 3, 4];
+// _array_push($testArray, 2);
+// array_push($testArray1, 2);
+// echo_r(...$testArray, ...$testArray1);
+// array_push($testArray1, $toPush);
+// _array_push($testArray, $toPush);
 // print_r($testArray);
-// echo '<br>';
-// array_push($testArray1, [2, 3, 4]);
 // print_r($testArray1);
+
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 //* 7 strFindCharAppearance
@@ -134,7 +128,7 @@ function strFindCharAppearance(string $toSearch, string $value)
     }
     return $appearanceCount;
 }
-// echo strFindCharAppearance('a', 'aabbbbaa');
+// echo_r(strFindCharAppearance('a', 'aabbbbaa'));
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -150,7 +144,7 @@ function _strToLower(string $value)
     }
     return $value;
 }
-// echo _strToLower('TEST');
+// echo_r(_strToLower('TEST'));
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -166,7 +160,7 @@ function _strToUpper(string $value)
     }
     return $value;
 }
-// echo strToUpper('test');
+// echo_r(strToUpper('test'));
 
 
 
@@ -187,11 +181,8 @@ function _count(array $value)
     }
     return $counter;
 }
-// $testArray = [0];
-// echo '<br>';
-// echo (_count($testArray));
-// echo '<br>';
-// echo (count($testArray));
+// $testArray = [1,2,3,4];
+// echo_r(_count($testArray), count($testArray));
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -213,9 +204,7 @@ function _strlen(string $value)
     }
 }
 // $test = 'it is working';
-// echo _strlen($test);
-// echo '<br>';
-// echo strlen($test);
+// echo_r(_strlen($test),strlen($test));
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //* 12 _isSet
 //check casting (int)$value to convert zero to int and differentiate it from null
@@ -224,49 +213,23 @@ function _isset($value)
 {
     return $value === null ? null : true;
 }
-// $test = '000';
-// echo _isSet($test);
-// echo '<br>';
-// echo isset($test);
-// echo '<br>';
-// echo ' <hr > ';
-// echo '<br>';
+// $test = 'ok';
+// echo_r(_isset($test), isset($test));
+
 //* 13 _is_array
-function _is_array(array &$array)
+function _is_array(array $array)
 {
     return _isset($array) ? true : false;
 }
-// $test = [1, 2, 5];
-// echo is_array($test);
-// echo '<br>';
-// echo _is_array($test);
-// echo '<br>';
+// echo_r(_is_array([1,2,3]), is_array([1, 2, 3]));
 //* 14 _str_replace
 function _str_replace(string $search, string $replace, string $subject)
 {
-    echo '<h1>' . _strlen($subject) . '</h1>';
-
-    return '';
-    // for ($i = 0; $i < _strlen($subject); $i++) {
-    //     for ($j = $i; $j < _strlen($subject); $j++) {
-    //         if($subject[$j]==$search[$j]){
-    //             $temp .= $
-    //         }
-    //     }
-    // }
+    _throw_null_exception($search, $replace, $subject);
+    if (_str_contains($subject, $search)) {
+    }
 }
-// echo $test = 'test';
-// echo '<br>';
-// $test = str_replace('test', 'ok', $test);
-// echo '<br>';
-// echo $test;
-// echo '<br>';
-// echo $test = 'test';
-// echo '<br>';
-// $test = _str_replace('test', 'ok', $test);
-// echo '<br>';
-// echo $test;
-
+// echo_r(_str_replace('ali', 'ahmed', 'my name is ali'), str_replace('ali', 'ahmed', 'my name is ali'));
 //* 15 _is_numeric
 function _is_numeric(mixed $value)
 {
@@ -275,22 +238,15 @@ function _is_numeric(mixed $value)
         return true;
     return false;
 }
+// echo_r(_is_numeric('55'),is_numeric('55'));
 
-// $test = '55';
-// echo _is_numeric($test);
-// echo '<br>';
-// echo is_numeric($test);
-// echo '<br>';
 //*16 _is_string
 function _is_string(mixed $value)
 {
     _throw_null_exception($value);
     return (string)$value === $value ? true : false;
 }
-// $test = 55;
-// echo _is_string($test);
-// echo '<br>';
-// echo is_string($test);
+// echo_r(_is_string('test'),is_string('test'));
 //* 17 _throw_null_exception
 function _throw_null_exception(...$value)
 {
@@ -303,10 +259,7 @@ function _is_null(mixed $value): bool
 {
     return !_isset($value);
 }
-// $test = null;
-// echo _is_null($test);
-// echo '<br>';
-// echo is_null($test);
+// echo_r(_is_null(null), is_null(null));
 //* 19 _pow
 function _pow($number, $exponent)
 {
@@ -334,7 +287,7 @@ function echo_r(...$values)
     echo "<hr>";
 }
 // echo_r(1, 2, ...['ok', 'it', 'is', 'working']);
-//* 22 range
+//* 22 _range
 function _range(float |int $start, float |int $end, float |int|null $step = 1)
 {
     $array = [];
@@ -352,23 +305,24 @@ function _is_int($value)
     return (int)$value === $value ? true : false;
 }
 // echo_r(_is_int(0), is_int(0));
-//* 24 float
+//* 24 _is_float
 function _is_float($value)
 {
     _throw_null_exception($value);
     return (float)$value === $value;
 }
 // echo_r(_is_float(5.5), is_float(5.1));
-//* 25
-function _str_ends_with(string $value, string $end)
+//* 25 _str_ends_with
+function _str_ends_with(string $value, string $endWith)
 {
     $flag = false;
-    _throw_null_exception($value, $end);
-    if (_str_contains($value, $end)) {
-        if (_strlen($end) > 1) {
+    _throw_null_exception($value, $endWith);
+    if ($value === '' || $endWith === '') throw new Exception('invalid value');
+    if (_str_contains($value, $endWith)) {
+        if (_strlen($endWith) > 1) {
             $i = _strlen($value) - 1;
-            for ($j = _strlen($end) - 1; $j >= 0; $j--) {
-                if ($end[$j] === $value[$i]) {
+            for ($j = _strlen($endWith) - 1; $j >= 0; $j--) {
+                if ($endWith[$j] === $value[$i]) {
                     $flag = true;
                     $i--;
                 } else {
@@ -376,20 +330,22 @@ function _str_ends_with(string $value, string $end)
                 }
             }
             return $flag;
-        } elseif (_strlen($end) === 1) {
-            $index = _strIndexOfChar($end, _strrev($value));
+        } elseif (_strlen($endWith) === 1) {
+            $index = _strIndexOfChar($endWith, _strrev($value));
             if ($index === 0) return true;
             else return false;
         }
-    } else {
-        throw new Exception('invalid end with value.');
     }
     return false;
 }
 // echo_r(str_ends_with('a string ends with ok', 'ok'), _str_ends_with('a string ends with ok', 'ok'));
-//* 26
-// strStartWith(){}
-//* 27
+//* 26 _str_starts_with
+function _str_starts_with($value, $startWith)
+{
+    return _str_ends_with(_strrev($value), _strrev($startWith));
+}
+// echo_r(_str_starts_with('test if this works', 'test'), str_starts_with('test if this works', 'test'));
+//* 27 _str_contains
 function _str_contains($value, $toSearch)
 {
     $temp = '';
@@ -415,10 +371,31 @@ function _str_contains($value, $toSearch)
 //     _str_contains('my name is ali', 'ali'),
 //     str_contains('my name is ali', 'ali')
 // );
-// _arrMaxValue(){}
+//* 28 _max
+function _max(array $array)
+{
+    _throw_null_exception($array);
+    if (_empty($array))
+        throw new Exception("Array can not be empty");
+    $maxValue = NULL;
+    foreach ($array as  $value) {
+        if (!is_numeric($value)) continue;
+        $maxValue = $maxValue < $value ? $value : $maxValue;
+    }
+    return $maxValue;
+}
+echo_r(_max([]), max([1, 2, 3]));
+//* 29 _min
+// _min(){}
 
-// _arrMinValue(){}
-
+//* 30 _empty
+function _empty($value)
+{
+    _throw_null_exception($value);
+    if ($value !== '' || $value !== [])
+        return true;
+    return false;
+}
 // strRepeat(){}
 
 // strSubString(){}
