@@ -108,7 +108,7 @@ function _array_push(array &$array, mixed ...$values)
         // if (_is_int($item))  $array[_count($array)] = (int)$item;
         // elseif (_is_float($item))  $array[_count($array)] = (float)$item;
         // else
-         $array[_count($array)] = $item;
+        $array[_count($array)] = $item;
     }
     // echo_r('after', _count($array));
 }
@@ -327,7 +327,7 @@ function echo_r(...$values)
 {
     $array = [...$values];
     foreach ($array as $value) {
-        echo '<h1>' . $value . '</h1>';
+        echo '<h1 style="color:red;font-size:40px">' . $value . '</h1>';
     }
     echo "<hr>";
 }
@@ -341,7 +341,7 @@ function _range(float |int $start, float |int $end, float |int|null $step = 1)
     }
     return $array;
 }
-echo_r(...range(0, 20, 10), ..._range(0, 20, 10));
+// echo_r(...range(0, 20, 5), ..._range(0, 20, 5));
 
 //* 23 _is_int
 function _is_int($value)
@@ -357,7 +357,37 @@ function _is_float($value)
     return (float)$value === $value;
 }
 // echo_r(_is_float(5.5), is_float(5.1));
-
+//* 25
+function _str_ends_with(string $value, string $end)
+{
+}
+// echo_r(str_ends_with('this is it', 'it'),_str_ends_with('this is it', 'it'));
+//* 26
+// strStartWith(){}
+//* 27
+function _str_contains($value, $toSearch)
+{
+    $temp = '';
+    _throw_null_exception($value);
+    _throw_null_exception($toSearch);
+    for ($i = 0; $i < _strlen($value); $i++) {
+        for ($j = 0; $j < _strlen($toSearch); $j++) {
+            if ($value[$i] === $toSearch[$j]) {
+                $temp .= $value[$i];
+                $i++;
+            } elseif ($temp === $toSearch) return true;
+            else {
+                $temp = '';
+                break;
+            }
+        }
+    }
+    return $temp === $toSearch ? true : false;
+}
+// echo_r(
+//     _str_contains('the name of all of us in ali', 'ali'),
+//     str_contains('the name of all of us in ali', 'ali')
+// );
 // _arrMaxValue(){}
 
 // _arrMinValue(){}
@@ -370,11 +400,6 @@ function _is_float($value)
 
 // strShuffle(){}
 
-// strEndWith(){}
-
-// strStartWith(){}
-
-// strIncludes(){}
 
 
 
