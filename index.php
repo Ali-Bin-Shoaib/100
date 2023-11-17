@@ -366,23 +366,20 @@ function _str_ends_with(string $value, string $end)
     _throw_null_exception($value, $end);
     if (_str_contains($value, $end)) {
         if (_strlen($end) > 1) {
-            for ($i = _strlen($value) - 1; $i >= 0; $i--) {
-                for ($j = _strlen($end) - 1; $j >= 0; $j--) {
-                    if ($end[$j] === $value[$i]) {
-                        $flag = true;
-                        $i--;
-                    } else {
-                        $flag = false;
-                        break;
-                    }
+            $i = _strlen($value) - 1;
+            for ($j = _strlen($end) - 1; $j >= 0; $j--) {
+                if ($end[$j] === $value[$i]) {
+                    $flag = true;
+                    $i--;
+                } else {
+                    return false;
                 }
-                return $flag;
             }
+            return $flag;
         } elseif (_strlen($end) === 1) {
             $index = _strIndexOfChar($end, _strrev($value));
             if ($index === 0) return true;
             else return false;
-            // echo_r($index);
         }
     } else {
         throw new Exception('invalid end with value.');
