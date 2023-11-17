@@ -282,10 +282,10 @@ function _is_string(mixed $value)
     _throw_null_exception($value);
     return (string)$value === $value ? true : false;
 }
-$test = 55;
-echo _is_string($test);
-echo '<br>';
-echo is_string($test);
+// $test = 55;
+// echo _is_string($test);
+// echo '<br>';
+// echo is_string($test);
 //* 17 _throw_null_exception
 function _throw_null_exception($value)
 {
@@ -308,11 +308,18 @@ function _pow($number, $exponent)
     return $number ** $exponent;
 }
 
-echo _pow(2, 3);
-echo '<br>';
-echo pow(2, 3);
-
-// mod(){}
+echo_r([pow(2, 3), _pow(2, 3)]);
+//* 20 _mod
+function _mod($num1, $num2)
+{
+}
+//* 21 echo_r
+function echo_r($array)
+{
+    foreach ($array as $value) {
+        echo '<h1>' . $value . '</h1>';
+    }
+}
 // _range(){}
 
 // _arrMaxValue(){}
