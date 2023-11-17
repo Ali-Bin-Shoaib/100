@@ -103,12 +103,14 @@ function _strIndexOfChar(string $char, string $value)
 //* 6 arrayPush
 function _array_push(array &$array, mixed ...$values)
 {
-    echo_r('before', _count($array));
+    // echo_r('before', _count($array));
     foreach ($values as $item) {
-
-        $array[_count($array)] = $item;
+        // if (_is_int($item))  $array[_count($array)] = (int)$item;
+        // elseif (_is_float($item))  $array[_count($array)] = (float)$item;
+        // else
+         $array[_count($array)] = $item;
     }
-    echo_r('after', _count($array));
+    // echo_r('after', _count($array));
 }
 // $testArray = [0, 1];
 // $testArray1 = [0, 1];
@@ -177,7 +179,7 @@ function _count(array $value)
         throw new Exception("provided value is null. value must be an array.");
     $counter = 0;
     $isValue = @$value[$counter];
-    if ($isValue) {
+    if (_isset($isValue)) {
         while (_isset($isValue)) {
             $counter++;
             $isValue = $value[$counter] ?? null;
@@ -185,7 +187,7 @@ function _count(array $value)
     }
     return $counter;
 }
-// $testArray = [1];
+// $testArray = [0];
 // echo '<br>';
 // echo (_count($testArray));
 // echo '<br>';
@@ -334,21 +336,22 @@ function echo_r(...$values)
 function _range(float |int $start, float |int $end, float |int|null $step = 1)
 {
     $array = [];
-    for ($i = $start; $i <= $end; $i += $step)
+    for ($i = $start; $i <= $end; $i += $step) {
         _array_push($array, $i);
+    }
     return $array;
 }
-// echo_r(...range(0, 20, 10), ..._range(0, 20, 10));
+echo_r(...range(0, 20, 10), ..._range(0, 20, 10));
 
 //* 23 _is_int
-function _is_int( $value)
+function _is_int($value)
 {
     _throw_null_exception($value);
     return (int)$value === $value ? true : false;
 }
-// echo_r(_is_int(5), is_int(5));
+// echo_r(_is_int(0), is_int(0));
 //* 24 float
-function _is_float( $value)
+function _is_float($value)
 {
     _throw_null_exception($value);
     return (float)$value === $value;
