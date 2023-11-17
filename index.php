@@ -274,13 +274,20 @@ function _is_numeric(mixed $value)
     return false;
 }
 
-
 // $test = '55';
 // echo _is_numeric($test);
 // echo '<br>';
 // echo is_numeric($test);
 // echo '<br>';
-
+//*16 _is_string
+function _is_string(mixed $value)
+{
+    return (string)$value === $value ? true : false;
+}
+$test = 'test';
+echo is_string($test);
+echo '<br>';
+echo is_string($test);
 // _range(){}
 
 // _arrMaxValue(){}
@@ -288,8 +295,6 @@ function _is_numeric(mixed $value)
 // _arrMinValue(){}
 
 // strRepeat(){}
-
-// isString(){}
 
 // strSubString(){}
 
