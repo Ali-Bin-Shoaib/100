@@ -375,8 +375,10 @@ function _str_contains($value, $toSearch)
             if ($value[$i] === $toSearch[$j]) {
                 $temp .= $value[$i];
                 $i++;
-            } elseif ($temp === $toSearch) return true;
-            else {
+                if ($temp === $toSearch) {
+                    return true;
+                }
+            } else {
                 $temp = '';
                 break;
             }
@@ -385,8 +387,8 @@ function _str_contains($value, $toSearch)
     return $temp === $toSearch ? true : false;
 }
 // echo_r(
-//     _str_contains('the name of all of us in ali', 'ali'),
-//     str_contains('the name of all of us in ali', 'ali')
+//     _str_contains('my name is ali', 'ali'),
+//     str_contains('my name is ali', 'ali')
 // );
 // _arrMaxValue(){}
 
