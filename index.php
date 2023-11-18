@@ -657,7 +657,7 @@ function _abs(int|float $num): int|float
     return $num < 0 ? $num * -1 : $num;
 }
 // echo_r(_abs(-54));
-//TODO 50 ceil 
+//* 50 ceil 
 //ceil — Round fractions up
 function _ceil(int|float $num): float
 {
@@ -665,12 +665,20 @@ function _ceil(int|float $num): float
     $fraction = (float)$num - (int)$num;
     $isNegative = $fraction < 0 ? true : false;
 
-    return $isNegative ? ($fraction !== 0 ? (int)$num  : '') : ($fraction !== 0 ? (int)$num + 1 : $num);
+    return $isNegative ? ($fraction !== 0 ? (int)$num  : $num) : ($fraction !== 0 ? (int)$num + 1 : $num);
 }
-echo_r(_ceil(6.9), ceil(6.9));
+// echo_r(_ceil(6.1), ceil(6.1));
 //TODO 51 floor
 //floor — Round fractions down
-//floor(int|float $num): float
+function _floor(int|float $num): float
+{
+    $fraction = (float)$num - (int)$num;
+    $isNegative = $fraction < 0 ? true : false;
+    // echo_r($fraction,$isNegative , (int)$num-1);
+    return $isNegative ? ((int)$fraction !== 0 ? ((int)$num - 1) : ((int)$num - 1)) : ((int)$fraction !== 0 ? ((int)$num + 1) : ((int)$num));
+}
+// echo_r(_floor(10.5), floor(10.5));
+
 //TODO 52 round
 //round — Rounds a float
 //round(int|float $num, int $precision = 0, int $mode = PHP_ROUND_HALF_UP): float
