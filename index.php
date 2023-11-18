@@ -625,10 +625,34 @@ function _str_shuffle(string $string): string
     }
     throw new Exception('string value must be not empty');
 }
-echo_r(_str_shuffle('test this string'));
+// echo_r(_str_shuffle('test this string'));
 //* 45
 //strstr — Find the first occurrence of a string
-//strstr(string $haystack, string $needle, bool $before_needle = false): string|false
+function _strstr(string $value, string $toSearch): string|false
+{
+    _throw_null_exception($value, $toSearch);
+    if (!_empty($value) && !_empty($toSearch))
+        if (_str_contains($value, $toSearch)) {
+            $temp = '';
+            for ($i = 0; $i < _strlen($value); $i++) {
+                for ($j = 0; $j < _strlen($toSearch); $j++) {
+                    if ($value[$i] === $toSearch[$j]) {
+                        $temp .= $value[$i];
+                        $i++;
+                        if ($temp === $toSearch) {
+                            return $temp;
+                        }
+                    } else {
+                        $temp = '';
+                        break;
+                    }
+                }
+            }
+            return $temp === $toSearch ? $temp : false;
+        }
+    return false;
+}
+echo _strstr('my name is ali','ali');
 //* 46
 //substr_count — Count the number of substring occurrences
 // substr_count( string $haystack, string $needle,int $offset = 0,?int $length = null): int
