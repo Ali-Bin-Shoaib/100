@@ -589,10 +589,43 @@ function _implode(array $array, string $separator = ' '): string
 // echo _implode(_explode_by_char(' ', 'hello my name is ali')); 
 //* 43
 //lcfirst — Make a string's first character lowercase
-//lcfirst(string $string): string
+function _lcfirst(string $string): string
+{
+    _throw_null_exception($string);
+    if (!_empty($string)) {
+        for ($i = 0; $i < _strlen($string); $i++) {
+            if (_str_contains('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', $string[$i])) {
+                $string[$i] = _str_to_lower($string[$i]);
+                break;
+            }
+        }
+        return $string;
+    }
+    throw new Exception('String must be not empty');
+}
+// echo _lcfirst('ALI');
 //* 44 
 //str_shuffle — Randomly shuffles a string
-//str_shuffle(string $string): string
+function _str_shuffle(string $string): string
+{
+    _throw_null_exception($string);
+    if (!_empty($string)) {
+        $stringLength = _strlen($string);
+        $shuffledIndexes = [];
+        $temp = '';
+        while (_count($shuffledIndexes) < _strlen($string)) {
+            $randomIndex = rand(0, _strlen($string) - 1);
+            if (!in_array($randomIndex, $shuffledIndexes))
+                _array_push($shuffledIndexes, $randomIndex);
+        }
+        for ($i = 0; $i < $stringLength; $i++) {
+            $temp .= $string[$shuffledIndexes[$i]];
+        }
+        return $temp;
+    }
+    throw new Exception('string value must be not empty');
+}
+echo_r(_str_shuffle('test this string'));
 //* 45
 //strstr — Find the first occurrence of a string
 //strstr(string $haystack, string $needle, bool $before_needle = false): string|false
