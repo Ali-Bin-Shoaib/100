@@ -651,15 +651,13 @@ function _strstr(string $value, string $toSearch): string|false
 //TODO 48 substr
 //substr — Return part of a string -Returns the portion of string specified by the offset and length parameters.
 //substr(string $string, int $offset, ?int $length = null): string
-//TODO 49 _abs
+//* 49 _abs
 //Returns the absolute value of num.
 function _abs(int|float $num): int|float
 {
-    if ($num < 0)
-        return $num * -1;
-    return $num;
+    return $num < 0 ? $num * -1 : $num;
 }
-// echo_r(_abs(-5));
+// echo_r(_abs(-54));
 //TODO 50 ceil 
 //ceil — Round fractions up
 //ceil(int|float $num): float
