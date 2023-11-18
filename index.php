@@ -545,7 +545,7 @@ function _chunk_split(string $string, int $length = 76, string $separator = "\r\
         for ($i = 0; $i < _strlen($string);) {
             for ($j = 0; $j < $length; $j++) {
                 $temp .= $string[$i++];
-                if ($i >= _strlen($string) ) {
+                if ($i >= _strlen($string)) {
                     break;
                 }
             }
@@ -555,10 +555,23 @@ function _chunk_split(string $string, int $length = 76, string $separator = "\r\
     }
     throw new Exception('string must be not empty');
 }
+
 // echo_r(chunk_split('test this string', 3, '+'), _chunk_split('test this string', 3, '+'));
 //* 41
 //count_chars — Return information about characters used in a string
-//count_chars(string $string, int $mode = 0): array|string
+function _count_chars(string $string): array|string
+{
+    $result = [];
+    _throw_null_exception($string);
+    if (!_empty($string)) {
+        for ($i = 0; $i < _strlen($string); $i++) {
+            $result[$string[$i]] = _str_count_char_appearance($string[$i], $string);
+        }
+        return $result;
+    }
+    throw new Exception('string must be not empty');
+}
+print_r(_count_chars('test'));
 //* 42 
 //implode — Join array elements with a string
 //implode(string $separator, array $array): string
