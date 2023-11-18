@@ -132,7 +132,7 @@ function _str_count_char_appearance(string $toSearch, string $value): int
     }
     return $appearanceCount;
 }
-// echo_r(strFindCharAppearance('a', 'aabbbbaa'));
+// echo_r(strFindCharAppearance('a', 'aa bb bb aa'));
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -571,10 +571,22 @@ function _count_chars(string $string): array|string
     }
     throw new Exception('string must be not empty');
 }
-print_r(_count_chars('test'));
+// print_r(_count_chars('count chars in this string.'));
 //* 42 
 //implode — Join array elements with a string
-//implode(string $separator, array $array): string
+function _implode(array $array, string $separator = ' '): string
+{
+    _throw_null_exception($array);
+    $temp = '';
+    if (!_empty($array)) {
+        foreach ($array as $value) {
+            $temp .= $value . $separator;
+        }
+        return $temp;
+    }
+    throw new Exception('Array must be not empty');
+}
+// echo _implode(_explode_by_char(' ', 'hello my name is ali')); 
 //* 43
 //lcfirst — Make a string's first character lowercase
 //lcfirst(string $string): string
