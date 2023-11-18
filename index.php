@@ -678,7 +678,7 @@ function _floor(int|float $num): float
 }
 // echo_r(_floor(10.5), floor(10.5));
 
-//TODO 52 round
+//* 52 round
 //round — Rounds a float
 function _round(int|float $num, int $precision = 0, int $mode = PHP_ROUND_HALF_UP): float
 {
@@ -688,12 +688,21 @@ function _round(int|float $num, int $precision = 0, int $mode = PHP_ROUND_HALF_U
     return $fraction >= -0.5 ? _floor($num) : (int)$num;
 }
 // echo_r(round(5.5), _round(5.5));
-//TODO 53 is_infinite
+// 53 is_infinite
 //is_infinite — Checks whether a float is infinite
-//is_infinite(float $num): bool
-//TODO 54 is_nan
+function _is_infinite(float $num): bool
+{
+    return ($num == INF || $num == -INF) ? true : false;
+}
+// echo_r(is_infinite(INF), _is_infinite(INF));
+//* 54 is_nan
 //is_nan — Checks whether a float is NAN
-//is_nan(float $num): bool
+function _is_nan(float $num): bool
+{
+    // return (string)$num === 'NAN' ? true : false;
+    return $num !== $num;
+}
+echo_r(is_nan(sqrt(-1)), _is_nan(sqrt(-1)));
 //TODO 55 is_finite
 //is_finite — Checks whether a float is finite - A finite float is neither NAN (is_nan()), nor infinite (is_infinite()).
 //is_finite(float $num): bool
