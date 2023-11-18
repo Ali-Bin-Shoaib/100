@@ -668,20 +668,26 @@ function _ceil(int|float $num): float
     return $isNegative ? ($fraction !== 0 ? (int)$num  : $num) : ($fraction !== 0 ? (int)$num + 1 : $num);
 }
 // echo_r(_ceil(6.1), ceil(6.1));
-//TODO 51 floor
+//* 51 floor
 //floor — Round fractions down
 function _floor(int|float $num): float
 {
     $fraction = (float)$num - (int)$num;
     $isNegative = $fraction < 0 ? true : false;
-    // echo_r($fraction,$isNegative , (int)$num-1);
     return $isNegative ? ((int)$fraction !== 0 ? ((int)$num - 1) : ((int)$num - 1)) : ((int)$fraction !== 0 ? ((int)$num + 1) : ((int)$num));
 }
 // echo_r(_floor(10.5), floor(10.5));
 
 //TODO 52 round
 //round — Rounds a float
-//round(int|float $num, int $precision = 0, int $mode = PHP_ROUND_HALF_UP): float
+function _round(int|float $num, int $precision = 0, int $mode = PHP_ROUND_HALF_UP): float
+{
+    $fraction = (float) $num - (int)$num;
+    if ($fraction > 0)
+        return $fraction >= 0.5 ? _ceil($num) : (int)$num;
+    return $fraction >= -0.5 ? _floor($num) : (int)$num;
+}
+// echo_r(round(5.5), _round(5.5));
 //TODO 53 is_infinite
 //is_infinite — Checks whether a float is infinite
 //is_infinite(float $num): bool
