@@ -517,7 +517,21 @@ function _array_fill(int $start_index, int $count, mixed $value): array
 // print_r(array_fill(0, 5, 'ok'));
 // echo '<br>';
 // print_r(_array_fill(0, 5, 'ok'));
-
+//* 39 _array_combine
+function _array_combine(array $keys, array $values): array
+{
+    $array = [];
+    $arrLength = _count($keys);
+    _throw_null_exception($keys, $values);
+    if (_count($keys) == _count($values) && $arrLength > 0) {
+        for ($i = 0; $i < $arrLength; $i++) {
+            $array[$keys[$i]] = $values[$i];
+        }
+        return $array;
+    } else
+        throw new Exception('passed arrays must have the same length.');
+}
+print_r(array_combine(['a', 's', 'h'], ['ali', 'salem', 'haddar']));
 // _substr_count($value,$substring){}
 
 // _substr_replace($value,$toSearch,$toReplace){}
