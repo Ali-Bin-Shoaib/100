@@ -1,6 +1,6 @@
 <?php
 //* 1 strCountWords
-function _str_word_count(string $value)
+function _str_word_count(string $value): string
 {
     $isLastCharIsSpace = false;
     $wordCount = 0;
@@ -22,7 +22,7 @@ function _str_word_count(string $value)
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 //* 2 _strrev
-function _strrev(string $value)
+function _strrev(string $value): string
 {
     _throw_null_exception($value);
     if (!_empty($value)) {
@@ -39,7 +39,7 @@ function _strrev(string $value)
 
 //* 3 _str_split
 
-function _str_split(string $value)
+function _str_split(string $value): array
 {
     $array = [];
     for ($i = 0; $i < _strlen($value); $i++) {
@@ -54,7 +54,7 @@ function _str_split(string $value)
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //none issues : don't split last char if separator is before the last char.
 //* 4 strSplit
-function _explode_by_char(string $separator, string $value)
+function _explode_by_char(string $separator, string $value): array
 {
     if (_strlen($separator) != 1) {
         throw new Exception("Separator must be one character. provided separator: \${$separator} with length = " . _strlen($separator));
@@ -85,7 +85,7 @@ function _explode_by_char(string $separator, string $value)
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 //* 5 strIndexOfChar
-function _strIndexOfChar(string $char, string $value)
+function _strIndexOfChar(string $char, string $value): int
 {
     if ($char == "" || $char == null)
         throw new Exception("\$char parameter is not set.");
@@ -121,7 +121,7 @@ function _array_push(array &$array, mixed ...$values)
 
 //* 7 strFindCharAppearance
 
-function _str_count_char_appearance(string $toSearch, string $value)
+function _str_count_char_appearance(string $toSearch, string $value): int
 {
     if (_strlen($toSearch) != 1) throw new Exception("char value to search is grater than one provided \$toSearch:$toSearch");
     $appearanceCount = 0;
@@ -137,7 +137,7 @@ function _str_count_char_appearance(string $toSearch, string $value)
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 //* 8 strToLower 
-function _str_to_lower(string $value)
+function _str_to_lower(string $value): string
 {
     $lowerLetters = 'abcdefghijklmnopqrstuvwxyz';
     $upperLetters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -153,7 +153,7 @@ function _str_to_lower(string $value)
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 //* 9 strToUpper
-function _str_to_upper(string $value)
+function _str_to_upper(string $value): string
 {
     $lowerLetters = 'abcdefghijklmnopqrstuvwxyz';
     $upperLetters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -171,7 +171,7 @@ function _str_to_upper(string $value)
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 //* 10 _count 
-function _count(array $value)
+function _count(array $value): int
 {
     if (!_isset($value))
         throw new Exception("provided value is null. value must be an array.");
@@ -191,7 +191,7 @@ function _count(array $value)
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 //* 11 _strlen 
-function _strlen(string $value)
+function _strlen(string $value): int
 {
     // echo_r(__FUNCTION__, $value);
     $counter = 0;
@@ -215,30 +215,31 @@ function _strlen(string $value)
 //* 12 _isSet
 //check casting (int)$value to convert zero to int and differentiate it from null
 
-function _isset($value)
+function _isset($value): bool
 {
-    return $value === null ? null : true;
+    return $value === null ? false : true;
 }
 // $test = 'ok';
 // echo_r(_isset($test), isset($test));
 
 //* 13 _is_array
-function _is_array(array $array)
+function _is_array(array $array): bool
 {
     return _isset($array) ? true : false;
 }
 // echo_r(_is_array([1,2,3]), is_array([1, 2, 3]));
 //* 14 _str_replace
 //! to implement
-function _str_replace(string $search, string $replace, string $subject)
+function _str_replace(string $search, string $replace, string $subject): string
 {
     _throw_null_exception($search, $replace, $subject);
     if (_str_contains($subject, $search)) {
     }
+    return "";
 }
 // echo_r(_str_replace('ali', 'ahmed', 'my name is ali'), str_replace('ali', 'ahmed', 'my name is ali'));
 //* 15 _is_numeric
-function _is_numeric(mixed $value)
+function _is_numeric(mixed $value): bool
 {
     _throw_null_exception($value);
     if ((int)$value == $value || (float)$value == $value || $value === 0)
@@ -248,7 +249,7 @@ function _is_numeric(mixed $value)
 // echo_r(_is_numeric('55'),is_numeric('55'));
 
 //*16 _is_string
-function _is_string(mixed $value)
+function _is_string(mixed $value): bool
 {
     _throw_null_exception($value);
     return (string)$value === $value ? true : false;
@@ -277,7 +278,7 @@ function _pow($number, $exponent)
 
 // echo_r(pow(2, 3), _pow(2, 3));
 //* 20 _mod
-function _mod($num1, $num2)
+function _mod($num1, $num2): int
 {
     _throw_null_exception($num1);
     _throw_null_exception($num2);
@@ -285,7 +286,7 @@ function _mod($num1, $num2)
 }
 // echo_r(_mod(10, 2));
 //* 21 echo_r
-function echo_r(...$values)
+function echo_r(...$values): void
 {
     $array = [...$values];
     foreach ($array as $value) {
@@ -295,7 +296,7 @@ function echo_r(...$values)
 }
 // echo_r(1, 2, ...['ok', 'it', 'is', 'working']);
 //* 22 _range
-function _range(float |int $start, float |int $end, float |int|null $step = 1)
+function _range(float |int $start, float |int $end, float |int|null $step = 1): array
 {
     $array = [];
     for ($i = $start; $i <= $end; $i += $step) {
@@ -303,24 +304,24 @@ function _range(float |int $start, float |int $end, float |int|null $step = 1)
     }
     return $array;
 }
-// echo_r(...range(0, 20, 5), ..._range(0, 20, 5));
+// echo_r(...range(1, 5, 1), ..._range(1, 5, 1));
 
 //* 23 _is_int
-function _is_int($value)
+function _is_int($value): bool
 {
     _throw_null_exception($value);
     return (int)$value === $value ? true : false;
 }
 // echo_r(_is_int(0), is_int(0));
 //* 24 _is_float
-function _is_float($value)
+function _is_float($value): bool
 {
     _throw_null_exception($value);
     return (float)$value === $value;
 }
 // echo_r(_is_float(5.5), is_float(5.1));
 //* 25 _str_ends_with
-function _str_ends_with(string $value, string $endWith)
+function _str_ends_with(string $value, string $endWith): bool
 {
     $flag = false;
     _throw_null_exception($value, $endWith);
@@ -347,13 +348,13 @@ function _str_ends_with(string $value, string $endWith)
 }
 // echo_r(str_ends_with('a string ends with ok', 'ok'), _str_ends_with('a string ends with ok', 'ok'));
 //* 26 _str_starts_with
-function _str_starts_with($value, $startWith)
+function _str_starts_with($value, $startWith): bool
 {
     return _str_ends_with(_strrev($value), _strrev($startWith));
 }
 // echo_r(_str_starts_with('test if this works', 'test'), str_starts_with('test if this works', 'test'));
 //* 27 _str_contains
-function _str_contains($value, $toSearch)
+function _str_contains($value, $toSearch): bool
 {
     $temp = '';
     _throw_null_exception($value);
@@ -407,7 +408,7 @@ function _min(array $array)
 // echo_r(_min([ 0, 5]), min([ 0, 5]));
 
 //* 30 _empty
-function _empty($value)
+function _empty($value): bool
 {
     _throw_null_exception($value);
     if ($value === '' || $value === [])
@@ -416,7 +417,7 @@ function _empty($value)
 }
 //* 31 _ltrim
 
-function _ltrim(string $value)
+function _ltrim(string $value): string
 {
     $firstCharacter = 0;
     // echo_r(__FUNCTION__, $value);
@@ -435,28 +436,26 @@ function _ltrim(string $value)
         }
         return $temp;
     } else {
-        // echo_r(__FUNCTION__, 'false');
-        //! error when returning the value!!?
         return $value;
     }
 }
-$test = '|test this|     ';
-// echo_r(_strlen(ltrim($test)), _strlen(_ltrim($test)));
+// $test = '|test this|     ';
+// echo_r(_strlen(ltrim($test)), ltrim($test), _strlen(_ltrim($test)), _ltrim($test));
 //* 32 _rtrim
-function _rtrim(string $value)
+function _rtrim(string $value): string
 {
     return _strrev(_ltrim(_strrev($value)));
 }
-// echo_r(_strlen(rtrim($test)), _strlen(_rtrim($test)));
+// echo_r(_strlen(rtrim($test)), rtrim($test), _strlen(_rtrim($test)), _rtrim($test));
 
 //* 33 _trim
-function _trim(string $value)
+function _trim(string $value): string
 {
     return _rtrim(_ltrim($value));
 }
-// echo_r(_strlen(_trim($test)), _strlen(_trim($test)));
+// echo_r(_strlen(_trim($test)), $test, _strlen(_trim($test)), $test);
 //*34 _str_repeat
-function _str_repeat(string $value, int $times)
+function _str_repeat(string $value, int $times): string
 {
     _throw_null_exception($value, $times);
     if (!is_numeric($times)) throw new Exception('times must be an int value');
@@ -469,7 +468,7 @@ function _str_repeat(string $value, int $times)
 }
 // echo_r(str_repeat('ok ', 4), _str_repeat('ok ', 4));
 //* 35 _join
-function _join(string $separator, array $values)
+function _join(string $separator, array $values): string
 {
     $temp = '';
     _throw_null_exception($separator, $values);
@@ -484,7 +483,7 @@ function _join(string $separator, array $values)
 // echo_r(join(' ', ['test', 'this', 'function']), _join(' ', ['test', 'this', 'function']));
 
 //* 36 _str_capitalize 
-function _str_capitalize(string $value)
+function _str_capitalize(string $value): string
 {
     _throw_null_exception($value);
     $temp = _trim($value);
@@ -495,8 +494,29 @@ function _str_capitalize(string $value)
     }
     return $temp;
 }
-echo_r(_str_capitalize('capitalization is working'));
+// echo_r(_str_capitalize('capitalization is working'));
 
+//* 37 _is_bool
+function _is_bool($value): bool
+{
+    _throw_null_exception($value);
+    return (bool)$value === $value ? true : false;
+}
+// echo_r(is_bool(true), _is_bool(true));
+
+//* 38 
+function _array_fill(int $start_index, int $count, mixed $value): array
+{
+    $array = [];
+    for ($i = $start_index; $i < $count; $i++) {
+        _array_push($array, $value);
+    }
+
+    return $array;
+}
+// print_r(array_fill(0, 5, 'ok'));
+// echo '<br>';
+// print_r(_array_fill(0, 5, 'ok'));
 
 // _substr_count($value,$substring){}
 
@@ -507,5 +527,3 @@ echo_r(_str_capitalize('capitalization is working'));
 // arrShuffle(){}
 
 // strShuffle(){}
-
-// _arrayFill($array,$value,int $times){}
