@@ -483,7 +483,7 @@ function _join(string $separator, array $values)
 }
 // echo_r(join(' ', ['test', 'this', 'function']), _join(' ', ['test', 'this', 'function']));
 
-//* 
+//* 36 _str_capitalize 
 function _str_capitalize(string $value)
 {
     _throw_null_exception($value);
@@ -491,12 +491,11 @@ function _str_capitalize(string $value)
     $temp[0] = _str_to_upper($temp[0]);
     for ($i = 1; $i < _strlen($temp); $i++) {
         if ($temp[$i] === ' ' && $i < _strlen($temp) - 1)
-            $temp[$i = 1] = _str_to_upper($temp[$i + 1]);
+            $temp[$i + 1] = _str_to_upper($temp[$i + 1]);
     }
     return $temp;
 }
-
-// echo_r(_str_capitalize('capitalization is working'));
+echo_r(_str_capitalize('capitalization is working'));
 
 
 // _substr_count($value,$substring){}
