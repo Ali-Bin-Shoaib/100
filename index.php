@@ -632,27 +632,16 @@ function _strstr(string $value, string $toSearch): string|false
 {
     _throw_null_exception($value, $toSearch);
     if (!_empty($value) && !_empty($toSearch))
-        if (_str_contains($value, $toSearch)) {
-            $temp = '';
-            for ($i = 0; $i < _strlen($value); $i++) {
-                for ($j = 0; $j < _strlen($toSearch); $j++) {
-                    if ($value[$i] === $toSearch[$j]) {
-                        $temp .= $value[$i];
-                        $i++;
-                        if ($temp === $toSearch) {
-                            return $temp;
-                        }
-                    } else {
-                        $temp = '';
-                        break;
-                    }
-                }
-            }
-            return $temp === $toSearch ? $temp : false;
+        $appearAt = _strstr_index($value, $toSearch);
+    if ($appearAt != -1) {
+        $temp = '';
+        for ($i = $appearAt; $i < _strlen($value); $i++) {
+            $temp .= $value[$i];
         }
-    return false;
+    }
+    return $temp;
 }
-echo _strstr('my name is ali','ali');
+// echo_r(_strstr('check if ali is ok.', 'if'), strstr('check if ali is ok.', 'if'));
 //* 46
 //substr_count — Count the number of substring occurrences
 // substr_count( string $haystack, string $needle,int $offset = 0,?int $length = null): int
@@ -1108,4 +1097,28 @@ the key and the contents of the variable become the value for that key. In short
 
 
 //* 99
+// return the index of the first occurrence of a string.
+function _strstr_index(string $value, string $toSearch): int
+{
+    $temp = '';
+    $appearAt = -1;
+    _throw_null_exception($value);
+    _throw_null_exception($toSearch);
+    for ($i = 0; $i < _strlen($value); $i++) {
+        for ($j = 0; $j < _strlen($toSearch); $j++) {
+            if ($value[$i] === $toSearch[$j]) {
+                $temp .= $value[$i];
+                $i++;
+                if ($temp === $toSearch) {
+                    return   $appearAt = $i - _strlen($toSearch);
+                }
+            } else {
+                $temp = '';
+                break;
+            }
+        }
+    }
+    return $appearAt;
+}
+// echo_r(_strstr_index('0123ali', 'ali'));
 //* 100
