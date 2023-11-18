@@ -166,8 +166,6 @@ function _str_to_upper(string $value): string
 }
 // echo_r(_str_to_upper('test'));
 
-
-
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 //* 10 _count 
@@ -533,11 +531,31 @@ function _array_combine(array $keys, array $values): array
     } else
         throw new Exception('passed arrays must have the same length.');
 }
-print_r(array_combine(['a', 's', 'h'], ['ali', 'salem', 'haddar']));
+// print_r(array_combine(['a', 's', 'h'], ['ali', 'salem', 'haddar']));
+// echo '<br>';
+// print_r(_array_combine(['a', 's', 'h'], ['ali', 'salem', 'haddar']));
 //* 40
 //chunk_split — Split a string into smaller chunks
-//chunk_split(string $string, int $length = 76, string $separator = "\r\n"): string
-
+function _chunk_split(string $string, int $length = 76, string $separator = "\r\n"): string
+{
+    _throw_null_exception($string);
+    $length = $length > _strlen($string) ? _strlen($string) : $length;
+    $temp = '';
+    if (!_empty($string)) {
+        for ($i = 0; $i < _strlen($string);) {
+            for ($j = 0; $j < $length; $j++) {
+                $temp .= $string[$i++];
+                if ($i >= _strlen($string) ) {
+                    break;
+                }
+            }
+            $temp .= $separator;
+        }
+        return $temp;
+    }
+    throw new Exception('string must be not empty');
+}
+// echo_r(chunk_split('test this string', 3, '+'), _chunk_split('test this string', 3, '+'));
 //* 41
 //count_chars — Return information about characters used in a string
 //count_chars(string $string, int $mode = 0): array|string
