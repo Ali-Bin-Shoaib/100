@@ -228,8 +228,7 @@ function _is_array(array $array): bool
     return _isset($array) ? true : false;
 }
 // echo_r(_is_array([1,2,3]), is_array([1, 2, 3]));
-//* 14 _str_replace
-//! to implement
+//TODO 14  _str_replace
 function _str_replace(string $search, string $replace, string $subject): string
 {
     _throw_null_exception($search, $replace, $subject);
@@ -660,7 +659,15 @@ function _abs(int|float $num): int|float
 // echo_r(_abs(-54));
 //TODO 50 ceil 
 //ceil — Round fractions up
-//ceil(int|float $num): float
+function _ceil(int|float $num): float
+{
+
+    $fraction = (float)$num - (int)$num;
+    $isNegative = $fraction < 0 ? true : false;
+
+    return $isNegative ? ($fraction !== 0 ? (int)$num  : '') : ($fraction !== 0 ? (int)$num + 1 : $num);
+}
+echo_r(_ceil(6.9), ceil(6.9));
 //TODO 51 floor
 //floor — Round fractions down
 //floor(int|float $num): float
@@ -1100,7 +1107,7 @@ the key and the contents of the variable become the value for that key. In short
 
 
 
-//* 99
+//* 99 _strstr_index
 // return the index of the first occurrence of a string.
 function _strstr_index(string $value, string $toSearch): int
 {
