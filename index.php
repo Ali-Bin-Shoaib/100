@@ -504,7 +504,7 @@ function _is_bool($value): bool
 }
 // echo_r(is_bool(true), _is_bool(true));
 
-//* 38 
+//* 38 _array_fill
 function _array_fill(int $start_index, int $count, mixed $value): array
 {
     $array = [];
@@ -534,7 +534,7 @@ function _array_combine(array $keys, array $values): array
 // print_r(array_combine(['a', 's', 'h'], ['ali', 'salem', 'haddar']));
 // echo '<br>';
 // print_r(_array_combine(['a', 's', 'h'], ['ali', 'salem', 'haddar']));
-//* 40
+//* 40 _chunk_split
 //chunk_split — Split a string into smaller chunks
 function _chunk_split(string $string, int $length = 76, string $separator = "\r\n"): string
 {
@@ -557,7 +557,7 @@ function _chunk_split(string $string, int $length = 76, string $separator = "\r\
 }
 
 // echo_r(chunk_split('test this string', 3, '+'), _chunk_split('test this string', 3, '+'));
-//* 41
+//* 41 _count_chars
 //count_chars — Return information about characters used in a string
 function _count_chars(string $string): array|string
 {
@@ -572,7 +572,7 @@ function _count_chars(string $string): array|string
     throw new Exception('string must be not empty');
 }
 // print_r(_count_chars('count chars in this string.'));
-//* 42 
+//* 42 _implode
 //implode — Join array elements with a string
 function _implode(array $array, string $separator = ' '): string
 {
@@ -587,7 +587,7 @@ function _implode(array $array, string $separator = ' '): string
     throw new Exception('Array must be not empty');
 }
 // echo _implode(_explode_by_char(' ', 'hello my name is ali')); 
-//* 43
+//* 43 _lcfirst
 //lcfirst — Make a string's first character lowercase
 function _lcfirst(string $string): string
 {
@@ -604,7 +604,7 @@ function _lcfirst(string $string): string
     throw new Exception('String must be not empty');
 }
 // echo _lcfirst('ALI');
-//* 44 
+//* 44 _str_shuffle
 //str_shuffle — Randomly shuffles a string
 function _str_shuffle(string $string): string
 {
@@ -626,7 +626,7 @@ function _str_shuffle(string $string): string
     throw new Exception('string value must be not empty');
 }
 // echo_r(_str_shuffle('test this string'));
-//* 45
+//* 45 _strstr
 //strstr — Find the first occurrence of a string
 function _strstr(string $value, string $toSearch): string|false
 {
@@ -642,93 +642,99 @@ function _strstr(string $value, string $toSearch): string|false
     return $temp;
 }
 // echo_r(_strstr('check if ali is ok.', 'if'), strstr('check if ali is ok.', 'if'));
-//* 46
+//TODO 46 substr_count
 //substr_count — Count the number of substring occurrences
 // substr_count( string $haystack, string $needle,int $offset = 0,?int $length = null): int
-//* 47
+//TODO 47 substr_replace
 //substr_replace — Replace text within a portion of a string
 //substr_replace(array|string $string,array|string $replace,array|int $offset,array|int|null $length = null): string|array
-//* 48
+//TODO 48 substr
 //substr — Return part of a string -Returns the portion of string specified by the offset and length parameters.
 //substr(string $string, int $offset, ?int $length = null): string
-//* 49 _abs
+//TODO 49 _abs
 //Returns the absolute value of num.
-//abs(int|float $num): int|float
-//* 50 
+function _abs(int|float $num): int|float
+{
+    if ($num < 0)
+        return $num * -1;
+    return $num;
+}
+// echo_r(_abs(-5));
+//TODO 50 ceil 
 //ceil — Round fractions up
 //ceil(int|float $num): float
-//* 51
+//TODO 51 floor
 //floor — Round fractions down
 //floor(int|float $num): float
-//* 52
+//TODO 52 round
 //round — Rounds a float
 //round(int|float $num, int $precision = 0, int $mode = PHP_ROUND_HALF_UP): float
-//* 53
+//TODO 53 is_infinite
 //is_infinite — Checks whether a float is infinite
 //is_infinite(float $num): bool
-//* 54
+//TODO 54 is_nan
 //is_nan — Checks whether a float is NAN
 //is_nan(float $num): bool
-//* 55
+//TODO 55 is_finite
 //is_finite — Checks whether a float is finite - A finite float is neither NAN (is_nan()), nor infinite (is_infinite()).
 //is_finite(float $num): bool
-//* 56
+//TODO 56 sqrt
 //sqrt — Square root
 //sqrt(float $num): float
-//* 57
+//TODO 57 array_chunk
 //array_chunk — Split an array into chunks - Chunks an array into arrays with length elements. The last chunk may contain less than length elements.
 //array_chunk(array $array, int $length, bool $preserve_keys = false): array
-//* 58
+//TODO 58 array_count_values
 //array_count_values — Counts the occurrences of each distinct value in an array
 //array_count_values() returns an array using the values of array (which must be ints or strings) as keys and their frequency in array as values.
 //array_count_values(array $array): array
-//* 59
+//TODO 59 array_diff_key
 //array_diff_key — Computes the difference of arrays using keys for comparison
 //Returns an array containing all the entries from array whose keys are absent from all of the other arrays.
 //array_diff_key(array $array, array ...$arrays): array
-//* 60
+//TODO 60 array_diff
 //array_diff — Computes the difference of arrays
 //Returns an array containing all the entries from array that are not present in any of the other arrays. Keys in the array array are preserved.
 //array_diff(array $array, array ...$arrays): array
-//* 61
+//TODO 61 array_fill_keys
 //array_fill_keys — Fill an array with values, specifying keys
 //array_fill_keys(array $keys, mixed $value): array
-//* 62 
+//TODO 62 array_filter 
 //array_filter — Filters elements of an array using a callback function
 //array_filter(array $array, ?callable $callback = null): array
-//* 63
+//TODO 63 array_flip
 //array_flip — Exchanges all keys with their associated values in an array
 //array_flip() returns an array in flip order, i.e. keys from array become values and values from array become keys.
 //array_flip(array $array): array
-//* 64
+//TODO 64 array_is_list
 //array_is_list — Checks whether a given array is a list
 //Determines if the given array is a list. An array is considered a list if its keys consist of consecutive numbers from 0 to count($array)-1.
 //array_is_list(array $array): bool
-//* 65
+//TODO 65 array_key_exists
 //array_key_exists — Checks if the given key or index exists in the array
 //array_key_exists(string|int $key, array $array): bool
-//* 66
+//TODO 66 array_key_first
 //array_key_first — Gets the first key of an array
 //array_key_first(array $array): int|string|null
 
-//* 67
+//TODO 67 array_key_last
 //array_key_last — Gets the last key of an array
 //array_key_last(array $array): int|string|null
-//*68
-//array_keys — Return all the keys or a subset of the keys of an array
+//TODO68 array_keys
+//array_keys — array_keys Return all the keys or a subset of the keys of an array
 //array_keys() returns the keys, numeric and string, from the array.
 //If a filter_value is specified, then only the keys for that value are returned. Otherwise, all the keys from the array are returned.
 // array_keys(array $array): array
 //array_keys(array $array, mixed $filter_value, bool $strict = false): array
 
-//* 69
+//TODO 69 array_map
 //array_map — Applies the callback to the elements of the given arrays
 //array_map() returns an array containing the results of applying the callback to the corresponding value of array 
 //(and arrays if more arrays are provided) used as arguments for the callback. 
 //The number of parameters that the callback function accepts should match the number of arrays passed to array_map(). 
 //Excess input arrays are ignored. An ArgumentCountError is thrown if an insufficient number of arguments is provided.
 //array_map(?callable $callback, array $array, array ...$arrays): array
-//* 70
+//TODO 70 array_merge_recursive
 //array_merge_recursive — Merge one or more arrays recursively
 //It returns the resulting array.
 //If the input arrays have the same string keys, then the values for these keys are merged together into an array, and this is done recursively, 
@@ -739,7 +745,7 @@ function _strstr(string $value, string $toSearch): string|false
 
 //array_merge_recursive(array ...$arrays): array
 
-//* 71
+//TODO 71 array_merge
 //array_merge — Merge one or more arrays
 //Merges the elements of one or more arrays together so that the values of one are appended to the end of the previous one. 
 //It returns the resulting array.
@@ -750,30 +756,30 @@ function _strstr(string $value, string $toSearch): string|false
 //array_merge(array ...$arrays): array
 
 
-//* 72
+//TODO 72 array_pop
 //array_pop — Pop the element off the end of array
 //array_pop() pops and returns the value of the last element of array, shortening the array by one element.
 
 //array_pop(array &$array): mixed
 
-//* 73
+//TODO 73 array_product
 //array_product — Calculate the product of values in an array-array_product() returns the product of values in an array.
 
 //array_product(array $array): int|float
 
-//* 74
+//TODO 74 array_rand
 //array_rand — Pick one or more random keys out of an array
 
 
 //array_rand(array $array, int $num = 1): int|string|array
 
-//* 75
+//TODO 75 array_reduce
 //array_reduce — Iteratively reduce the array to a single value using a callback function
 //array_reduce() applies iteratively the callback function to the elements of the array, so as to reduce the array to a single value.
 
 //array_reduce(array $array, callable $callback, mixed $initial = null): mixed
 
-//* 76
+//TODO 76 array_replace_recursive
 //array_replace_recursive — Replaces elements from passed arrays into the first array recursively
 //array_replace_recursive() replaces the values of array with the same values from all the following arrays. 
 //If a key from the first array exists in the second array, its value will be replaced by the value from the second array. 
@@ -824,7 +830,7 @@ Array
 
 //array_replace_recursive(array $array, array ...$replacements): array
 
-//* 77
+//TODO 77 array_replace
 //array_replace — Replaces elements from passed arrays into the first array
 
 
@@ -853,7 +859,7 @@ Array
 )
 
 */
-//* 78
+//TODO 78 array_reverse
 //array_reverse — Return an array with elements in reverse order
 
 //array_reverse(array $array, bool $preserve_keys = false): array
@@ -900,19 +906,19 @@ Array
 )
 
 */
-//* 79
+//TODO 79 array_search
 //array_search — Searches the array for a given value and returns the first corresponding key if successful
 
 
 //array_search(mixed $toSearch, array $values, bool $strict = false): int|string|false
 
-//* 80
+//TODO 80 array_shift
 //array_shift — Shift an element off the beginning of array
 
 
 //array_shift(array &$array): mixed
 
-//* 81
+//TODO 81 array_slice
 //array_slice() returns the sequence of elements from the array array as specified by the offset and length parameters.
 /*
 $input = array("a", "b", "c", "d", "e");
@@ -924,7 +930,7 @@ $output = array_slice($input, 0, 3);   // returns "a", "b", and "c"
 */
 //array_slice(array $array,int $offset,?int $length = null,bool $preserve_keys = false): array
 
-//* 82
+//TODO 82 array_splice
 //array_splice — Remove a portion of the array and replace it with something else
 //Removes the elements designated by offset and length from the array array, and replaces them with the elements of the replacement array, if supplied.
 /*
@@ -980,12 +986,12 @@ array(5) {
 
 //array_splice(array &$array,int $offset,?int $length = null,mixed $replacement = []): array
 
-//* 83
+//TODO 83 array_sum
 //array_sum — Calculate the sum of values in an array
 //array_sum(array $array): int|float
 
 
-//* 84
+//TODO 84 array_unique
 //array_unique — Removes duplicate values from an array
 /*
 Takes an input array and returns a new array without duplicate values.
@@ -996,19 +1002,19 @@ then the key and value of the first equal element will be retained.
 
 //array_unique(array $array, int $flags = SORT_STRING): array
 
-//* 85
+//TODO 85 array_values
 //array_values — Return all the values of an array
 
 
 //array_values(array $array): array
 
 
-//* 86
+//TODO 86 array
 //array — Create an array
 //array(mixed ...$values): array
 
 
-//* 87
+//TODO 87 arsort
 //arsort — Sort an array in descending order and maintain index association
 /*
 Sorts array in place in descending order, such that its keys maintain their correlation with the values they are associated with.
@@ -1018,7 +1024,7 @@ This is used mainly when sorting associative arrays where the actual element ord
 //arsort(array &$array, int $flags = SORT_REGULAR): true
 
 
-//* 88
+//TODO 88 asort
 //asort — Sort an array in ascending order and maintain index association
 /*
 Sorts array in place in ascending order, such that its keys maintain their correlation with the values they are associated with.
@@ -1031,7 +1037,7 @@ This is used mainly when sorting associative arrays where the actual element ord
 //asort(array &$array, int $flags = SORT_REGULAR): true
 
 
-//* 89
+//TODO 89 compact
 //compact — Create array containing variables and their values
 /*
 Creates an array containing variables and their values.
@@ -1044,37 +1050,37 @@ the key and the contents of the variable become the value for that key. In short
 //compact(array|string $var_name, array|string ...$var_names): array
 
 
-//* 90
+//TODO 90 in_array
 //in_array — Checks if a value exists in an array
 //in_array(mixed $toSearch, array $values, bool $strict = false): bool
 
 
-//* 91
+//TODO 91 krsort
 //krsort — Sort an array by key in descending order d -> c -> b -> a
 //krsort(array &$array, int $flags = SORT_REGULAR): true
 
 
-//* 92
+//TODO 92 ksort
 //ksort — Sort an array by key in ascending order
 //ksort(array &$array, int $flags = SORT_REGULAR): true
 
 
 
-//* 93
+//TODO 93 rsort
 //rsort — Sort an array in descending order z -> a
 //rsort(array &$array, int $flags = SORT_REGULAR): true
 
 
-//* 94
+//TODO 94 shuffle
 //shuffle — Shuffle an array - This function shuffles (randomizes the order of the elements in) an array.
 //shuffle(array &$array): true
 
-//* 95
+//TODO 95 sort
 //sort — Sort an array in ascending order
 //sort(array &$array, int $flags = SORT_REGULAR): true
 
 
-//* 96
+//TODO 96 uasort
 //uasort — Sort an array with a user-defined comparison function and maintain index association -5 -> 5 sort array by value
 
 //Sorts array in place such that its keys maintain their correlation with the values they are associated with, using a user-defined comparison function.
@@ -1083,14 +1089,14 @@ the key and the contents of the variable become the value for that key. In short
 
 //uasort(array &$array, callable $callback): true
 
-//* 97
+//TODO 97 uksort
 //uksort — Sort an array by keys using a user-defined comparison function - Sorts array in place by keys using a user-supplied comparison function to determine the order.
 
 
 //uksort(array &$array, callable $callback): true
 
 
-//* 98
+//TODO 98 usort
 //usort — Sort an array by values using a user-defined comparison function
 //usort(array &$array, callable $callback): true
 
