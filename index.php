@@ -171,6 +171,8 @@ function _str_to_upper(string $value): string
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 //* 10 _count 
+//count(Countable|array $value, int $mode = COUNT_NORMAL): int
+
 function _count(array $value): int
 {
     if (!_isset($value))
@@ -532,12 +534,478 @@ function _array_combine(array $keys, array $values): array
         throw new Exception('passed arrays must have the same length.');
 }
 print_r(array_combine(['a', 's', 'h'], ['ali', 'salem', 'haddar']));
-// _substr_count($value,$substring){}
+//* 40
+//chunk_split — Split a string into smaller chunks
+//chunk_split(string $string, int $length = 76, string $separator = "\r\n"): string
 
-// _substr_replace($value,$toSearch,$toReplace){}
+//* 41
+//count_chars — Return information about characters used in a string
+//count_chars(string $string, int $mode = 0): array|string
+//* 42 
+//implode — Join array elements with a string
+//implode(string $separator, array $array): string
+//* 43
+//lcfirst — Make a string's first character lowercase
+//lcfirst(string $string): string
+//* 44 
+//str_shuffle — Randomly shuffles a string
+//str_shuffle(string $string): string
+//* 45
+//strstr — Find the first occurrence of a string
+//strstr(string $haystack, string $needle, bool $before_needle = false): string|false
+//* 46
+//substr_count — Count the number of substring occurrences
+// substr_count( string $haystack, string $needle,int $offset = 0,?int $length = null): int
+//* 47
+//substr_replace — Replace text within a portion of a string
+//substr_replace(array|string $string,array|string $replace,array|int $offset,array|int|null $length = null): string|array
+//* 48
+//substr — Return part of a string -Returns the portion of string specified by the offset and length parameters.
+//substr(string $string, int $offset, ?int $length = null): string
+//* 49 _abs
+//Returns the absolute value of num.
+//abs(int|float $num): int|float
+//* 50 
+//ceil — Round fractions up
+//ceil(int|float $num): float
+//* 51
+//floor — Round fractions down
+//floor(int|float $num): float
+//* 52
+//round — Rounds a float
+//round(int|float $num, int $precision = 0, int $mode = PHP_ROUND_HALF_UP): float
+//* 53
+//is_infinite — Checks whether a float is infinite
+//is_infinite(float $num): bool
+//* 54
+//is_nan — Checks whether a float is NAN
+//is_nan(float $num): bool
+//* 55
+//is_finite — Checks whether a float is finite - A finite float is neither NAN (is_nan()), nor infinite (is_infinite()).
+//is_finite(float $num): bool
+//* 56
+//sqrt — Square root
+//sqrt(float $num): float
+//* 57
+//array_chunk — Split an array into chunks - Chunks an array into arrays with length elements. The last chunk may contain less than length elements.
+//array_chunk(array $array, int $length, bool $preserve_keys = false): array
+//* 58
+//array_count_values — Counts the occurrences of each distinct value in an array
+//array_count_values() returns an array using the values of array (which must be ints or strings) as keys and their frequency in array as values.
+//array_count_values(array $array): array
+//* 59
+//array_diff_key — Computes the difference of arrays using keys for comparison
+//Returns an array containing all the entries from array whose keys are absent from all of the other arrays.
+//array_diff_key(array $array, array ...$arrays): array
+//* 60
+//array_diff — Computes the difference of arrays
+//Returns an array containing all the entries from array that are not present in any of the other arrays. Keys in the array array are preserved.
+//array_diff(array $array, array ...$arrays): array
+//* 61
+//array_fill_keys — Fill an array with values, specifying keys
+//array_fill_keys(array $keys, mixed $value): array
+//* 62 
+//array_filter — Filters elements of an array using a callback function
+//array_filter(array $array, ?callable $callback = null): array
+//* 63
+//array_flip — Exchanges all keys with their associated values in an array
+//array_flip() returns an array in flip order, i.e. keys from array become values and values from array become keys.
+//array_flip(array $array): array
+//* 64
+//array_is_list — Checks whether a given array is a list
+//Determines if the given array is a list. An array is considered a list if its keys consist of consecutive numbers from 0 to count($array)-1.
+//array_is_list(array $array): bool
+//* 65
+//array_key_exists — Checks if the given key or index exists in the array
+//array_key_exists(string|int $key, array $array): bool
+//* 66
+//array_key_first — Gets the first key of an array
+//array_key_first(array $array): int|string|null
 
-// strSubString(){}
+//* 67
+//array_key_last — Gets the last key of an array
+//array_key_last(array $array): int|string|null
+//*68
+//array_keys — Return all the keys or a subset of the keys of an array
+//array_keys() returns the keys, numeric and string, from the array.
+//If a filter_value is specified, then only the keys for that value are returned. Otherwise, all the keys from the array are returned.
+// array_keys(array $array): array
+//array_keys(array $array, mixed $filter_value, bool $strict = false): array
 
-// arrShuffle(){}
+//* 69
+//array_map — Applies the callback to the elements of the given arrays
+//array_map() returns an array containing the results of applying the callback to the corresponding value of array 
+//(and arrays if more arrays are provided) used as arguments for the callback. 
+//The number of parameters that the callback function accepts should match the number of arrays passed to array_map(). 
+//Excess input arrays are ignored. An ArgumentCountError is thrown if an insufficient number of arguments is provided.
+//array_map(?callable $callback, array $array, array ...$arrays): array
+//* 70
+//array_merge_recursive — Merge one or more arrays recursively
+//It returns the resulting array.
+//If the input arrays have the same string keys, then the values for these keys are merged together into an array, and this is done recursively, 
+//so that if one of the values is an array itself, the function will merge it with a corresponding entry in another array too. If, however, 
+//the arrays have the same numeric key, the later value will not overwrite the original value, but will be appended.
+//array_merge_recursive() merges the elements of one or more arrays together so that the values of one are appended to the end of the previous one. 
 
-// strShuffle(){}
+
+//array_merge_recursive(array ...$arrays): array
+
+//* 71
+//array_merge — Merge one or more arrays
+//Merges the elements of one or more arrays together so that the values of one are appended to the end of the previous one. 
+//It returns the resulting array.
+//If the input arrays have the same string keys, then the later value for that key will overwrite the previous one. If, however, 
+//the arrays contain numeric keys, the later value will not overwrite the original value, but will be appended.
+//Values in the input arrays with numeric keys will be renumbered with incrementing keys starting from zero in the result array.
+
+//array_merge(array ...$arrays): array
+
+
+//* 72
+//array_pop — Pop the element off the end of array
+//array_pop() pops and returns the value of the last element of array, shortening the array by one element.
+
+//array_pop(array &$array): mixed
+
+//* 73
+//array_product — Calculate the product of values in an array-array_product() returns the product of values in an array.
+
+//array_product(array $array): int|float
+
+//* 74
+//array_rand — Pick one or more random keys out of an array
+
+
+//array_rand(array $array, int $num = 1): int|string|array
+
+//* 75
+//array_reduce — Iteratively reduce the array to a single value using a callback function
+//array_reduce() applies iteratively the callback function to the elements of the array, so as to reduce the array to a single value.
+
+//array_reduce(array $array, callable $callback, mixed $initial = null): mixed
+
+//* 76
+//array_replace_recursive — Replaces elements from passed arrays into the first array recursively
+//array_replace_recursive() replaces the values of array with the same values from all the following arrays. 
+//If a key from the first array exists in the second array, its value will be replaced by the value from the second array. 
+//If the key exists in the second array, and not the first, it will be created in the first array. If a key only exists in the first array, 
+//it will be left as is. If several arrays are passed for replacement, they will be processed in order, the later array overwriting the previous values.
+//array_replace_recursive() is recursive : it will recurse into arrays and apply the same process to the inner value.
+//When the value in the first array is scalar, it will be replaced by the value in the second array, may it be scalar or array. 
+//When the value in the first array and the second array are both arrays, array_replace_recursive() will replace their respective value recursively.
+/**
+ * $base = array('citrus' => array( "orange") , 'berries' => array("blackberry", "raspberry"), );
+ * $replacements = array('citrus' => array('pineapple'), 'berries' => array('blueberry')); 
+ * $basket = array_replace_recursive($base, $replacements);
+ * print_r($basket);
+ * $basket = array_replace($base, $replacements);
+ * print_r($basket);
+ */
+/*
+Array
+(
+    [citrus] => Array
+        (
+            [0] => pineapple
+        )
+
+    [berries] => Array
+        (
+            [0] => blueberry
+            [1] => raspberry
+        )
+
+)
+Array
+(
+    [citrus] => Array
+        (
+            [0] => pineapple
+        )
+
+    [berries] => Array
+        (
+            [0] => blueberry
+        )
+
+)
+
+*/
+
+
+//array_replace_recursive(array $array, array ...$replacements): array
+
+//* 77
+//array_replace — Replaces elements from passed arrays into the first array
+
+
+//array_replace(array $array, array ...$replacements): array
+/*
+array_replace() replaces the values of array with values having the same keys in each of the following arrays. 
+If a key from the first array exists in the second array, its value will be replaced by the value from the second array. 
+If the key exists in the second array, and not the first, it will be created in the first array. If a key only exists in the first array, 
+it will be left as is. If several arrays are passed for replacement, they will be processed in order, the later arrays overwriting the previous values.
+
+array_replace() is not recursive : it will replace values in the first array by whatever type is in the second array.
+
+$base = array("orange", "banana", "apple", "raspberry");
+$replacements = array(0 => "pineapple", 4 => "cherry");
+$replacements2 = array(0 => "grape");
+
+$basket = array_replace($base, $replacements, $replacements2);
+print_r($basket);
+Array
+(
+    [0] => grape
+    [1] => banana
+    [2] => apple
+    [3] => raspberry
+    [4] => cherry
+)
+
+*/
+//* 78
+//array_reverse — Return an array with elements in reverse order
+
+//array_reverse(array $array, bool $preserve_keys = false): array
+/*
+$input  = array("php", 4.0, array("green", "red"));
+$reversed = array_reverse($input);
+$preserved = array_reverse($input, true);
+
+print_r($input);
+print_r($reversed);
+print_r($preserved);
+Array
+(
+    [0] => php
+    [1] => 4
+    [2] => Array
+        (
+            [0] => green
+            [1] => red
+        )
+
+)
+Array
+(
+    [0] => Array
+        (
+            [0] => green
+            [1] => red
+        )
+
+    [1] => 4
+    [2] => php
+)
+Array
+(
+    [2] => Array
+        (
+            [0] => green
+            [1] => red
+        )
+
+    [1] => 4
+    [0] => php
+)
+
+*/
+//* 79
+//array_search — Searches the array for a given value and returns the first corresponding key if successful
+
+
+//array_search(mixed $toSearch, array $values, bool $strict = false): int|string|false
+
+//* 80
+//array_shift — Shift an element off the beginning of array
+
+
+//array_shift(array &$array): mixed
+
+//* 81
+//array_slice() returns the sequence of elements from the array array as specified by the offset and length parameters.
+/*
+$input = array("a", "b", "c", "d", "e");
+
+$output = array_slice($input, 2);      // returns "c", "d", and "e"
+$output = array_slice($input, -2, 1);  // returns "d"
+$output = array_slice($input, 0, 3);   // returns "a", "b", and "c"
+
+*/
+//array_slice(array $array,int $offset,?int $length = null,bool $preserve_keys = false): array
+
+//* 82
+//array_splice — Remove a portion of the array and replace it with something else
+//Removes the elements designated by offset and length from the array array, and replaces them with the elements of the replacement array, if supplied.
+/*
+ $input = array("red", "green", "blue", "yellow");
+array_splice($input, 2);
+var_dump($input);
+
+$input = array("red", "green", "blue", "yellow");
+array_splice($input, 1, -1);
+var_dump($input);
+
+$input = array("red", "green", "blue", "yellow");
+array_splice($input, 1, count($input), "orange");
+var_dump($input);
+
+$input = array("red", "green", "blue", "yellow");
+array_splice($input, -1, 1, array("black", "maroon"));
+var_dump($input);
+
+array(2) {
+  [0]=>
+  string(3) "red"
+  [1]=>
+  string(5) "green"
+}
+array(2) {
+  [0]=>
+  string(3) "red"
+  [1]=>
+  string(6) "yellow"
+}
+array(2) {
+  [0]=>
+  string(3) "red"
+  [1]=>
+  string(6) "orange"
+}
+array(5) {
+  [0]=>
+  string(3) "red"
+  [1]=>
+  string(5) "green"
+  [2]=>
+  string(4) "blue"
+  [3]=>
+  string(5) "black"
+  [4]=>
+  string(6) "maroon"
+}
+
+ */
+
+
+//array_splice(array &$array,int $offset,?int $length = null,mixed $replacement = []): array
+
+//* 83
+//array_sum — Calculate the sum of values in an array
+//array_sum(array $array): int|float
+
+
+//* 84
+//array_unique — Removes duplicate values from an array
+/*
+Takes an input array and returns a new array without duplicate values.
+Note that keys are preserved. If multiple elements compare equal under the given flags, 
+then the key and value of the first equal element will be retained.
+*/
+
+
+//array_unique(array $array, int $flags = SORT_STRING): array
+
+//* 85
+//array_values — Return all the values of an array
+
+
+//array_values(array $array): array
+
+
+//* 86
+//array — Create an array
+//array(mixed ...$values): array
+
+
+//* 87
+//arsort — Sort an array in descending order and maintain index association
+/*
+Sorts array in place in descending order, such that its keys maintain their correlation with the values they are associated with.
+
+This is used mainly when sorting associative arrays where the actual element order is significant.
+*/
+//arsort(array &$array, int $flags = SORT_REGULAR): true
+
+
+//* 88
+//asort — Sort an array in ascending order and maintain index association
+/*
+Sorts array in place in ascending order, such that its keys maintain their correlation with the values they are associated with.
+
+This is used mainly when sorting associative arrays where the actual element order is significant.
+
+
+*/
+
+//asort(array &$array, int $flags = SORT_REGULAR): true
+
+
+//* 89
+//compact — Create array containing variables and their values
+/*
+Creates an array containing variables and their values.
+
+For each of these, compact() looks for a variable with that name in the current symbol table and adds it to the output array such that the variable name becomes 
+the key and the contents of the variable become the value for that key. In short, it does the opposite of extract().
+
+
+*/
+//compact(array|string $var_name, array|string ...$var_names): array
+
+
+//* 90
+//in_array — Checks if a value exists in an array
+//in_array(mixed $toSearch, array $values, bool $strict = false): bool
+
+
+//* 91
+//krsort — Sort an array by key in descending order d -> c -> b -> a
+//krsort(array &$array, int $flags = SORT_REGULAR): true
+
+
+//* 92
+//ksort — Sort an array by key in ascending order
+//ksort(array &$array, int $flags = SORT_REGULAR): true
+
+
+
+//* 93
+//rsort — Sort an array in descending order z -> a
+//rsort(array &$array, int $flags = SORT_REGULAR): true
+
+
+//* 94
+//shuffle — Shuffle an array - This function shuffles (randomizes the order of the elements in) an array.
+//shuffle(array &$array): true
+
+//* 95
+//sort — Sort an array in ascending order
+//sort(array &$array, int $flags = SORT_REGULAR): true
+
+
+//* 96
+//uasort — Sort an array with a user-defined comparison function and maintain index association -5 -> 5 sort array by value
+
+//Sorts array in place such that its keys maintain their correlation with the values they are associated with, using a user-defined comparison function.
+//This is used mainly when sorting associative arrays where the actual element order is significant.
+
+
+//uasort(array &$array, callable $callback): true
+
+//* 97
+//uksort — Sort an array by keys using a user-defined comparison function - Sorts array in place by keys using a user-supplied comparison function to determine the order.
+
+
+//uksort(array &$array, callable $callback): true
+
+
+//* 98
+//usort — Sort an array by values using a user-defined comparison function
+//usort(array &$array, callable $callback): true
+
+
+
+//* 99
+//* 100
