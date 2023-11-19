@@ -814,7 +814,11 @@ function _array_diff_key(array $array, array ...$arrays): array
 
 //TODO 67 array_key_last
 //array_key_last — Gets the last key of an array
-//array_key_last(array $array): int|string|null
+function _array_key_last(array $array): int|string|null
+{
+    return array_keys($array)[count($array) - 1];
+}
+// echo_r(_array_key_last(['a'=>1,'b'=>2,'c'=>3]));
 //* 68 array_keys
 function _array_keys(array $array, mixed $filter_value, bool $strict = false): array
 {
