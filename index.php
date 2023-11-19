@@ -988,9 +988,9 @@ function _array_rand(array $array, int $num = 1): int|string|array
     }
     return $result;
 }
-print_r(array_rand([1, 2, 3], 2));
-echo "<hr>";
-print_r(_array_rand([1, 2, 3], 2));
+// print_r(array_rand([1, 2, 3], 2));
+// echo "<hr>";
+// print_r(_array_rand([1, 2, 3], 2));
 //TODO 75 array_reduce
 //array_reduce — Iteratively reduce the array to a single value using a callback function
 //array_reduce() applies iteratively the callback function to the elements of the array, so as to reduce the array to a single value.
@@ -1090,12 +1090,20 @@ function _array_search(mixed $toSearch, array $values, bool $strict = false): in
     return false;
 }
 // echo_r(array_search(2, [1, 2, 3]), _array_search(2, [1, 2, 3]));
-//TODO 80 array_shift
+//* 80 _array_shift
 //array_shift — Shift an element off the beginning of array
-
-
-//array_shift(array &$array): mixed
-
+function _array_shift(array &$array): mixed
+{
+    $temp = [];
+    for ($i = 1; $i < _count($array); $i++) {
+        $temp[$i - 1] = $array[$i];
+    }
+    $array = $temp;
+    return true;
+}
+// $test = [1, 2, 3];
+// _array_shift($test);
+// print_r($test);
 //TODO 81 array_slice
 //array_slice() returns the sequence of elements from the array array as specified by the offset and length parameters.
 /*
