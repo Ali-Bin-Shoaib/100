@@ -1134,27 +1134,32 @@ the key and the contents of the variable become the value for that key. In short
 //rsort(array &$array, int $flags = SORT_REGULAR): true
 
 
-//TODO 94 shuffle
+//* 94 shuffle
 //shuffle — Shuffle an array - This function shuffles (randomizes the order of the elements in) an array.
-// function _shuffle(array &$array): true
-// {
-    // if (!_empty($string)) {
-    //     $stringLength = _strlen($string);
-    //     $shuffledIndexes = [];
-    //     $temp = '';
-    //     while (_count($shuffledIndexes) < _strlen($string)) {
-    //         $randomIndex = rand(0, _strlen($string) - 1);
-    //         if (!in_array($randomIndex, $shuffledIndexes))
-    //             _array_push($shuffledIndexes, $randomIndex);
-    //     }
-    //     for ($i = 0; $i < $stringLength; $i++) {
-    //         $temp .= $string[$shuffledIndexes[$i]];
-    //     }
-    //     return $temp;
-    // }
-    // throw new Exception('string value must be not empty');
-// }
-
+function _shuffle(array &$array): true
+{
+    if (!_empty($array)) {
+        $arrayLength = _count($array);
+        $shuffledIndexes = [];
+        $temp = false;
+        $result = [];
+        while (_count($shuffledIndexes) < _count($array)) {
+            $randomIndex = rand(0, _count($array) - 1);
+            if (!in_array($randomIndex, $shuffledIndexes))
+                _array_push($shuffledIndexes, $randomIndex);
+        }
+        print_r($shuffledIndexes);
+        for ($i = 0; $i < $arrayLength; $i++) {
+            _array_push($result, $array[$shuffledIndexes[$i]]);
+        }
+        $array = $result;
+        return true;
+    }
+    // return false;
+}
+$test = [1, 2, 3];
+_shuffle($test);
+echo_r(...$test);
 //TODO 95 sort
 //sort — Sort an array in ascending order
 //sort(array &$array, int $flags = SORT_REGULAR): true
