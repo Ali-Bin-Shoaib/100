@@ -920,66 +920,27 @@ Array
 function _array_reverse(array $array, bool $preserve_keys = false): array
 {
     $temp = [];
-    // if($preserve_keys){
-    //     foreach ($array as $key => $value) {
-
-    //     }
-    // }
     for ($i = _count($array) - 1, $j = 0; $i >= 0; $i--, $j++) {
         $temp[$preserve_keys ? $i : $j] = $array[$i];
     }
     return $temp;
 }
 // print_r(_array_reverse([1, 2, 3, 4, 5]));
-/*
-$input  = array("php", 4.0, array("green", "red"));
-$reversed = array_reverse($input);
-$preserved = array_reverse($input, true);
 
-print_r($input);
-print_r($reversed);
-print_r($preserved);
-Array
-(
-    [0] => php
-    [1] => 4
-    [2] => Array
-        (
-            [0] => green
-            [1] => red
-        )
-
-)
-Array
-(
-    [0] => Array
-        (
-            [0] => green
-            [1] => red
-        )
-
-    [1] => 4
-    [2] => php
-)
-Array
-(
-    [2] => Array
-        (
-            [0] => green
-            [1] => red
-        )
-
-    [1] => 4
-    [0] => php
-)
-
-*/
-//TODO 79 array_search
+//* 79 array_search
 //array_search — Searches the array for a given value and returns the first corresponding key if successful
 
 
-//array_search(mixed $toSearch, array $values, bool $strict = false): int|string|false
-
+function _array_search(mixed $toSearch, array $values, bool $strict = false): int|string|false
+{
+    foreach ($values as $key => $value) {
+        if (($strict && $value === $toSearch) || (!$strict && $value == $toSearch)) {
+            return $key;
+        }
+    }
+    return false;
+}
+echo_r(array_search(2, [1, 2,3]), _array_search(2, [1, 2,3]));
 //TODO 80 array_shift
 //array_shift — Shift an element off the beginning of array
 
