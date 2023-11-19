@@ -775,13 +775,24 @@ function _array_chunk(array $array, int $length): array
 //TODO 67 array_key_last
 //array_key_last — Gets the last key of an array
 //array_key_last(array $array): int|string|null
-//TODO68 array_keys
+//* array_keys
 //array_keys — array_keys Return all the keys or a subset of the keys of an array
 //array_keys() returns the keys, numeric and string, from the array.
 //If a filter_value is specified, then only the keys for that value are returned. Otherwise, all the keys from the array are returned.
 // array_keys(array $array): array
-//array_keys(array $array, mixed $filter_value, bool $strict = false): array
+// function _array_keys(array $array, mixed $filter_value, bool $strict = false): array
+function _array_keys(array $array, bool $strict = false): array
 
+{
+    $result = [];
+    if (!_empty($array)) {
+        foreach ($array as $key => $value) {
+            _array_push($result, $key);
+        }
+    }
+    return $result;
+}
+// print_r(_array_keys(['a' => 1, 'b' => 2]));
 //TODO 69 array_map
 //array_map — Applies the callback to the elements of the given arrays
 //array_map() returns an array containing the results of applying the callback to the corresponding value of array 
@@ -940,7 +951,7 @@ function _array_search(mixed $toSearch, array $values, bool $strict = false): in
     }
     return false;
 }
-echo_r(array_search(2, [1, 2,3]), _array_search(2, [1, 2,3]));
+// echo_r(array_search(2, [1, 2, 3]), _array_search(2, [1, 2, 3]));
 //TODO 80 array_shift
 //array_shift — Shift an element off the beginning of array
 
@@ -1015,11 +1026,18 @@ array(5) {
 
 //array_splice(array &$array,int $offset,?int $length = null,mixed $replacement = []): array
 
-//TODO 83 array_sum
+//* 83 array_sum
 //array_sum — Calculate the sum of values in an array
-//array_sum(array $array): int|float
+function _array_sum(array $array): int|float
+{
+    $sum = 0;
+    for ($i = 0; $i < _count($array); $i++) {
+        $sum += $array[$i];
+    }
+    return $sum;
+}
 
-
+// echo _array_sum([1,2,3,4]);
 //TODO 84 array_unique
 //array_unique — Removes duplicate values from an array
 /*
@@ -1031,17 +1049,33 @@ then the key and value of the first equal element will be retained.
 
 //array_unique(array $array, int $flags = SORT_STRING): array
 
-//TODO 85 array_values
+//* 85 array_values
 //array_values — Return all the values of an array
 
 
-//array_values(array $array): array
+function _array_values(array $array): array
+{
+    $result = [];
+    if (!_empty($array)) {
+        foreach ($array as $key => $value) {
+            _array_push($result, $value);
+        }
+    }
+    return $result;
+}
+// echo_r(...(array_values(['a' => 1, 'b' => 2])));
 
-
-//TODO 86 array
+//* 86 array
 //array — Create an array
-//array(mixed ...$values): array
-
+function _array(mixed ...$values): array
+{
+    $result = [];
+    foreach ($values as $value) {
+        _array_push($result, $value);
+    }
+    return $result;
+}
+// echo_r(..._array(1, 2, 3,'uuu'));
 
 //TODO 87 arsort
 //arsort — Sort an array in descending order and maintain index association
@@ -1102,7 +1136,24 @@ the key and the contents of the variable become the value for that key. In short
 
 //TODO 94 shuffle
 //shuffle — Shuffle an array - This function shuffles (randomizes the order of the elements in) an array.
-//shuffle(array &$array): true
+// function _shuffle(array &$array): true
+// {
+    // if (!_empty($string)) {
+    //     $stringLength = _strlen($string);
+    //     $shuffledIndexes = [];
+    //     $temp = '';
+    //     while (_count($shuffledIndexes) < _strlen($string)) {
+    //         $randomIndex = rand(0, _strlen($string) - 1);
+    //         if (!in_array($randomIndex, $shuffledIndexes))
+    //             _array_push($shuffledIndexes, $randomIndex);
+    //     }
+    //     for ($i = 0; $i < $stringLength; $i++) {
+    //         $temp .= $string[$shuffledIndexes[$i]];
+    //     }
+    //     return $temp;
+    // }
+    // throw new Exception('string value must be not empty');
+// }
 
 //TODO 95 sort
 //sort — Sort an array in ascending order
