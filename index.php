@@ -931,8 +931,6 @@ function _array_merge(array ...$arrays): array
 
 //* 72 array_pop
 //array_pop — Pop the element off the end of array
-//array_pop() pops and returns the value of the last element of array, shortening the array by one element.
-
 function _array_pop(array &$array): mixed
 {
     if (_isset($array) && !_empty($array)) {
@@ -955,10 +953,21 @@ function _array_pop(array &$array): mixed
 // echo "<hr>";
 // print_r($test);
 
-//TODO 73 array_product
+//* 73 array_product
 //array_product — Calculate the product of values in an array-array_product() returns the product of values in an array.
 
-//array_product(array $array): int|float
+function _array_product(array $array): int|float
+{
+    $product = 1;
+    if (!_empty($array)) {
+        foreach ($array as $value) {
+            $product *= $value;
+        }
+    }
+    return $product;
+    // throw new Exception('array must not be empty.');
+}
+// echo _array_product([1,2,3,4]);
 
 //TODO 74 array_rand
 //array_rand — Pick one or more random keys out of an array
