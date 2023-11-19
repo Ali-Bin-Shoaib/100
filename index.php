@@ -770,10 +770,22 @@ function _array_count_values(array $array): array
 // echo '<hr>';
 // echo "<br>";
 // print_r(_array_count_values([1, 2, 2, 3, 3, 3, 4, 4, 4, 4]));
-//TODO 59 array_diff_key
+//* 59 array_diff_key
 //array_diff_key — Computes the difference of arrays using keys for comparison
 //Returns an array containing all the entries from array whose keys are absent from all of the other arrays.
-//array_diff_key(array $array, array ...$arrays): array
+function _array_diff_key(array $array, array ...$arrays): array
+{
+    $allArrays = [...$arrays];
+    $result = [];
+    foreach ($array as $k => $v) {
+        if (!in_array($v, $allArrays))
+            _array_push($result, $v);
+    }
+    return $result;
+}
+// print_r( array_diff_key(['a' => 1, 'b' => 2, 'c' => 3, 'd' => 4], ['d' => 4]));
+// echo "<br>";
+// print_r(array_diff_key(['a' => 1, 'b' => 2, 'c' => 3, 'd' => 4], ['d' => 4]));
 //TODO 60 array_diff
 //array_diff — Computes the difference of arrays
 //Returns an array containing all the entries from array that are not present in any of the other arrays. 
@@ -1143,8 +1155,16 @@ the key and the contents of the variable become the value for that key. In short
 
 //TODO 90 in_array
 //in_array — Checks if a value exists in an array
-//in_array(mixed $toSearch, array $values, bool $strict = false): bool{}
-
+function _in_array(mixed $toSearch, array $values, bool $strict = false): bool
+{
+    for ($i = 0; $i < _count($values); $i++) {
+        if ($strict ? $values[$i] === $toSearch : $values[$i] == $toSearch) {
+            return true;
+        }
+    }
+    return false;
+}
+// echo_r(in_array(1,[5,4,3,2,1]), _in_array(1, [5, 4, 3, 2, 1]));
 
 //TODO 91 krsort
 //krsort — Sort an array by key in descending order d -> c -> b -> a
