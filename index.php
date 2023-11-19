@@ -915,11 +915,6 @@ function _array_keys(array $array, mixed $filter_value = null, bool $strict = fa
 //* 71 array_merge
 //array_merge — Merge one or more arrays
 //Merges the elements of one or more arrays together so that the values of one are appended to the end of the previous one. 
-//It returns the resulting array.
-//If the input arrays have the same string keys, then the later value for that key will overwrite the previous one. If, however, 
-//the arrays contain numeric keys, the later value will not overwrite the original value, but will be appended.
-//Values in the input arrays with numeric keys will be renumbered with incrementing keys starting from zero in the result array.
-
 function _array_merge(array ...$arrays): array
 {
     $allArrays = [];
@@ -934,11 +929,31 @@ function _array_merge(array ...$arrays): array
 // echo "<br>";
 // print_r(_array_merge(['a' => 1, 'b' => 2, 'c' => 3, 'd' => 4], ['d' => 4], ['c' => 3]));
 
-//TODO 72 array_pop
+//* 72 array_pop
 //array_pop — Pop the element off the end of array
 //array_pop() pops and returns the value of the last element of array, shortening the array by one element.
 
-//array_pop(array &$array): mixed
+function _array_pop(array &$array): mixed
+{
+    if (_isset($array) && !_empty($array)) {
+        $result = [];
+        $popIndex = _count($array) - 1;
+        $i = 0;
+        foreach ($array as $key => $value) {
+            if ($i < $popIndex) {
+                $result[$key] = $value;
+                $i++;
+            } else $popVal = $value;
+        }
+        $array = $result;
+        return $popVal;
+    }
+    throw new Exception('array is empty');
+}
+// $test = ['a' => 1, 'b' => 2, 'c' => 3, 'd' => 4, 'e' => 5];
+// print_r(_array_pop($test));
+// echo "<hr>";
+// print_r($test);
 
 //TODO 73 array_product
 //array_product — Calculate the product of values in an array-array_product() returns the product of values in an array.
