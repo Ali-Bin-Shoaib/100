@@ -519,9 +519,9 @@ function _array_fill(int $start_index, int $count, mixed $value): array
 //* 39 _array_combine
 function _array_combine(array $keys, array $values): array
 {
+    _throw_null_exception($keys, $values);
     $array = [];
     $arrLength = _count($keys);
-    _throw_null_exception($keys, $values);
     if (_count($keys) == _count($values) && $arrLength > 0) {
         for ($i = 0; $i < $arrLength; $i++) {
             $array[$keys[$i]] = $values[$i];
@@ -797,10 +797,14 @@ function _array_diff_key(array $array, array ...$arrays): array
 //TODO 62 array_filter 
 //array_filter — Filters elements of an array using a callback function
 //array_filter(array $array, ?callable $callback = null): array
-//TODO 63 array_flip
+//* 63 array_flip
 //array_flip — Exchanges all keys with their associated values in an array
 //array_flip() returns an array in flip order, i.e. keys from array become values and values from array become keys.
-//array_flip(array $array): array
+function _array_flip(array $array): array
+{
+    return _array_combine(_array_keys($array), _array_values($array));
+}
+// print_r(_array_flip([5, 4, 3, 2, 1]));
 //* 64 array_is_list
 //array_is_list — Checks whether a given array is a list
 //Determines if the given array is a list. An array is considered a list if its keys consist of consecutive numbers from 0 to count($array)-1.
@@ -844,9 +848,12 @@ function _array_keys(array $array, mixed $filter_value = null, bool $strict = fa
     $result = [];
     if (!_empty($array)) {
         foreach ($array as $key => $value) {
-            if (!empty($filter_value))
+
+            if (!empty($filter_value)) {
                 if ($strict ? $filter_value === $value : $filter_value == $value)
                     _array_push($result, $key);
+            } else
+                _array_push($result, $key);
         }
     }
     return $result;
