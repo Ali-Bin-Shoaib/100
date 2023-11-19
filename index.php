@@ -171,17 +171,14 @@ function _str_to_upper(string $value): string
 //* 10 _count 
 //count(Countable|array $value, int $mode = COUNT_NORMAL): int
 
-function _count(array $value): int
+function _count(array $array): int
 {
-    if (!_isset($value))
+    if (!_isset($array))
         throw new Exception("provided value is null. value must be an array.");
     $counter = 0;
-    $isValue = @$value[$counter];
-    if (_isset($isValue)) {
-        while (_isset($isValue)) {
-            $counter++;
-            $isValue = $value[$counter] ?? null;
-        }
+    if (_empty($array)) return $counter;
+    foreach ($array as $key => $value) {
+        @$array[$key] ? $counter++ : '';
     }
     return $counter;
 }
@@ -775,28 +772,44 @@ function _array_count_values(array $array): array
 //Returns an array containing all the entries from array whose keys are absent from all of the other arrays.
 function _array_diff_key(array $array, array ...$arrays): array
 {
-    $allArrays = [...$arrays];
+    $allArrays = _array_merge(...$arrays);
     $result = [];
+
     foreach ($array as $k => $v) {
-        if (!_in_array($v, $allArrays))
-            _array_push($result, $v);
+        if (!_array_key_exists($k, $allArrays))
+            $result[$k] = $v;
     }
     return $result;
 }
-// print_r( array_diff_key(['a' => 1, 'b' => 2, 'c' => 3, 'd' => 4], ['d' => 4]));
+// print_r(array_diff_key(['a' => 1, 'b' => 2, 'c' => 3, 'd' => 4], ['d' => 4], ['c' => 3]));
 // echo "<br>";
-// print_r(array_diff_key(['a' => 1, 'b' => 2, 'c' => 3, 'd' => 4], ['d' => 4]));
-//TODO 60 array_diff
+// print_r(_array_diff_key(['a' => 1, 'b' => 2, 'c' => 3, 'd' => 4], ['d' => 4], ['c' => 3]));
+//* 60 array_diff
 //array_diff — Computes the difference of arrays
 //Returns an array containing all the entries from array that are not present in any of the other arrays. 
 //Keys in the array array are preserved.
-//array_diff(array $array, array ...$arrays): array
+function _array_diff(array $array, array ...$arrays): array
+{
+    $allArrays = array_merge(...$arrays);
+    $result = [];
+    foreach ($array as $key => $value) {
+        // echo_r (!_in_array($value, $array));
+        if (!_in_array($value, $allArrays))
+            $result[$key] = $value;
+    }
+    return $result;
+}
+// print_r(array_diff(['a' => 1, 'b' => 2, 'c' => 3, 'd' => 4], ['d' => 5], ['c' => 3]));
+// echo "<hr>";
+// print_r(_array_diff(['a' => 1, 'b' => 2, 'c' => 3, 'd' => 4], ['d' => 5], ['c' => 3]));
+
 //* 61 array_fill_keys
 //array_fill_keys — Fill an array with values, specifying keys
-function _array_fill_keys(array $keys, mixed $value): array{
-    $result=[];
-    for ($i=0; $i < _count($keys); $i++) { 
-        $result[$keys[$i]]=$value   ;
+function _array_fill_keys(array $keys, mixed $value): array
+{
+    $result = [];
+    for ($i = 0; $i < _count($keys); $i++) {
+        $result[$keys[$i]] = $value;
     }
     return $result;
 }
@@ -843,7 +856,7 @@ function _array_is_list(array $array): bool
 //array_key_exists — Checks if the given key or index exists in the array
 function _array_key_exists(string|int $key, array $array): bool
 {
-    return (isset($array[$key])) ? true : false;
+    return (isset($array[$key]) && !empty($array[$key])) ? true : false;
 }
 // echo_r(_array_key_exists('b',['a' => 1, 'b' => 2, 'c' => 3]));
 
@@ -899,7 +912,7 @@ function _array_keys(array $array, mixed $filter_value = null, bool $strict = fa
 
 //array_merge_recursive(array ...$arrays): array
 
-//TODO 71 array_merge
+//* 71 array_merge
 //array_merge — Merge one or more arrays
 //Merges the elements of one or more arrays together so that the values of one are appended to the end of the previous one. 
 //It returns the resulting array.
@@ -907,8 +920,19 @@ function _array_keys(array $array, mixed $filter_value = null, bool $strict = fa
 //the arrays contain numeric keys, the later value will not overwrite the original value, but will be appended.
 //Values in the input arrays with numeric keys will be renumbered with incrementing keys starting from zero in the result array.
 
-//array_merge(array ...$arrays): array
-
+function _array_merge(array ...$arrays): array
+{
+    $allArrays = [];
+    foreach ($arrays as $arr) {
+        if (_is_array($arr))
+            foreach ($arr as $key => $val) {
+                $allArrays[$key] = $val;
+            }
+    }
+    return $allArrays;
+}
+// echo "<br>";
+// print_r(_array_merge(['a' => 1, 'b' => 2, 'c' => 3, 'd' => 4], ['d' => 4], ['c' => 3]));
 
 //TODO 72 array_pop
 //array_pop — Pop the element off the end of array
@@ -1205,8 +1229,8 @@ the key and the contents of the variable become the value for that key. In short
 //in_array — Checks if a value exists in an array
 function _in_array(mixed $toSearch, array $values, bool $strict = false): bool
 {
-    for ($i = 0; $i < _count($values); $i++) {
-        if ($strict ? $values[$i] === $toSearch : $values[$i] == $toSearch) {
+    foreach ($values as $key => $value) {
+        if ($strict === true ? ($value === $toSearch) : ($value == $toSearch)) {
             return true;
         }
     }
