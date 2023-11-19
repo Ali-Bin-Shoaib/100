@@ -710,15 +710,35 @@ function _is_finite(float $num): bool
     return !_is_infinite($num) && !_is_nan($num);
 }
 // echo_r(is_finite(sqrt(50)),_is_finite(sqrt(50)));
-//TODO 56 sqrt
+//* 56 sqrt
 //sqrt — Square root
-function _sqrt(float $num): float{
-    return _pow($num,1/2);
+function _sqrt(float $num): float
+{
+    return _pow($num, 1 / 2);
 }
 // echo_r(_sqrt(9), sqrt(9));
-//TODO 57 array_chunk
+// 57 array_chunk
 //array_chunk — Split an array into chunks - Chunks an array into arrays with length elements. The last chunk may contain less than length elements.
-//array_chunk(array $array, int $length, bool $preserve_keys = false): array
+function _array_chunk(array $array, int $length): array
+{
+    $result = [];
+    if (!_empty($array)) {
+        for ($i = 0; $i < _count($array);) {
+            $chunks = [];
+            for ($j = 0; $j < $length && $i < _count($array); $j++) {
+                $chunks[$j] = $array[$i];
+                $i++;
+            }
+            _array_push($result, $chunks);
+        }
+        return $result;
+    }
+    return [[]];
+}
+// $array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+// print_r(array_chunk($array, 3));
+// echo '<br>';
+// print_r(_array_chunk($array, 3));
 //TODO 58 array_count_values
 //array_count_values — Counts the occurrences of each distinct value in an array
 //array_count_values() returns an array using the values of array (which must be ints or strings) as keys and their frequency in array as values.
@@ -894,10 +914,23 @@ Array
 )
 
 */
-//TODO 78 array_reverse
+//* 78 _array_reverse
 //array_reverse — Return an array with elements in reverse order
 
-//array_reverse(array $array, bool $preserve_keys = false): array
+function _array_reverse(array $array, bool $preserve_keys = false): array
+{
+    $temp = [];
+    // if($preserve_keys){
+    //     foreach ($array as $key => $value) {
+
+    //     }
+    // }
+    for ($i = _count($array) - 1, $j = 0; $i >= 0; $i--, $j++) {
+        $temp[$preserve_keys ? $i : $j] = $array[$i];
+    }
+    return $temp;
+}
+// print_r(_array_reverse([1, 2, 3, 4, 5]));
 /*
 $input  = array("php", 4.0, array("green", "red"));
 $reversed = array_reverse($input);
