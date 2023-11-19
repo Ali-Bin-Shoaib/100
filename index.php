@@ -805,9 +805,14 @@ function _array_diff_key(array $array, array ...$arrays): array
 //array_is_list — Checks whether a given array is a list
 //Determines if the given array is a list. An array is considered a list if its keys consist of consecutive numbers from 0 to count($array)-1.
 //array_is_list(array $array): bool
-//TODO 65 array_key_exists
+//* 65 array_key_exists
 //array_key_exists — Checks if the given key or index exists in the array
-//array_key_exists(string|int $key, array $array): bool
+function _array_key_exists(string|int $key, array $array): bool
+{
+    return (isset($array[$key])) ? true : false;
+}
+// echo_r(_array_key_exists('b',['a' => 1, 'b' => 2, 'c' => 3]));
+
 //* 66 array_key_first
 //array_key_first — Gets the first key of an array
 function _array_key_first(array $array): int|string|null
