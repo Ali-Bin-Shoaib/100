@@ -815,24 +815,20 @@ function _array_diff_key(array $array, array ...$arrays): array
 //TODO 67 array_key_last
 //array_key_last — Gets the last key of an array
 //array_key_last(array $array): int|string|null
-//* array_keys
-//array_keys — array_keys Return all the keys or a subset of the keys of an array
-//array_keys() returns the keys, numeric and string, from the array.
-//If a filter_value is specified, then only the keys for that value are returned. Otherwise, all the keys from the array are returned.
-// array_keys(array $array): array
-// function _array_keys(array $array, mixed $filter_value, bool $strict = false): array
-function _array_keys(array $array, bool $strict = false): array
-
+//* 68 array_keys
+function _array_keys(array $array, mixed $filter_value, bool $strict = false): array
 {
     $result = [];
     if (!_empty($array)) {
         foreach ($array as $key => $value) {
-            _array_push($result, $key);
+            if (!empty($filter_value))
+                if ($strict ? $filter_value === $value : $filter_value == $value)
+                    _array_push($result, $key);
         }
     }
     return $result;
 }
-// print_r(_array_keys(['a' => 1, 'b' => 2]));
+// print_r(_array_keys(['a' => 1, 'b' => 2, 'c' => 3], 2));
 //TODO 69 array_map
 //array_map — Applies the callback to the elements of the given arrays
 //array_map() returns an array containing the results of applying the callback to the corresponding value of array 
@@ -1153,7 +1149,7 @@ the key and the contents of the variable become the value for that key. In short
 //compact(array|string $var_name, array|string ...$var_names): array
 
 
-//TODO 90 in_array
+//* 90 in_array
 //in_array — Checks if a value exists in an array
 function _in_array(mixed $toSearch, array $values, bool $strict = false): bool
 {
@@ -1210,7 +1206,7 @@ function _shuffle(array &$array): true
 //TODO 95 sort
 //sort — Sort an array in ascending order
 //sort(array &$array): true
-$test = [1, 2, 3];
+// $test = [1, 2, 3];
 // sort($test);
 
 
