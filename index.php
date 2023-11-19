@@ -791,9 +791,18 @@ function _array_diff_key(array $array, array ...$arrays): array
 //Returns an array containing all the entries from array that are not present in any of the other arrays. 
 //Keys in the array array are preserved.
 //array_diff(array $array, array ...$arrays): array
-//TODO 61 array_fill_keys
+//* 61 array_fill_keys
 //array_fill_keys — Fill an array with values, specifying keys
-//array_fill_keys(array $keys, mixed $value): array
+function _array_fill_keys(array $keys, mixed $value): array{
+    $result=[];
+    for ($i=0; $i < _count($keys); $i++) { 
+        $result[$keys[$i]]=$value   ;
+    }
+    return $result;
+}
+// print_r(array_fill_keys([1,2,3],5));
+// echo '<br>';
+// print_r( _array_fill_keys([1, 2, 3], 5));
 //* 62 array_filter 
 //array_filter — Filters elements of an array using a callback function
 function _array_filter(array $array, ?callable $callback = null): array
