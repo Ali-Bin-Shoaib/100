@@ -22,4 +22,4 @@ if ($method == "POST") {
     <input type="text" name="password">
     <br>
     <button type="submit">login</button>
-</form>f
+</form>
