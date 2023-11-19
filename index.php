@@ -98,11 +98,12 @@ function _strIndexOfChar(string $char, string $value): int
 // echo_r(_strIndexOfChar('a', 'bba'));
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
+//! bug when pushing an element whit int zero value
 //* 6 arrayPush
 function _array_push(array &$array, mixed ...$values)
 {
-    foreach ($values as $item) {
+    $arr = [...$values];
+    foreach ($arr as $item) {
         $array[_count($array)] = $item;
     }
 }
@@ -969,12 +970,27 @@ function _array_product(array $array): int|float
 }
 // echo _array_product([1,2,3,4]);
 
-//TODO 74 array_rand
+//* 74 array_rand
 //array_rand — Pick one or more random keys out of an array
 
 
-//array_rand(array $array, int $num = 1): int|string|array
-
+function _array_rand(array $array, int $num = 1): int|string|array
+{
+    $randomIndexes = array();
+    $result = [];
+    while (_count($randomIndexes)  != $num) {
+        $randomIndex = rand(0, _count($array) - 1);
+        if (!in_array($randomIndex, $randomIndexes, true))
+            array_push($randomIndexes, $randomIndex);
+    }
+    for ($i = 0; $i < $num; $i++) {
+        $result[] = @$randomIndexes[$i];
+    }
+    return $result;
+}
+print_r(array_rand([1, 2, 3], 2));
+echo "<hr>";
+print_r(_array_rand([1, 2, 3], 2));
 //TODO 75 array_reduce
 //array_reduce — Iteratively reduce the array to a single value using a callback function
 //array_reduce() applies iteratively the callback function to the elements of the array, so as to reduce the array to a single value.
@@ -1032,35 +1048,21 @@ Array
 
 //array_replace_recursive(array $array, array ...$replacements): array
 
-//TODO 77 array_replace
-//array_replace — Replaces elements from passed arrays into the first array
-
-
-//array_replace(array $array, array ...$replacements): array
-/*
-array_replace() replaces the values of array with values having the same keys in each of the following arrays. 
-If a key from the first array exists in the second array, its value will be replaced by the value from the second array. 
-If the key exists in the second array, and not the first, it will be created in the first array. If a key only exists in the first array, 
-it will be left as is. If several arrays are passed for replacement, they will be processed in order, the later arrays overwriting the previous values.
-
-array_replace() is not recursive : it will replace values in the first array by whatever type is in the second array.
-
-$base = array("orange", "banana", "apple", "raspberry");
-$replacements = array(0 => "pineapple", 4 => "cherry");
-$replacements2 = array(0 => "grape");
-
-$basket = array_replace($base, $replacements, $replacements2);
-print_r($basket);
-Array
-(
-    [0] => grape
-    [1] => banana
-    [2] => apple
-    [3] => raspberry
-    [4] => cherry
-)
-
-*/
+//* 77 _uc_first
+function _uc_first(string $string): string
+{
+    _throw_null_exception($string);
+    if (!_empty($string)) {
+        for ($i = 0; $i < _strlen($string); $i++) {
+            if (_str_contains('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', $string[$i])) {
+                $string[$i] = _str_to_upper($string[$i]);
+                break;
+            }
+        }
+        return $string;
+    }
+    throw new Exception('String must be not empty');
+}
 //* 78 _array_reverse
 //array_reverse — Return an array with elements in reverse order
 
@@ -1251,12 +1253,15 @@ the key and the contents of the variable become the value for that key. In short
 
 //* 90 in_array
 //in_array — Checks if a value exists in an array
-function _in_array(mixed $toSearch, array $values, bool $strict = false): bool
+function _in_array(mixed $toSearch, array $array, bool $strict = false): bool
 {
-    foreach ($values as $key => $value) {
-        if ($strict === true ? ($value === $toSearch) : ($value == $toSearch)) {
-            return true;
+    if (_empty($array)) {
+        foreach ($array as $value) {
+            if ($strict  ? ($value === $toSearch) : ($value == $toSearch)) {
+                return true;
+            }
         }
+        return false;
     }
     return false;
 }
