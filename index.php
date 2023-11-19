@@ -702,13 +702,20 @@ function _is_nan(float $num): bool
     // return (string)$num === 'NAN' ? true : false;
     return $num !== $num;
 }
-echo_r(is_nan(sqrt(-1)), _is_nan(sqrt(-1)));
-//TODO 55 is_finite
+// echo_r(is_nan(sqrt(-1)), _is_nan(sqrt(-1)));
+//* 55 is_finite
 //is_finite — Checks whether a float is finite - A finite float is neither NAN (is_nan()), nor infinite (is_infinite()).
-//is_finite(float $num): bool
+function _is_finite(float $num): bool
+{
+    return !_is_infinite($num) && !_is_nan($num);
+}
+// echo_r(is_finite(sqrt(50)),_is_finite(sqrt(50)));
 //TODO 56 sqrt
 //sqrt — Square root
-//sqrt(float $num): float
+function _sqrt(float $num): float{
+    return _pow($num,1/2);
+}
+// echo_r(_sqrt(9), sqrt(9));
 //TODO 57 array_chunk
 //array_chunk — Split an array into chunks - Chunks an array into arrays with length elements. The last chunk may contain less than length elements.
 //array_chunk(array $array, int $length, bool $preserve_keys = false): array
