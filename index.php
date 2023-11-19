@@ -614,7 +614,7 @@ function _str_shuffle(string $string): string
         $temp = '';
         while (_count($shuffledIndexes) < _strlen($string)) {
             $randomIndex = rand(0, _strlen($string) - 1);
-            if (!in_array($randomIndex, $shuffledIndexes))
+            if (!_in_array($randomIndex, $shuffledIndexes))
                 _array_push($shuffledIndexes, $randomIndex);
         }
         for ($i = 0; $i < $stringLength; $i++) {
@@ -751,7 +751,7 @@ function _array_count_values(array $array): array
     $indexes = [];
     if (!_empty($array)) {
         for ($i = 0; $i < _count($array); $i++) {
-            if (!in_array($array[$i], $indexes)) {
+            if (!_in_array($array[$i], $indexes)) {
                 $indexes[] = $array[$i];
             }
         }
@@ -778,7 +778,7 @@ function _array_diff_key(array $array, array ...$arrays): array
     $allArrays = [...$arrays];
     $result = [];
     foreach ($array as $k => $v) {
-        if (!in_array($v, $allArrays))
+        if (!_in_array($v, $allArrays))
             _array_push($result, $v);
     }
     return $result;
@@ -1193,7 +1193,7 @@ function _shuffle(array &$array): true
         $result = [];
         while (_count($shuffledIndexes) < _count($array)) {
             $randomIndex = rand(0, _count($array) - 1);
-            if (!in_array($randomIndex, $shuffledIndexes))
+            if (!_in_array($randomIndex, $shuffledIndexes))
                 _array_push($shuffledIndexes, $randomIndex);
         }
         for ($i = 0; $i < $arrayLength; $i++) {
