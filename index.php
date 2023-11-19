@@ -904,14 +904,23 @@ function _array_keys(array $array, mixed $filter_value = null, bool $strict = fa
 //array_map(?callable $callback, array $array, array ...$arrays): array
 //TODO 70 array_merge_recursive
 //array_merge_recursive — Merge one or more arrays recursively
-//It returns the resulting array.
-//If the input arrays have the same string keys, then the values for these keys are merged together into an array, and this is done recursively, 
-//so that if one of the values is an array itself, the function will merge it with a corresponding entry in another array too. If, however, 
-//the arrays have the same numeric key, the later value will not overwrite the original value, but will be appended.
-//array_merge_recursive() merges the elements of one or more arrays together so that the values of one are appended to the end of the previous one. 
-
 
 //array_merge_recursive(array ...$arrays): array
+function _array_merge_recursive(array ...$arrays): array
+{
+    $allArrays = [];
+
+    foreach ($arrays as $arr) {
+        if (is_array($arr)) {
+            return _array_merge_recursive($arr);
+        } else {
+            $allArrays = array_merge($allArrays, $arr);
+        }
+    }
+
+    return $allArrays;
+}
+print_r(_array_merge_recursive(['a' => 1, 'b' => 2, 'c' => 3, 'd' => 4], ['d' => 4], ['c' => 3]));
 
 //* 71 array_merge
 //array_merge — Merge one or more arrays
@@ -1123,7 +1132,7 @@ function _array_slice(array $array, int $offset, ?int $length = null): array
 }
 $input = array("a", "b", "c", "d", "e");
 
-print_r(_array_slice($input, 2));
+// print_r(_array_slice($input, 2));
 
 //TODO 82 array_splice
 //array_splice — Remove a portion of the array and replace it with something else
