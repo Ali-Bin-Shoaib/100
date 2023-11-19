@@ -739,17 +739,45 @@ function _array_chunk(array $array, int $length): array
 // print_r(array_chunk($array, 3));
 // echo '<br>';
 // print_r(_array_chunk($array, 3));
-//TODO 58 array_count_values
+//* 58 array_count_values
 //array_count_values — Counts the occurrences of each distinct value in an array
-//array_count_values() returns an array using the values of array (which must be ints or strings) as keys and their frequency in array as values.
-//array_count_values(array $array): array
+//array_count_values() returns an array using the values of array (which must be ints or strings) as keys and their 
+//frequency in array as values.
+function _array_count_values(array $array): array
+{
+    //[0,1,2,3,4,5,6,7,8,9]
+    //[1,2,2,3,3,3,4,4,4,4]
+    $result = [];
+    $indexes = [];
+    if (!_empty($array)) {
+        for ($i = 0; $i < _count($array); $i++) {
+            if (!in_array($array[$i], $indexes)) {
+                $indexes[] = $array[$i];
+            }
+        }
+        // print_r($indexes);
+        for ($i = 0; $i < _count($indexes); $i++) {
+            for ($j = 0; $j < _count($array); $j++) {
+                if ($indexes[$i] === $array[$j]) {
+                    @$result[$indexes[$i]]++;
+                }
+            }
+        }
+    }
+    return $result;
+}
+// print_r(array_count_values([1, 2, 2, 3, 3, 3, 4, 4, 4, 4]));
+// echo '<hr>';
+// echo "<br>";
+// print_r(_array_count_values([1, 2, 2, 3, 3, 3, 4, 4, 4, 4]));
 //TODO 59 array_diff_key
 //array_diff_key — Computes the difference of arrays using keys for comparison
 //Returns an array containing all the entries from array whose keys are absent from all of the other arrays.
 //array_diff_key(array $array, array ...$arrays): array
 //TODO 60 array_diff
 //array_diff — Computes the difference of arrays
-//Returns an array containing all the entries from array that are not present in any of the other arrays. Keys in the array array are preserved.
+//Returns an array containing all the entries from array that are not present in any of the other arrays. 
+//Keys in the array array are preserved.
 //array_diff(array $array, array ...$arrays): array
 //TODO 61 array_fill_keys
 //array_fill_keys — Fill an array with values, specifying keys
@@ -1115,7 +1143,7 @@ the key and the contents of the variable become the value for that key. In short
 
 //TODO 90 in_array
 //in_array — Checks if a value exists in an array
-//in_array(mixed $toSearch, array $values, bool $strict = false): bool
+//in_array(mixed $toSearch, array $values, bool $strict = false): bool{}
 
 
 //TODO 91 krsort
@@ -1148,21 +1176,22 @@ function _shuffle(array &$array): true
             if (!in_array($randomIndex, $shuffledIndexes))
                 _array_push($shuffledIndexes, $randomIndex);
         }
-        print_r($shuffledIndexes);
         for ($i = 0; $i < $arrayLength; $i++) {
             _array_push($result, $array[$shuffledIndexes[$i]]);
         }
         $array = $result;
         return true;
     }
-    // return false;
+    throw new Exception('array is empty');
 }
-$test = [1, 2, 3];
-_shuffle($test);
-echo_r(...$test);
+// $test = [1, 2, 3];
+// _shuffle($test);
+// echo_r(...$test);
 //TODO 95 sort
 //sort — Sort an array in ascending order
-//sort(array &$array, int $flags = SORT_REGULAR): true
+//sort(array &$array): true
+$test = [1, 2, 3];
+// sort($test);
 
 
 //TODO 96 uasort
@@ -1213,3 +1242,4 @@ function _strstr_index(string $value, string $toSearch): int
 }
 // echo_r(_strstr_index('0123ali', 'ali'));
 //* 100
+// getYear
