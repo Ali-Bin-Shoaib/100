@@ -1104,17 +1104,26 @@ function _array_shift(array &$array): mixed
 // $test = [1, 2, 3];
 // _array_shift($test);
 // print_r($test);
-//TODO 81 array_slice
+//* 81 _array_slice
 //array_slice() returns the sequence of elements from the array array as specified by the offset and length parameters.
-/*
+
+// function _array_slice(array $array,int $offset,?int $length = null,bool $preserve_keys = false): array{
+function _array_slice(array $array, int $offset, ?int $length = null): array
+{
+
+    $result = [];
+    $i = 0;
+    $start = $offset;
+    while ($length !== null ? $i < $length : $i < _count($array) - $offset) {
+        _array_push($result, $array[$start]);
+        $start++;
+        $i++;
+    }
+    return $result;
+}
 $input = array("a", "b", "c", "d", "e");
 
-$output = array_slice($input, 2);      // returns "c", "d", and "e"
-$output = array_slice($input, -2, 1);  // returns "d"
-$output = array_slice($input, 0, 3);   // returns "a", "b", and "c"
-
-*/
-//array_slice(array $array,int $offset,?int $length = null,bool $preserve_keys = false): array
+print_r(_array_slice($input, 2));
 
 //TODO 82 array_splice
 //array_splice — Remove a portion of the array and replace it with something else
