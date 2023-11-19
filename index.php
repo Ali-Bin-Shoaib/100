@@ -808,19 +808,25 @@ function _array_diff_key(array $array, array ...$arrays): array
 //TODO 65 array_key_exists
 //array_key_exists — Checks if the given key or index exists in the array
 //array_key_exists(string|int $key, array $array): bool
-//TODO 66 array_key_first
+//* 66 array_key_first
 //array_key_first — Gets the first key of an array
-//array_key_first(array $array): int|string|null
+function _array_key_first(array $array): int|string|null
+{
+    foreach ($array as $key => $value)
+        return $key;
+    return null;
+}
+// echo_r(_array_key_first(['a' => 1, 'b' => 2, 'c' => 3]));
 
-//TODO 67 array_key_last
+//* 67 array_key_last
 //array_key_last — Gets the last key of an array
 function _array_key_last(array $array): int|string|null
 {
-    return array_keys($array)[count($array) - 1];
+    return _array_keys($array)[count($array) - 1];
 }
 // echo_r(_array_key_last(['a'=>1,'b'=>2,'c'=>3]));
 //* 68 array_keys
-function _array_keys(array $array, mixed $filter_value, bool $strict = false): array
+function _array_keys(array $array, mixed $filter_value = null, bool $strict = false): array
 {
     $result = [];
     if (!_empty($array)) {
