@@ -801,10 +801,18 @@ function _array_diff_key(array $array, array ...$arrays): array
 //array_flip — Exchanges all keys with their associated values in an array
 //array_flip() returns an array in flip order, i.e. keys from array become values and values from array become keys.
 //array_flip(array $array): array
-//TODO 64 array_is_list
+//* 64 array_is_list
 //array_is_list — Checks whether a given array is a list
 //Determines if the given array is a list. An array is considered a list if its keys consist of consecutive numbers from 0 to count($array)-1.
-//array_is_list(array $array): bool
+function _array_is_list(array $array): bool
+{
+    $i = 0;
+    foreach ($array as $key => $value) {
+        $key === $i ? $i++ : '';
+    }
+    return (_count($array)) === $i ? true : false;
+}
+// echo_r(_array_is_list([1, 2, 3, 4, 5]));
 //* 65 array_key_exists
 //array_key_exists — Checks if the given key or index exists in the array
 function _array_key_exists(string|int $key, array $array): bool
