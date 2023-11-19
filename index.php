@@ -794,12 +794,25 @@ function _array_diff_key(array $array, array ...$arrays): array
 //TODO 61 array_fill_keys
 //array_fill_keys — Fill an array with values, specifying keys
 //array_fill_keys(array $keys, mixed $value): array
-//TODO 62 array_filter 
+//* 62 array_filter 
 //array_filter — Filters elements of an array using a callback function
-//array_filter(array $array, ?callable $callback = null): array
+function _array_filter(array $array, ?callable $callback = null): array
+{
+
+    $result = [];
+    foreach ($array as $item) {
+        $callback($item) ? array_push($result, $callback($item)) : '';
+    }
+    return $result;
+}
+
+// function getEvenNumbers($num)
+// {
+//     return $num % 2 == 0 ? $num : null;
+// }
+// print_r(_array_filter([1, 2, 3], 'getEvenNumbers'));
 //* 63 array_flip
 //array_flip — Exchanges all keys with their associated values in an array
-//array_flip() returns an array in flip order, i.e. keys from array become values and values from array become keys.
 function _array_flip(array $array): array
 {
     return _array_combine(_array_keys($array), _array_values($array));
