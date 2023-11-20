@@ -644,7 +644,7 @@ function _strstr(string $value, string $toSearch): string|false
 {
     _throw_null_exception($value, $toSearch);
     if (!_empty($value) && !_empty($toSearch))
-        $appearAt = _strstr_index($value, $toSearch);
+        $appearAt = _strpos($value, $toSearch);
     if ($appearAt != -1) {
         $temp = '';
         for ($i = $appearAt; $i < _strlen($value); $i++) {
@@ -1203,39 +1203,12 @@ function _array(mixed ...$values): array
 }
 // echo_r(..._array(1, 2, 3,'uuu'));
 
-//* 87 arsort
-//arsort — Sort an array in descending order and maintain index association
-
-function _arsort(array &$array, int $flags = SORT_REGULAR): true
-{
-    for ($i = 0; $i < count($array); $i++) {
-        for ($j = 0; $j < count($array); $j++) {
-            if ($array[$j] < $array[$i]) {
-                $temp = $array[$i];
-                $array[$i] = $array[$j];
-                $array[$j] = $temp;
-            }
-        }
-    }
-
-    return true;
-}
-// $arr = [1, 5, 6, 2, 3, 4];
-// asort($arr);
-// print_r($arr);
 
 
 
 //* 89 compact
 //compact — Create array containing variables and their values
-/*
-Creates an array containing variables and their values.
 
-For each of these, compact() looks for a variable with that name in the current symbol table and adds it to the output array such that the variable name becomes 
-the key and the contents of the variable become the value for that key. In short, it does the opposite of extract().
-
-
-*/
 function _compact(array|string $var_name): array
 {
     $result = [];
@@ -1293,13 +1266,51 @@ function _krsort(array &$array, int $flags = SORT_REGULAR): true
 
 //* 92 ksort
 //ksort — Sort an array by key in ascending order
-//ksort(array &$array, int $flags = SORT_REGULAR): true
+function _ksort(array &$array, int $flags = SORT_REGULAR): true
+{
+    $result = [];
+    $keys = _array_keys($array);
+    for ($i = 0; $i < count($keys); $i++) {
+        for ($j = 0; $j < count($keys); $j++) {
+            if ($keys[$j] > $keys[$i]) {
+                $temp = $keys[$i];
+                $keys[$i] = $keys[$j];
+                $keys[$j] = $temp;
+            }
+        }
+    }
+    for ($i = 0; $i < count($array); $i++) {
+        $result[$keys[$i]] = $array[$keys[$i]];
+    }
+    $array = $result;
+    return true;
+}
+// $arr = [5 => 1, 3 => 2, 1 => 8, 0 => 5];
+// _ksort($arr);
+// print_r($arr);
+
 
 
 
 //* 93 rsort
 //rsort — Sort an array in descending order z -> a
-//rsort(array &$array, int $flags = SORT_REGULAR): true
+function _rsort(array &$array, int $flags = SORT_REGULAR): true
+{
+    for ($i = 0; $i < count($array); $i++) {
+        for ($j = 0; $j < count($array); $j++) {
+            if ($array[$j] < $array[$i]) {
+                $temp = $array[$i];
+                $array[$i] = $array[$j];
+                $array[$j] = $temp;
+            }
+        }
+    }
+
+    return true;
+}
+// $arr = [1, 5, 6, 2, 3, 4];
+// _rsort($arr);
+// print_r($arr);
 
 
 //* 94 shuffle
@@ -1334,31 +1345,9 @@ function _shuffle(array &$array): true
 // sort($test);
 
 
-//* 96 uasort
-//uasort — Sort an array with a user-defined comparison function and maintain index association -5 -> 5 sort array by value
-
-//Sorts array in place such that its keys maintain their correlation with the values they are associated with, using a user-defined comparison function.
-//This is used mainly when sorting associative arrays where the actual element order is significant.
-
-
-//uasort(array &$array, callable $callback): true
-
-//* 97 uksort
-//uksort — Sort an array by keys using a user-defined comparison function - Sorts array in place by keys using a user-supplied comparison function to determine the order.
-
-
-//uksort(array &$array, callable $callback): true
-
-
-// 98 usort
-//usort — Sort an array by values using a user-defined comparison function
-//usort(array &$array, callable $callback): true
-
-
-
-//* 99 _strstr_index
+//* 99 _strpos
 // return the index of the first occurrence of a string.
-function _strstr_index(string $value, string $toSearch): int
+function _strpos(string $value, string $toSearch): int
 {
     $temp = '';
     $appearAt = -1;
@@ -1430,3 +1419,4 @@ function _rand(int $min, int $max): int
     return (int)((int)(microtime(true)) % $max);
 }
 // echo _rand(0, 5);
+//* 108 
