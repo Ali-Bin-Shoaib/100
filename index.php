@@ -1,4 +1,5 @@
 <?php
+//? 89 function
 //* 1 strCountWords
 function _str_word_count(string $value): string
 {
@@ -226,15 +227,30 @@ function _is_array(array $array): bool
     return _isset($array) ? true : false;
 }
 // echo_r(_is_array([1,2,3]), is_array([1, 2, 3]));
-//TODO 14  _str_replace
+//* 14  _str_replace
+// function _str_replace(string $search, string $replace, string $subject): string
 function _str_replace(string $search, string $replace, string $subject): string
 {
-    _throw_null_exception($search, $replace, $subject);
-    if (_str_contains($subject, $search)) {
+    $temp = '';
+    for ($i = 0; $i < strlen($subject); $i++) {
+        $isMatch = true;
+        for ($j = 0; $j < strlen($search); $j++) {
+            if ($subject[$i + $j] !== $search[$j]) {
+                $isMatch = false;
+                break;
+            }
+        }
+        if ($isMatch) {
+            $temp .= $replace;
+            $i += strlen($search) - 1;
+        } else {
+            $temp .= $subject[$i];
+        }
     }
-    return "";
+    return $temp;
 }
-// echo_r(_str_replace('ali', 'ahmed', 'my name is ali'), str_replace('ali', 'ahmed', 'my name is ali'));
+
+// echo_r(_str_replace('ali', 'ahmed', 'ali\'s friend name is ali'), str_replace('ali', 'ahmed', 'ali\'s friend name is ali'));
 //* 15 _is_numeric
 function _is_numeric(mixed $value): bool
 {
@@ -477,7 +493,7 @@ function _join(string $separator, array $values): string
     }
     throw new Exception('array is empty');
 }
-// echo_r(join(' ', ['test', 'this', 'function']), _join(' ', ['test', 'this', 'function']));
+// echo_r(join(' ', ['test', 'this', ]), _join(' ', ['test', 'this', '']));
 
 //* 36 _str_capitalize 
 function _str_capitalize(string $value): string
