@@ -1,5 +1,5 @@
 <?php
-//? 95 functions
+//? 96 functions
 //* 1 strCountWords
 function _str_word_count(string $value): string
 {
@@ -53,7 +53,6 @@ function _str_split(string $value): array
 // print_r(str_split('do ok'));
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-//none issues : don't split last char if separator is before the last char.
 //* 4 strSplit
 function _explode_by_char(string $separator, string $value): array
 {
@@ -99,7 +98,6 @@ function _strIndexOfChar(string $char, string $value): int
 // echo_r(_strIndexOfChar('a', 'bba'));
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-//! bug when pushing an element with int zero value
 //* 6 arrayPush
 function _array_push(array &$array, mixed ...$values)
 {
@@ -656,7 +654,6 @@ function _strstr(string $value, string $toSearch): string|false
     return $temp;
 }
 // echo_r(_strstr('check if ali is ok.', 'if'), strstr('check if ali is ok.', 'if'));
-//! bug: unexpected behavior when toSearch starts with space.
 //* 46 substr_count
 //substr_count — Count the number of substring occurrences
 function  _substr_count(string $value, string $toSearch, int $offset = 0, ?int $length = null): int
@@ -683,12 +680,6 @@ function  _substr_count(string $value, string $toSearch, int $offset = 0, ?int $
     return $appearanceCount;
 }
 // echo _substr_count('ali ali ali is my name ', 'ali');
-//TODO 47 substr_replace
-//substr_replace — Replace text within a portion of a string
-//substr_replace(array|string $string,array|string $replace,array|int $offset,array|int|null $length = null): string|array
-//* 48 substr
-//substr — Return part of a string -Returns the portion of string specified by the offset and length parameters.
-//substr(string $string, int $offset, ?int $length = null): string
 //* 49 _abs
 //Returns the absolute value of num.
 function _abs(int|float $num): int|float
@@ -1080,11 +1071,11 @@ function _array_reduce(array $array, callable $callback, mixed $initial = null):
 
 // $arr = [1, 2, 3, 4, 5];
 // echo _array_reduce($arr, 'sum');
-function sum($sum, $item)
-{
-    $sum += $item;
-    return $sum;
-}
+// function sum($sum, $item)
+// {
+//     $sum += $item;
+//     return $sum;
+// }
 //* 77 _uc_first
 function _uc_first(string $string): string
 {
@@ -1177,13 +1168,6 @@ function _array_sum(array $array): int|float
 // echo _array_sum([1,2,3,4]);
 //* 84 array_unique
 //array_unique — Removes duplicate values from an array
-/*
-Takes an input array and returns a new array without duplicate values.
-Note that keys are preserved. If multiple elements compare equal under the given flags, 
-then the key and value of the first equal element will be retained.
-*/
-
-
 function _array_unique(array $array): array
 {
     $result = [];
@@ -1195,8 +1179,6 @@ function _array_unique(array $array): array
 // print_r(_array_unique([1, 2, 3, 1, 2, 3, 4]));
 //* 85 array_values
 //array_values — Return all the values of an array
-
-
 function _array_values(array $array): array
 {
     $result = [];
@@ -1285,8 +1267,29 @@ function _in_array(mixed $toSearch, array $array, bool $strict = false): bool
 
 //* 91 krsort
 //krsort — Sort an array by key in descending order d -> c -> b -> a
-//krsort(array &$array, int $flags = SORT_REGULAR): true
+function _krsort(array &$array, int $flags = SORT_REGULAR): true
+{
+    $result = [];
+    $keys = _array_keys($array);
+    for ($i = 0; $i < count($keys); $i++) {
+        for ($j = 0; $j < count($keys); $j++) {
+            if ($keys[$j] < $keys[$i]) {
+                $temp = $keys[$i];
+                $keys[$i] = $keys[$j];
+                $keys[$j] = $temp;
+            }
+        }
+    }
+    for ($i = 0; $i < count($array); $i++) {
+        $result[$keys[$i]] = $array[$keys[$i]];
+    }
+    $array = $result;
+    return true;
+}
 
+// $arr = [5 => 1, 3 => 2, 1 => 8, 0 => 5];
+// _krsort($arr);
+// print_r($arr);
 
 //* 92 ksort
 //ksort — Sort an array by key in ascending order
