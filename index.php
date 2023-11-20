@@ -1,5 +1,5 @@
 <?php
-//? 98 functions
+//? 101 functions
 //* 1 strCountWords
 function _str_word_count(string $value): string
 {
