@@ -5,3 +5,15 @@ home.php
 test.php
 test.php
 test.php
+test/file1.txt
+test/file2.txt
+test/folder1/file1.txt
+test/folder1/subfolder1/file1.txt
+test/folder1/subfolder1/file2.txt
+test/folder1/subfolder1/subfolder2/file1.txt
+test/folder1/subfolder1/subfolder2/file2.txt
+test/folder2/file1.txt
+test/folder2/subfolder1/file1.txt
+test/folder2/subfolder1/file2.txt
+test/folder2/subfolder1/subfolder2/file1.txt
+test/folder2/subfolder1/subfolder2/file2.txt

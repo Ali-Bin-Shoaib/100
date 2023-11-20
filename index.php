@@ -610,8 +610,10 @@ function _str_shuffle(string $string): string
         $stringLength = _strlen($string);
         $shuffledIndexes = [];
         $temp = '';
-        while (_count($shuffledIndexes) < _strlen($string)) {
+        while (count($shuffledIndexes) < _strlen($string)) {
             $randomIndex = rand(0, _strlen($string) - 1);
+            // $randomIndex = _rand( _strlen($string) - 1);
+
             if (!_in_array($randomIndex, $shuffledIndexes))
                 _array_push($shuffledIndexes, $randomIndex);
         }
@@ -639,13 +641,37 @@ function _strstr(string $value, string $toSearch): string|false
     return $temp;
 }
 // echo_r(_strstr('check if ali is ok.', 'if'), strstr('check if ali is ok.', 'if'));
-//TODO 46 substr_count
+//! bug: unexpected behavior when toSearch starts with space.
+//* 46 substr_count
 //substr_count — Count the number of substring occurrences
-// substr_count( string $haystack, string $needle,int $offset = 0,?int $length = null): int
+function  _substr_count(string $value, string $toSearch, int $offset = 0, ?int $length = null): int
+{
+    $appearanceCount = 0;
+    $temp = '';
+    for ($i = 0; $i < _strlen($value); $i++) {
+        for ($j = 0; $j < _strlen($toSearch); $j++) {
+            if ($toSearch[$j] == $value[$i]) {
+                $temp .= $value[$i];
+                $i++;
+                if ($i >= _strlen($value))
+                    break;
+                if ($temp === $toSearch) {
+                    $appearanceCount++;
+                    $temp = '';
+                }
+            } else {
+                $temp = '';
+                continue;
+            }
+        }
+    }
+    return $appearanceCount;
+}
+// echo _substr_count('ali ali ali is my name ', 'ali');
 //TODO 47 substr_replace
 //substr_replace — Replace text within a portion of a string
 //substr_replace(array|string $string,array|string $replace,array|int $offset,array|int|null $length = null): string|array
-//TODO 48 substr
+//* 48 substr
 //substr — Return part of a string -Returns the portion of string specified by the offset and length parameters.
 //substr(string $string, int $offset, ?int $length = null): string
 //* 49 _abs
@@ -897,14 +923,10 @@ function _array_keys(array $array, mixed $filter_value = null, bool $strict = fa
 // print_r(_array_keys(['a' => 1, 'b' => 2, 'c' => 3], 2));
 //* 69 array_map
 //array_map — Applies the callback to the elements of the given arrays
-//array_map() returns an array containing the results of applying the callback to the corresponding value of array 
-//(and arrays if more arrays are provided) used as arguments for the callback. 
-//The number of parameters that the callback function accepts should match the number of arrays passed to array_map(). 
-//Excess input arrays are ignored. An ArgumentCountError is thrown if an insufficient number of arguments is provided.
 function _array_map(?callable $callback, array $array, array ...$arrays): array
 {
     $result = [];
-    if(_empty($arrays)){
+    if (_empty($arrays)) {
         foreach ($array as $item) {
             $temp = $callback($item);
             array_push($result, $temp);
@@ -1158,7 +1180,7 @@ function _array_slice(array $array, int $offset, ?int $length = null): array
     }
     return $result;
 }
-$input = array("a", "b", "c", "d", "e");
+// $input = array("a", "b", "c", "d", "e");
 
 // print_r(_array_slice($input, 2));
 
@@ -1182,36 +1204,6 @@ $input = array("red", "green", "blue", "yellow");
 array_splice($input, -1, 1, array("black", "maroon"));
 var_dump($input);
 
-array(2) {
-  [0]=>
-  string(3) "red"
-  [1]=>
-  string(5) "green"
-}
-array(2) {
-  [0]=>
-  string(3) "red"
-  [1]=>
-  string(6) "yellow"
-}
-array(2) {
-  [0]=>
-  string(3) "red"
-  [1]=>
-  string(6) "orange"
-}
-array(5) {
-  [0]=>
-  string(3) "red"
-  [1]=>
-  string(5) "green"
-  [2]=>
-  string(4) "blue"
-  [3]=>
-  string(5) "black"
-  [4]=>
-  string(6) "maroon"
-}
 
  */
 
@@ -1321,18 +1313,18 @@ function _in_array(mixed $toSearch, array $array, bool $strict = false): bool
 }
 // echo_r(in_array(1,[5,4,3,2,1]), _in_array(1, [5, 4, 3, 2, 1]));
 
-//TODO 91 krsort
+//* 91 krsort
 //krsort — Sort an array by key in descending order d -> c -> b -> a
 //krsort(array &$array, int $flags = SORT_REGULAR): true
 
 
-//TODO 92 ksort
+//* 92 ksort
 //ksort — Sort an array by key in ascending order
 //ksort(array &$array, int $flags = SORT_REGULAR): true
 
 
 
-//TODO 93 rsort
+//* 93 rsort
 //rsort — Sort an array in descending order z -> a
 //rsort(array &$array, int $flags = SORT_REGULAR): true
 
@@ -1362,14 +1354,14 @@ function _shuffle(array &$array): true
 // $test = [1, 2, 3];
 // _shuffle($test);
 // echo_r(...$test);
-//TODO 95 sort
+//* 95 sort
 //sort — Sort an array in ascending order
 //sort(array &$array): true
 // $test = [1, 2, 3];
 // sort($test);
 
 
-//TODO 96 uasort
+//* 96 uasort
 //uasort — Sort an array with a user-defined comparison function and maintain index association -5 -> 5 sort array by value
 
 //Sorts array in place such that its keys maintain their correlation with the values they are associated with, using a user-defined comparison function.
@@ -1378,14 +1370,14 @@ function _shuffle(array &$array): true
 
 //uasort(array &$array, callable $callback): true
 
-//TODO 97 uksort
+//* 97 uksort
 //uksort — Sort an array by keys using a user-defined comparison function - Sorts array in place by keys using a user-supplied comparison function to determine the order.
 
 
 //uksort(array &$array, callable $callback): true
 
 
-//TODO 98 usort
+// 98 usort
 //usort — Sort an array by values using a user-defined comparison function
 //usort(array &$array, callable $callback): true
 
@@ -1416,5 +1408,52 @@ function _strstr_index(string $value, string $toSearch): int
     return $appearAt;
 }
 // echo_r(_strstr_index('0123ali', 'ali'));
-//* 100
-// getYear
+//* 100 _year
+function _year($date): string
+{
+    return date("Y", strtotime($date));
+}
+// echo _year('2021/05/06');
+
+//* 101 _month
+function _month($date): int
+{
+    return (int)date("m", strtotime($date));
+}
+// echo _month('2021/05/06');
+//* 102 _day
+function _day($date): int
+{
+    return (int)date("d", strtotime($date));
+}
+// echo _day('2021/05/06');
+//* 103 _hour
+function _hour()
+{
+    return (int)date("h");
+}
+// echo _hour();
+//* 104 _minute
+function _minute()
+{
+    return (int)date("i");
+}
+// echo _minute();
+//* 105 _second
+function _second()
+{
+    return (int)date("s");
+}
+// echo _second();
+//* 106 _is_morning
+function _is_morning()
+{
+    return date('a') === 'am' ? true : false;
+}
+// echo _is_morning();
+//* 107 _rand
+function _rand(int $max): int
+{
+    return (int)((time() * 1000) % $max);
+}
+// echo _rand(5);
