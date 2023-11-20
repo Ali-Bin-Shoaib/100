@@ -1,5 +1,5 @@
 <?php
-//? 97 functions
+//? 98 functions
 //* 1 strCountWords
 function _str_word_count(string $value): string
 {
@@ -1437,3 +1437,21 @@ function _sort(array &$array, int|null $flags = SORT_REGULAR): bool
 // $arr = [5, 4, 7, 8, 9, 1, 0, 4, 5, 2, 5, 7];
 // _sort($arr);
 // print_r($arr);
+//* 109 intval(): Converts a string to an integer.
+function _intval(mixed $value): int
+{
+    return (int)$value;
+}
+// echo _intval('55') + 5;
+//* 110 floatval(): Converts a string to a float.
+function _floatval(mixed $value): float
+{
+    return (float)$value;
+}
+
+//* 111 boolval(): Converts a string to a boolean.
+function _boolval(mixed $value): float
+{
+    return (bool)$value;
+}
+echo _boolval(false);
