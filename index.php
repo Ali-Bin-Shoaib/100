@@ -1428,32 +1428,32 @@ function _day($date): int
 }
 // echo _day('2021/05/06');
 //* 103 _hour
-function _hour()
+function _hour($time, $h = true)
 {
-    return (int)date("h");
+    return (int)date($h ? 'h' : 'H', strtotime($time));
 }
-// echo _hour();
+// echo _hour('2023-11-20 14:30:45');
 //* 104 _minute
-function _minute()
+function _minute($time)
 {
-    return (int)date("i");
+    return (int)date('i', strtotime($time));
 }
-// echo _minute();
+// echo _minute('2023-11-20 14:30:45');
 //* 105 _second
-function _second()
+function _second($time)
 {
-    return (int)date("s");
+    return (int)date("s", strtotime($time));
 }
-// echo _second();
+// echo _second('2023-11-20 14:30:45');
 //* 106 _is_morning
-function _is_morning()
+function _is_morning($time)
 {
-    return date('a') === 'am' ? true : false;
+    return date('a', strtotime($time)) === 'am' ? true : false;
 }
-// echo _is_morning();
+// echo _is_morning('2023-11-20 1:30:45');
 //* 107 _rand
-function _rand(int $max): int
+function _rand(int $min, int $max): int
 {
-    return (int)((time() * 1000) % $max);
+    return (int)((int)(microtime(true)) % $max);
 }
-// echo _rand(5);
+// echo _rand(0, 5);
