@@ -1,5 +1,5 @@
 <?php
-//? 96 functions
+//? 97 functions
 //* 1 strCountWords
 function _str_word_count(string $value): string
 {
@@ -1419,4 +1419,21 @@ function _rand(int $min, int $max): int
     return (int)((int)(microtime(true)) % $max);
 }
 // echo _rand(0, 5);
-//* 108 
+//* 108 sort
+function _sort(array &$array, int|null $flags = SORT_REGULAR): bool
+{
+    for ($i = 0; $i < count($array); $i++) {
+        for ($j = 0; $j < count($array); $j++) {
+            if ($array[$j] > $array[$i]) {
+                $temp = $array[$i];
+                $array[$i] = $array[$j];
+                $array[$j] = $temp;
+            }
+        }
+    }
+
+    return true;
+}
+// $arr = [5, 4, 7, 8, 9, 1, 0, 4, 5, 2, 5, 7];
+// _sort($arr);
+// print_r($arr);
