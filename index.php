@@ -1,5 +1,5 @@
 <?php
-//? 91 functions
+//? 93 functions
 //* 1 strCountWords
 function _str_word_count(string $value): string
 {
@@ -968,39 +968,40 @@ function _array_map(?callable $callback, array $array, array ...$arrays): array
 // $arr = [3, 2, 2, 2, 2, 2, 2, 2, 2];
 // $arr3 = [2, 3, 4, 5, 6, 7, 8, 9, 10];
 // print_r(_array_map('_pow', $arr3,$arr));
-//TODO 70 array_merge_recursive
+//* 70 array_merge_recursive
 //array_merge_recursive — Merge one or more arrays recursively
+function _array_merge_recursive(array ...$arrays): array
+{
+    $result = [];
 
-//array_merge_recursive(array ...$arrays): array
-// function _array_merge_recursive(array ...$arrays): array
-// {
-//     $allArrays = [];
 
-//     foreach ($arrays as $arr) {
-//         if (is_array($arr)) {
-//             return _array_merge_recursive($arr);
-//         } else {
-//             $allArrays = array_merge($allArrays, $arr);
-//         }
-//     }
 
-//     return $allArrays;
-// }
-// print_r(_array_merge_recursive(['a' => 1, 'b' => 2, 'c' => 3, 'd' => 4], ['d' => 4], ['c' => 3]));
+    foreach ($arrays as  $array) {
+        foreach ($array as $key => $value) {
+            if (is_array($value))
+                $result[$key] = _array_merge_recursive($value);
+            else
+                $result[$key] = $value;
+        }
+    }
+
+    return $result;
+}
+// print_r(_array_merge_recursive(['a' => 1, 'b' => 2, 'c' => 3, 'd' => 4, 'e' => [9, 99, 999]], ['d' => 4], ['c' => 5]));
 
 //* 71 array_merge
 //array_merge — Merge one or more arrays
 //Merges the elements of one or more arrays together so that the values of one are appended to the end of the previous one. 
 function _array_merge(array ...$arrays): array
 {
-    $allArrays = [];
+    $result = [];
     foreach ($arrays as $arr) {
         if (_is_array($arr))
             foreach ($arr as $key => $val) {
-                $allArrays[$key] = $val;
+                $result[$key] = $val;
             }
     }
-    return $allArrays;
+    return $result;
 }
 // echo "<br>";
 // print_r(_array_merge(['a' => 1, 'b' => 2, 'c' => 3, 'd' => 4], ['d' => 4], ['c' => 3]));
@@ -1150,31 +1151,6 @@ function _array_slice(array $array, int $offset, ?int $length = null): array
 
 // print_r(_array_slice($input, 2));
 
-//TODO 82 array_splice
-//array_splice — Remove a portion of the array and replace it with something else
-//Removes the elements designated by offset and length from the array array, and replaces them with the elements of the replacement array, if supplied.
-/*
- $input = array("red", "green", "blue", "yellow");
-array_splice($input, 2);
-var_dump($input);
-
-$input = array("red", "green", "blue", "yellow");
-array_splice($input, 1, -1);
-var_dump($input);
-
-$input = array("red", "green", "blue", "yellow");
-array_splice($input, 1, count($input), "orange");
-var_dump($input);
-
-$input = array("red", "green", "blue", "yellow");
-array_splice($input, -1, 1, array("black", "maroon"));
-var_dump($input);
-
-
- */
-
-
-//array_splice(array &$array,int $offset,?int $length = null,mixed $replacement = []): array
 
 //* 83 array_sum
 //array_sum — Calculate the sum of values in an array
@@ -1242,7 +1218,8 @@ Sorts array in place in descending order, such that its keys maintain their corr
 This is used mainly when sorting associative arrays where the actual element order is significant.
 */
 //arsort(array &$array, int $flags = SORT_REGULAR): true
-
+$arr=[1,5,6,2,3,4];
+print_r(arsort($arr));
 
 //TODO 88 asort
 //asort — Sort an array in ascending order and maintain index association
