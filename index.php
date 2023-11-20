@@ -895,32 +895,60 @@ function _array_keys(array $array, mixed $filter_value = null, bool $strict = fa
     return $result;
 }
 // print_r(_array_keys(['a' => 1, 'b' => 2, 'c' => 3], 2));
-//TODO 69 array_map
+//* 69 array_map
 //array_map — Applies the callback to the elements of the given arrays
 //array_map() returns an array containing the results of applying the callback to the corresponding value of array 
 //(and arrays if more arrays are provided) used as arguments for the callback. 
 //The number of parameters that the callback function accepts should match the number of arrays passed to array_map(). 
 //Excess input arrays are ignored. An ArgumentCountError is thrown if an insufficient number of arguments is provided.
-//array_map(?callable $callback, array $array, array ...$arrays): array
+function _array_map(?callable $callback, array $array, array ...$arrays): array
+{
+    $result = [];
+    if(_empty($arrays)){
+        foreach ($array as $item) {
+            $temp = $callback($item);
+            array_push($result, $temp);
+        }
+        return $result;
+    }
+    foreach ($array as $item) {
+        if (!empty($arrays)) {
+            foreach ($arrays as $arr) {
+                if (!empty($arr)) {
+                    foreach ($arr as $val)
+                        $temp = $callback($item, $val);
+                    array_push($result, $temp);
+                } else {
+                    $temp = $callback($item, $arr);
+                    array_push($result, $temp);
+                }
+            }
+        }
+    }
+    return $result;
+}
+// $arr = [3, 2, 2, 2, 2, 2, 2, 2, 2];
+// $arr3 = [2, 3, 4, 5, 6, 7, 8, 9, 10];
+// print_r(_array_map('_pow', $arr3,$arr));
 //TODO 70 array_merge_recursive
 //array_merge_recursive — Merge one or more arrays recursively
 
 //array_merge_recursive(array ...$arrays): array
-function _array_merge_recursive(array ...$arrays): array
-{
-    $allArrays = [];
+// function _array_merge_recursive(array ...$arrays): array
+// {
+//     $allArrays = [];
 
-    foreach ($arrays as $arr) {
-        if (is_array($arr)) {
-            return _array_merge_recursive($arr);
-        } else {
-            $allArrays = array_merge($allArrays, $arr);
-        }
-    }
+//     foreach ($arrays as $arr) {
+//         if (is_array($arr)) {
+//             return _array_merge_recursive($arr);
+//         } else {
+//             $allArrays = array_merge($allArrays, $arr);
+//         }
+//     }
 
-    return $allArrays;
-}
-print_r(_array_merge_recursive(['a' => 1, 'b' => 2, 'c' => 3, 'd' => 4], ['d' => 4], ['c' => 3]));
+//     return $allArrays;
+// }
+// print_r(_array_merge_recursive(['a' => 1, 'b' => 2, 'c' => 3, 'd' => 4], ['d' => 4], ['c' => 3]));
 
 //* 71 array_merge
 //array_merge — Merge one or more arrays
