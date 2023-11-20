@@ -1,5 +1,5 @@
 <?php
-//? 89 function
+//? 91 functions
 //* 1 strCountWords
 function _str_word_count(string $value): string
 {
@@ -99,7 +99,7 @@ function _strIndexOfChar(string $char, string $value): int
 // echo_r(_strIndexOfChar('a', 'bba'));
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-//! bug when pushing an element whit int zero value
+//! bug when pushing an element with int zero value
 //* 6 arrayPush
 function _array_push(array &$array, mixed ...$values)
 {
@@ -108,11 +108,11 @@ function _array_push(array &$array, mixed ...$values)
         $array[_count($array)] = $item;
     }
 }
-// $testArray = [0, 1];
-// $testArray1 = [0, 1];
+// $testArray = [];
+// $testArray1 = [];
 // $toPush = [2, 3, 4];
-// _array_push($testArray, 2);
-// array_push($testArray1, 2);
+// _array_push($testArray, 0,1,2);
+// array_push($testArray1, 0,1,2);
 // echo_r(...$testArray, ...$testArray1);
 // array_push($testArray1, $toPush);
 // _array_push($testArray, $toPush);
@@ -134,7 +134,7 @@ function _str_count_char_appearance(string $toSearch, string $value): int
     }
     return $appearanceCount;
 }
-// echo_r(strFindCharAppearance('a', 'aa bb bb aa'));
+// echo_r(_str_count_char_appearance('a', 'aa bb dd aa'));
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -177,10 +177,10 @@ function _count(array $array): int
 {
     if (!_isset($array))
         throw new Exception("provided value is null. value must be an array.");
+    if (_empty($array)) return 0;
     $counter = 0;
-    if (_empty($array)) return $counter;
     foreach ($array as $key => $value) {
-        @$array[$key] ? $counter++ : '';
+        _isset($array[$key]) ? $counter++ : '';
     }
     return $counter;
 }
@@ -1072,56 +1072,6 @@ function _array_rand(array $array, int $num = 1): int|string|array
 
 //array_reduce(array $array, callable $callback, mixed $initial = null): mixed
 
-//TODO 76 array_replace_recursive
-//array_replace_recursive — Replaces elements from passed arrays into the first array recursively
-//array_replace_recursive() replaces the values of array with the same values from all the following arrays. 
-//If a key from the first array exists in the second array, its value will be replaced by the value from the second array. 
-//If the key exists in the second array, and not the first, it will be created in the first array. If a key only exists in the first array, 
-//it will be left as is. If several arrays are passed for replacement, they will be processed in order, the later array overwriting the previous values.
-//array_replace_recursive() is recursive : it will recurse into arrays and apply the same process to the inner value.
-//When the value in the first array is scalar, it will be replaced by the value in the second array, may it be scalar or array. 
-//When the value in the first array and the second array are both arrays, array_replace_recursive() will replace their respective value recursively.
-/**
- * $base = array('citrus' => array( "orange") , 'berries' => array("blackberry", "raspberry"), );
- * $replacements = array('citrus' => array('pineapple'), 'berries' => array('blueberry')); 
- * $basket = array_replace_recursive($base, $replacements);
- * print_r($basket);
- * $basket = array_replace($base, $replacements);
- * print_r($basket);
- */
-/*
-Array
-(
-    [citrus] => Array
-        (
-            [0] => pineapple
-        )
-
-    [berries] => Array
-        (
-            [0] => blueberry
-            [1] => raspberry
-        )
-
-)
-Array
-(
-    [citrus] => Array
-        (
-            [0] => pineapple
-        )
-
-    [berries] => Array
-        (
-            [0] => blueberry
-        )
-
-)
-
-*/
-
-
-//array_replace_recursive(array $array, array ...$replacements): array
 
 //* 77 _uc_first
 function _uc_first(string $string): string
@@ -1238,7 +1188,7 @@ function _array_sum(array $array): int|float
 }
 
 // echo _array_sum([1,2,3,4]);
-//TODO 84 array_unique
+//* 84 array_unique
 //array_unique — Removes duplicate values from an array
 /*
 Takes an input array and returns a new array without duplicate values.
@@ -1247,8 +1197,15 @@ then the key and value of the first equal element will be retained.
 */
 
 
-//array_unique(array $array, int $flags = SORT_STRING): array
-
+function _array_unique(array $array): array
+{
+    $result = [];
+    foreach ($array as $value) {
+        _in_array($value, $result) ? '' : array_push($result, $value);
+    }
+    return $result;
+}
+// print_r(_array_unique([1, 2, 3, 1, 2, 3, 4]));
 //* 85 array_values
 //array_values — Return all the values of an array
 
@@ -1317,7 +1274,7 @@ the key and the contents of the variable become the value for that key. In short
 //in_array — Checks if a value exists in an array
 function _in_array(mixed $toSearch, array $array, bool $strict = false): bool
 {
-    if (_empty($array)) {
+    if (!_empty($array)) {
         foreach ($array as $value) {
             if ($strict  ? ($value === $toSearch) : ($value == $toSearch)) {
                 return true;
