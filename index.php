@@ -1210,16 +1210,26 @@ function _array(mixed ...$values): array
 }
 // echo_r(..._array(1, 2, 3,'uuu'));
 
-//TODO 87 arsort
+//* 87 arsort
 //arsort — Sort an array in descending order and maintain index association
-/*
-Sorts array in place in descending order, such that its keys maintain their correlation with the values they are associated with.
 
-This is used mainly when sorting associative arrays where the actual element order is significant.
-*/
-//arsort(array &$array, int $flags = SORT_REGULAR): true
-$arr=[1,5,6,2,3,4];
-print_r(arsort($arr));
+function _arsort(array &$array, int $flags = SORT_REGULAR): true
+{
+    for ($i = 0; $i < count($array); $i++) {
+        for ($j = 0; $j < count($array); $j++) {
+            if ($array[$j] < $array[$i]) {
+                $temp = $array[$i];
+                $array[$i] = $array[$j];
+                $array[$j] = $temp;
+            }
+        }
+    }
+   
+    return true;
+}
+// $arr = [1, 5, 6, 2, 3, 4];
+// _arsort($arr);
+// print_r($arr);
 
 //TODO 88 asort
 //asort — Sort an array in ascending order and maintain index association
