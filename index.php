@@ -1257,7 +1257,7 @@ This is used mainly when sorting associative arrays where the actual element ord
 //asort(array &$array, int $flags = SORT_REGULAR): true
 
 
-//TODO 89 compact
+//* 89 compact
 //compact — Create array containing variables and their values
 /*
 Creates an array containing variables and their values.
@@ -1267,8 +1267,18 @@ the key and the contents of the variable become the value for that key. In short
 
 
 */
-//compact(array|string $var_name, array|string ...$var_names): array
-
+function _compact(array|string $var_name): array
+{
+    $result = [];
+    foreach ($var_name as $key => $val) {
+        $result[$val] = $GLOBALS[$val];
+    }
+    return $result;
+}
+// $a = 1;
+// $b = 2;
+// $c = 3;
+// print_r(_compact(['a', 'b', 'c']));
 
 //* 90 in_array
 //in_array — Checks if a value exists in an array
