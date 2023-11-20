@@ -1,5 +1,5 @@
 <?php
-//? 93 functions
+//? 95 functions
 //* 1 strCountWords
 function _str_word_count(string $value): string
 {
@@ -228,7 +228,6 @@ function _is_array(array $array): bool
 }
 // echo_r(_is_array([1,2,3]), is_array([1, 2, 3]));
 //* 14  _str_replace
-// function _str_replace(string $search, string $replace, string $subject): string
 function _str_replace(string $search, string $replace, string $subject): string
 {
     $temp = '';
@@ -1067,13 +1066,25 @@ function _array_rand(array $array, int $num = 1): int|string|array
 // print_r(array_rand([1, 2, 3], 2));
 // echo "<hr>";
 // print_r(_array_rand([1, 2, 3], 2));
-//TODO 75 array_reduce
+//* 75 array_reduce
 //array_reduce — Iteratively reduce the array to a single value using a callback function
 //array_reduce() applies iteratively the callback function to the elements of the array, so as to reduce the array to a single value.
 
-//array_reduce(array $array, callable $callback, mixed $initial = null): mixed
+function _array_reduce(array $array, callable $callback, mixed $initial = null): mixed
+{
+    $temp = $initial;
+    foreach ($array as $item)
+        $temp = $callback($temp, $item);
+    return $temp;
+}
 
-
+// $arr = [1, 2, 3, 4, 5];
+// echo _array_reduce($arr, 'sum');
+function sum($sum, $item)
+{
+    $sum += $item;
+    return $sum;
+}
 //* 77 _uc_first
 function _uc_first(string $string): string
 {
@@ -1224,24 +1235,13 @@ function _arsort(array &$array, int $flags = SORT_REGULAR): true
             }
         }
     }
-   
+
     return true;
 }
 // $arr = [1, 5, 6, 2, 3, 4];
-// _arsort($arr);
+// asort($arr);
 // print_r($arr);
 
-//TODO 88 asort
-//asort — Sort an array in ascending order and maintain index association
-/*
-Sorts array in place in ascending order, such that its keys maintain their correlation with the values they are associated with.
-
-This is used mainly when sorting associative arrays where the actual element order is significant.
-
-
-*/
-
-//asort(array &$array, int $flags = SORT_REGULAR): true
 
 
 //* 89 compact
