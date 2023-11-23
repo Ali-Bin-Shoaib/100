@@ -1431,7 +1431,6 @@ function _sort(array &$array, int|null $flags = SORT_REGULAR): bool
             }
         }
     }
-
     return true;
 }
 // $arr = [5, 4, 7, 8, 9, 1, 0, 4, 5, 2, 5, 7];
