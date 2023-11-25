@@ -40,17 +40,26 @@ function _strrev(string $value): string
 
 //* 3 _str_split
 
-function _str_split(string $value): array
+function _str_split(string $value, int $length = 1): array
 {
     $array = [];
-    for ($i = 0; $i < _strlen($value); $i++) {
-        $array[$i] = $value[$i];
+    
+    for ($i = 0; $i < _strlen($value); $i += $length) {
+        // $chars = '';
+        for ($j = 0; $j < $length; $j++) {
+            if ($i + $j < _strlen($value) - 1)
+                // $chars .= $value[$i + $j];
+                @$array[$i] .= $value[$i + $j];
+            else
+                return $array;
+        }
+        // $array[$i] = $chars;
     }
     return $array;
 };
-// print_r(_str_split('do ok'));
-// echo '<br>';
-// print_r(str_split('do ok'));
+print_r(_str_split('hamod is a smart person.', 5));
+echo '<br>';
+print_r(str_split('hamod is a smart person.', 5));
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //* 4 strSplit
