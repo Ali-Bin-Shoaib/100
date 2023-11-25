@@ -43,23 +43,21 @@ function _strrev(string $value): string
 function _str_split(string $value, int $length = 1): array
 {
     $array = [];
-    
+    $currentIndex = 0;
     for ($i = 0; $i < _strlen($value); $i += $length) {
-        // $chars = '';
         for ($j = 0; $j < $length; $j++) {
-            if ($i + $j < _strlen($value) - 1)
-                // $chars .= $value[$i + $j];
-                @$array[$i] .= $value[$i + $j];
+            if ($i + $j < _strlen($value))
+                @$array[$currentIndex] .= $value[$i + $j];
             else
                 return $array;
         }
-        // $array[$i] = $chars;
+        $currentIndex++;
     }
     return $array;
 };
-print_r(_str_split('hamod is a smart person.', 5));
+print_r(_str_split('abcdefghijklmnopqrstuvwxyz', 3));
 echo '<br>';
-print_r(str_split('hamod is a smart person.', 5));
+print_r(str_split('abcdefghijklmnopqrstuvwxyz', 3));
 
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //* 4 strSplit
